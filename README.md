@@ -1,1 +1,1 @@
-# This is my project on react.js
+# My project on react
