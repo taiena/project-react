@@ -1,15 +1,15 @@
 import React from "react";
-import "./App.scss";
-import Header from "./components/header/header";
-import Nav from "./components/nav/nav";
-import Profile from "./components/profile/profile";
+import "./scss/App.scss";
+import Header from "./components/header/header.jsx";
+import Nav from "./components/nav/nav.jsx";
+import Main from "./components/main/main.jsx";
 
 const App = () => {
   return (
     <div className="wrapper">
       <Header />
       <Nav />
-      <Profile />
+      <Main />
     </div>
   );
 };

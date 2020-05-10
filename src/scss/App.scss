@@ -1,8 +1,9 @@
+@import "/vars";
+
 .wrapper {
   max-width: 1280px;
   height: 100vh;
   margin: 0 auto;
-  border: 1px solid black;
 
   display: grid;
   grid-gap: 10px;
@@ -10,5 +11,5 @@
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
     "header header header"
-    "nav profile profile";
+    "nav main main";
 }

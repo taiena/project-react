@@ -1,0 +1,14 @@
+@import "../../scss/vars";
+
+.main {
+  grid-area: main;
+}
+
+.posts {
+  border: 1px solid $color-border;
+}
+
+.post {
+  background-color: $color-white;
+  border: 1px solid $color-border;
+}

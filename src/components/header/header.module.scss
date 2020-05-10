@@ -1,4 +1,7 @@
+@import "../../scss/vars";
+
 .header {
-  background-color: greenyellow;
+  background-color: $color-main;
+  color: $color-white;
   grid-area: header;
 }

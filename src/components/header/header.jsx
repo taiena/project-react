@@ -3,9 +3,9 @@ import classes from "./header.module.scss";
 
 const Header = () => {
   return (
-    <div className={classes.header}>
+    <header className={classes.header}>
       <span>Header is here</span>
-    </div>
+    </header>
   );
 };
 

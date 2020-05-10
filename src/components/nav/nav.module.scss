@@ -1,13 +1,14 @@
+@import "../../scss/vars";
+
 .nav {
-  background-color: #0044ff;
   grid-area: nav;
 }
 
 .link {
-  color: white;
+  color: $color-secondary;
 }
 
 .link.active {
-  color: yellow;
+  color: $color-main;
   font-weight: 700;
 }
