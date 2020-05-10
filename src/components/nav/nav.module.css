@@ -1,0 +1,13 @@
+.nav {
+  background-color: #0044ff;
+  grid-area: nav;
+}
+
+.link {
+  color: white;
+}
+
+.link.active {
+  color: yellow;
+  font-weight: 700;
+}
