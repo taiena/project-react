@@ -6,7 +6,7 @@ import MainHeader from "./mainHeader/mainHeader.jsx";
 
 const Main = () => {
   return (
-    <main className={classes.main}>
+    <main className={classes.mainPage}>
       <MainHeader />
       <Profile />
       <Posts />

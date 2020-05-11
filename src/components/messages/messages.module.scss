@@ -1,6 +1,7 @@
 @import "../../scss/vars";
 
-.mainPage {
+.messages {
   display: grid;
   grid-gap: 10px;
+  border: 1px solid $color-border;
 }
