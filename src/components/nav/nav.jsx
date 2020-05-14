@@ -6,7 +6,7 @@ const Nav = () => {
     <nav className={classes.nav}>
       <ul>
         <li>
-          <a className={`${classes.link} ${classes.active}`} href="google.com">
+          <a className={`${classes.link} ${classes.active}`} href="/main">
             Main
           </a>
         </li>
@@ -21,7 +21,7 @@ const Nav = () => {
           </a>
         </li>
         <li>
-          <a className={classes.link} href="google.com">
+          <a className={classes.link} href="/messages">
             Messages
           </a>
         </li>
