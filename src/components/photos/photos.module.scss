@@ -1,0 +1,7 @@
+@import "../../scss/vars";
+
+.photos {
+  display: grid;
+  grid-gap: 10px;
+  border: 1px solid $color-border;
+}

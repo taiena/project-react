@@ -1,0 +1,7 @@
+@import "../../scss/vars";
+
+.friends {
+  display: grid;
+  grid-gap: 10px;
+  border: 1px solid $color-border;
+}
