@@ -2,13 +2,18 @@
 
 .nav {
   grid-area: nav;
+  padding: 20px;
 }
 
 .link {
-  color: $color-secondary;
-}
+  margin-bottom: 10px;
 
-.link.active {
-  color: $color-main;
-  font-weight: 700;
+  & a {
+    color: $color-secondary;
+
+    &.active {
+      color: $color-main;
+      font-weight: 700;
+    }
+  }
 }
