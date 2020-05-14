@@ -8,3 +8,9 @@
 .inputpost {
   display: flex;
 }
+
+textarea {
+  border: 1px solid $color-border;
+  border-radius: 5px;
+  padding: 5px;
+}

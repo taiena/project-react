@@ -9,11 +9,11 @@
   margin-bottom: 10px;
 
   & a {
-    color: $color-secondary;
+    color: $color-main;
 
     &.active {
-      color: $color-main;
       font-weight: 700;
+      color: $color-active;
     }
   }
 }
