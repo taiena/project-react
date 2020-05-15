@@ -4,12 +4,12 @@ import Posts from "./posts/posts.jsx";
 import Profile from "./profile/profile.jsx";
 import MainHeader from "./mainHeader/mainHeader.jsx";
 
-const Main = () => {
+const Main = (props) => {
   return (
     <main className={classes.mainPage}>
       <MainHeader />
       <Profile />
-      <Posts />
+      <Posts posts={props.posts} />
     </main>
   );
 };

@@ -3,13 +3,7 @@ import classes from "./posts.module.scss";
 import Post from "./post/post.jsx";
 
 const Posts = (props) => {
-  let posts = [
-    { id: 1, message: "Hi, how are you?", likesCount: 3 },
-    { id: 2, message: "It is so amazing!", likesCount: 12 },
-    { id: 3, message: "It is my first post", likesCount: 5 },
-  ];
-
-  let postsElements = posts.map((p) => (
+  let postsElements = props.posts.map((p) => (
     <Post message={p.message} likesCount={p.likesCount} />
   ));
 

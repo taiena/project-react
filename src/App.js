@@ -9,15 +9,20 @@ import Photos from "./components/photos/photos.jsx";
 import Music from "./components/music/music.jsx";
 import { BrowserRouter, Route } from "react-router-dom";
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className="wrapper">
         <Header />
         <Nav />
         <div className="wrapper-content">
-          <Route path="/main" component={Main} />
-          <Route path="/messages" component={Messages} />
+          <Route path="/main" render={() => <Main posts={props.posts} />} />
+          <Route
+            path="/messages"
+            render={() => (
+              <Messages messages={props.messages} dialogs={props.dialogs} />
+            )}
+          />
           <Route path="/friends" component={Friends} />
           <Route path="/photos" component={Photos} />
           <Route path="/music" component={Music} />
