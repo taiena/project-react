@@ -7,7 +7,7 @@ import state from "./redux/state.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App appState={state} />
+    <App state={state} />
   </React.StrictMode>,
   document.getElementById("root")
 );
