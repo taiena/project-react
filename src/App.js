@@ -18,7 +18,9 @@ const App = (props) => {
         <div className="wrapper-content">
           <Route
             path="/main"
-            render={() => <Main state={props.state.mainPage} />}
+            render={() => (
+              <Main state={props.state.mainPage} addPost={props.addPost} />
+            )}
           />
           <Route
             path="/messages"
