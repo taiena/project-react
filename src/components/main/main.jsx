@@ -12,8 +12,7 @@ const Main = (props) => {
       <Posts
         posts={props.mainPage.posts}
         newPostText={props.mainPage.newPostText}
-        updateNewPostText={props.updateNewPostText}
-        addPost={props.addPost}
+        dispatch={props.dispatch}
       />
     </main>
   );
