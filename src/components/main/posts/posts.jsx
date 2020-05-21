@@ -4,7 +4,7 @@ import Post from "./post/post.jsx";
 import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
-} from "../../../redux/state.js";
+} from "../../../redux/state";
 
 const Posts = (props) => {
   let postsElements = props.posts.map((p) => (
@@ -19,7 +19,8 @@ const Posts = (props) => {
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    let action = updateNewPostTextActionCreator();
+    let action = updateNewPostTextActionCreator(text);
+    props.dispatch(action);
   };
 
   return (
