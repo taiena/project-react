@@ -4,32 +4,34 @@ import {
   updateNewMessageBodyCreator,
   sendMessageCreator,
 } from "../../redux/messagesReducer.js";
-import StoreContext from "../../StoreContext";
 
-const MessagesContainer = (props) => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        let state = store.getState().messagesPage;
+import { connect } from "react-redux";
 
-        let onSendMessageClick = () => {
-          store.dispatch(sendMessageCreator());
-        };
-
-        let onNewMessageChange = (body) => {
-          store.dispatch(updateNewMessageBodyCreator(body));
-        };
-
-        return (
-          <Messages
-            updateNewMessageBody={onNewMessageChange}
-            sendMessage={onSendMessageClick}
-            messagesPage={state}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
+let mapStateToProps = (state) => {
+  return {
+    messagesPage: state.messagesPage,
+  };
 };
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    updateNewMessageBody: (body) => {
+      dispatch(updateNewMessageBodyCreator(body));
+    },
+    sendMessage: () => {
+      dispatch(sendMessageCreator());
+    },
+  };
+};
+
+// connect создает контейнерную компоненту,
+// внутри нее рендерит презентационную компоненту,
+// внутрь которой в качестве пропсов передает свойства,
+// которые сидят в mapStateToProps, mapDispatchToProps
+
+const MessagesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Messages);
 
 export default MessagesContainer;

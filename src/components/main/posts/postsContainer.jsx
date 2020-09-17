@@ -4,34 +4,33 @@ import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
 } from "../../../redux/mainReducer";
-import StoreContext from "../../../StoreContext";
 
-const PostsContainer = (props) => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        let state = store.getState();
+import { connect } from "react-redux";
 
-        let addPost = () => {
-          store.dispatch(addPostActionCreator());
-        };
-
-        let onPostChange = (text) => {
-          let action = updateNewPostTextActionCreator(text);
-          store.dispatch(action);
-        };
-
-        return (
-          <Posts
-            updateNewPostText={onPostChange}
-            addPost={addPost}
-            posts={state.mainPage.posts}
-            newPostText={state.mainPage.newPostText}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
+const mapStateToProps = (state) => {
+  return {
+    posts: state.mainPage.posts,
+    newPostText: state.mainPage.newPostText,
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateNewPostText: (text) => {
+      let action = updateNewPostTextActionCreator(text);
+      dispatch(action);
+    },
+    addPost: () => {
+      dispatch(addPostActionCreator());
+    },
+  };
+};
+
+// connect создает контейнерную компоненту,
+// внутри нее рендерит презентационную компоненту,
+// внутрь которой в качестве пропсов передает свойства,
+// которые сидят в mapStateToProps, mapDispatchToProps
+
+const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
 export default PostsContainer;
