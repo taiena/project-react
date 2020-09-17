@@ -15,11 +15,8 @@ const App = (props) => {
       <Header />
       <Nav />
       <div className="wrapper-content">
-        <Route path="/main" render={() => <Main store={props.store} />} />
-        <Route
-          path="/messages"
-          render={() => <MessagesContainer store={props.store} />}
-        />
+        <Route path="/main" render={() => <Main />} />
+        <Route path="/messages" render={() => <MessagesContainer />} />
         <Route path="/friends" component={Friends} />
         <Route path="/photos" component={Photos} />
         <Route path="/music" component={Music} />

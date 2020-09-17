@@ -4,24 +4,31 @@ import {
   updateNewMessageBodyCreator,
   sendMessageCreator,
 } from "../../redux/messagesReducer.js";
+import StoreContext from "../../StoreContext";
 
 const MessagesContainer = (props) => {
-  let state = props.store.getState().messagesPage;
-
-  let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageCreator());
-  };
-
-  let onNewMessageChange = (body) => {
-    props.store.dispatch(updateNewMessageBodyCreator(body));
-  };
-
   return (
-    <Messages
-      updateNewMessageBody={onNewMessageChange}
-      sendMessage={onSendMessageClick}
-      messagesPage={state}
-    />
+    <StoreContext.Consumer>
+      {(store) => {
+        let state = store.getState().messagesPage;
+
+        let onSendMessageClick = () => {
+          store.dispatch(sendMessageCreator());
+        };
+
+        let onNewMessageChange = (body) => {
+          store.dispatch(updateNewMessageBodyCreator(body));
+        };
+
+        return (
+          <Messages
+            updateNewMessageBody={onNewMessageChange}
+            sendMessage={onSendMessageClick}
+            messagesPage={state}
+          />
+        );
+      }}
+    </StoreContext.Consumer>
   );
 };
 
