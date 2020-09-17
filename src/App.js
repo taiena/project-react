@@ -15,12 +15,7 @@ const App = (props) => {
       <Header />
       <Nav />
       <div className="wrapper-content">
-        <Route
-          path="/main"
-          render={() => (
-            <Main mainPage={props.state.mainPage} dispatch={props.dispatch} />
-          )}
-        />
+        <Route path="/main" render={() => <Main store={props.store} />} />
         <Route
           path="/messages"
           render={() => <Messages store={props.store} />}

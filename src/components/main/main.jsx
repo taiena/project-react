@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./main.module.scss";
-import Posts from "./posts/posts.jsx";
+import PostsContainer from "./posts/postsContainer.jsx";
 import Profile from "./profile/profile.jsx";
 import MainHeader from "./mainHeader/mainHeader.jsx";
 
@@ -9,11 +9,7 @@ const Main = (props) => {
     <main className={classes.mainPage}>
       <MainHeader />
       <Profile />
-      <Posts
-        posts={props.mainPage.posts}
-        newPostText={props.mainPage.newPostText}
-        dispatch={props.dispatch}
-      />
+      <PostsContainer store={props.store} />
     </main>
   );
 };
