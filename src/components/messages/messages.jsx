@@ -2,13 +2,9 @@ import React from "react";
 import classes from "./messages.module.scss";
 import Message from "./message/message.jsx";
 import Dialog from "./dialog/dialog.jsx";
-import {
-  updateNewMessageBodyCreator,
-  sendMessageCreator,
-} from "../../redux/messagesReducer.js";
 
 const Messages = (props) => {
-  let state = props.store.getState().messagesPage;
+  let state = props.messagesPage;
 
   let dialogsElements = state.dialogs.map((d) => (
     <Dialog name={d.name} id={d.id} />
@@ -21,12 +17,12 @@ const Messages = (props) => {
   let newMessageBody = state.newMessageBody;
 
   let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageCreator());
+    props.sendMessage();
   };
 
   let onNewMessageChange = (e) => {
     let body = e.target.value;
-    props.store.dispatch(updateNewMessageBodyCreator(body));
+    props.updateNewMessageBody(body);
   };
 
   return (
@@ -52,22 +48,3 @@ const Messages = (props) => {
 };
 
 export default Messages;
-
-// пример с массивом dialogs, но без map
-
-// let dialogs = [
-//   { id: 1, name: "Lena" },
-//   { id: 2, name: "Vova" },
-// ];
-
-// const Messages = () => {
-
-//   return (
-//     <div className={classes.messages}>
-//       <div className={classes.dialogList}>
-//         <Dialog name={dialogs[0].name} id={dialogs[0].id} />
-//         <Dialog name={dialogs[1].name} id={dialogs[1].id} />
-//       </div>
-//     </div>
-//   );
-// };
