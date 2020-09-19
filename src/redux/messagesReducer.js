@@ -12,28 +12,27 @@ let initialState = {
     { id: 2, message: "Hello" },
   ],
 
-  newMessageBody: "",
+  newMessageBody: "", // value from textarea
 };
 
 const messagesReducer = (state = initialState, action) => {
-  // мы не имеем права менять стейт, поэтому делаем его копию для перерисовки
-  let stateCopy = {
-    ...state,
-    // нам не надо делать копию массива messages,
-    // т.к. уже скопировали state.messagesPage в messagesContainer,
-    // messages: [...state.messages],
-  };
-
   switch (action.type) {
+    // добавление нового сообщения
     case SEND_MESSAGE:
-      let body = stateCopy.newMessageBody;
-      stateCopy.newMessageBody = "";
-      stateCopy.messages.push({ id: 6, message: body });
-      return stateCopy;
+      let body = state.newMessageBody; // достаем текст из textarea
+      return {
+        ...state, // возвращаем поверхностную копию стейта
+        newMessageBody: "", // обнуляем textarea
+        // возвращаем копию массива messages и добавляем в конце новый элемент
+        messages: [...state.messages, { id: 6, message: body }],
+      };
 
+    // добавление в стейт нового впечатанного символа
     case UPDATE_NEW_MESSAGE_BODY:
-      stateCopy.newMessageBody = action.body;
-      return stateCopy;
+      return {
+        ...state, // возвращаем поверхностную копию стейта
+        newMessageBody: action.body, // добавляем впечатанный символ из body (textarea)
+      };
 
     default:
       return state;
