@@ -16,15 +16,28 @@ let initialState = {
 };
 
 const messagesReducer = (state = initialState, action) => {
-  if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-    state.newMessageBody = action.body;
-  } else if (action.type === SEND_MESSAGE) {
-    let body = state.newMessageBody;
-    state.newMessageBody = "";
-    state.messages.push({ id: 6, message: body });
-  }
+  // мы не имеем права менять стейт, поэтому делаем его копию для перерисовки
+  let stateCopy = {
+    ...state,
+    // нам не надо делать копию массива messages,
+    // т.к. уже скопировали state.messagesPage в messagesContainer,
+    // messages: [...state.messages],
+  };
 
-  return state;
+  switch (action.type) {
+    case SEND_MESSAGE:
+      let body = stateCopy.newMessageBody;
+      stateCopy.newMessageBody = "";
+      stateCopy.messages.push({ id: 6, message: body });
+      return stateCopy;
+
+    case UPDATE_NEW_MESSAGE_BODY:
+      stateCopy.newMessageBody = action.body;
+      return stateCopy;
+
+    default:
+      return state;
+  }
 };
 
 export const sendMessageCreator = () => ({ type: SEND_MESSAGE });

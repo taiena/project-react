@@ -28,6 +28,8 @@ let mapDispatchToProps = (dispatch) => {
 // внутри нее рендерит презентационную компоненту,
 // внутрь которой в качестве пропсов передает свойства,
 // которые сидят в mapStateToProps, mapDispatchToProps
+// каждый раз при изменениях в стейте запускается mapStateToProps
+// и формируется новый объект
 
 const MessagesContainer = connect(
   mapStateToProps,
