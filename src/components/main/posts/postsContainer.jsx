@@ -30,6 +30,9 @@ const mapDispatchToProps = (dispatch) => {
 // внутри нее рендерит презентационную компоненту,
 // внутрь которой в качестве пропсов передает свойства,
 // которые сидят в mapStateToProps, mapDispatchToProps
+// у connect свой subscriber, смотрит что надо перерисовать
+// каждый раз при изменениях в стейте запускается mapStateToProps
+// и формируется новый объект
 
 const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
