@@ -18,8 +18,8 @@ const Nav = () => {
           </NavLink>
         </li>
         <li className={classes.link}>
-          <NavLink to="/friends" activeClassName={classes.active}>
-            Friends
+          <NavLink to="/users" activeClassName={classes.active}>
+            Find Users
           </NavLink>
         </li>
         <li className={classes.link}>
