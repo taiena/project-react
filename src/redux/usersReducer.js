@@ -4,59 +4,61 @@ const SET_USERS = "SET_USERS";
 
 let initialState = {
   users: [
-    // {
-    //   id: 1,
-    //   followed: false,
-    //   fullName: "Vasiliy",
-    //   status: "I am super pro",
-    //   location: { city: "Murmansk", country: "Russia" },
-    // },
-    // {
-    //   id: 2,
-    //   followed: true,
-    //   fullName: "Fekla",
-    //   status: "I am hard to find and easy to lose",
-    //   location: { city: "Olenegorsk", country: "Russia" },
-    // },
+    {
+      id: 1,
+      followed: false,
+      avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
+      fullName: "Vasiliy",
+      status: "I am super pro",
+      location: { city: "Murmansk", country: "Russia" },
+    },
+    {
+      id: 2,
+      followed: true,
+      avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
+      fullName: "Fekla",
+      status: "I am hard to find and easy to lose",
+      location: { city: "Olenegorsk", country: "Russia" },
+    },
   ],
 };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     // зафрендить
-    case FOLLOW: 
+    case FOLLOW:
       return {
         ...state, // возвращаем поверхностную копию стейта
-        // проходим циклом по массиву юзерс и если находим нужный айди, 
+        // проходим циклом по массиву юзерс и если находим нужный айди,
         // делаем копию юзера и меняем ему followed
-        users: state.users.map( callbackfn: u => {
-          if (u.id === action.userId) {
-            return {...u, followed: true}
+        users: state.users.map((user) => {
+          if (user.id === action.userId) {
+            return { ...user, followed: true };
           }
-          return u;
-        }), 
+          return user;
+        }),
       };
 
     // отфрендить, аналогично follow
-    case UNFOLLOW: 
+    case UNFOLLOW:
       return {
-        ...state, 
-        users: state.users.map( callbackfn: u => {
-          if (u.id === action.userId) {
-            return {...u, followed: false}
+        ...state,
+        users: state.users.map((user) => {
+          if (user.id === action.userId) {
+            return { ...user, followed: false };
           }
-          return u;
-        }), 
+          return user;
+        }),
       };
 
     // добавить пользователей в стейт (приходят из бекенда)
-    case SET_USERS: 
+    case SET_USERS:
       return {
-        ...state, 
+        ...state,
         // к массиву старых юзеров из стейта добавим новых юзеров, к-е пришли
         users: [...state.users, ...action.users],
       };
-    
+
     default:
       return state;
   }

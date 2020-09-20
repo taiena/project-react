@@ -1,7 +1,32 @@
 @import "../../scss/vars";
 
 .Users {
+}
+
+.User {
   display: grid;
   grid-gap: 10px;
-  border: 1px solid $color-border;
+  grid-template-columns: 1fr 1fr 10fr;
+
+  &Ava {
+  }
+
+  &Btn {
+  }
+
+  &Info {
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  &Person {
+  }
+
+  &Location {
+  }
 }
