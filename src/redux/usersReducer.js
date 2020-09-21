@@ -3,24 +3,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 
 let initialState = {
-  users: [
-    {
-      id: 1,
-      followed: false,
-      avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
-      fullName: "Vasiliy",
-      status: "I am super pro",
-      location: { city: "Murmansk", country: "Russia" },
-    },
-    {
-      id: 2,
-      followed: true,
-      avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
-      fullName: "Fekla",
-      status: "I am hard to find and easy to lose",
-      location: { city: "Olenegorsk", country: "Russia" },
-    },
-  ],
+  users: [],
 };
 
 const usersReducer = (state = initialState, action) => {
