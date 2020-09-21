@@ -1,28 +1,18 @@
 import React from "react";
 import classes from "./Users.module.scss";
+import * as axios from "axios";
+import userAva from "../../assets/images/ava.png";
 
 const Users = (props) => {
   // изначально юзеров в стейте нет, если их нет, то задиспатчится setUsers
   // юзеры запишутся в стейт и компонент перерисуется с ними
   if (props.users.length === 0) {
-    props.setUsers([
-      {
-        id: 1,
-        followed: false,
-        avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
-        fullName: "Vasiliy",
-        status: "I am super pro",
-        location: { city: "Murmansk", country: "Russia" },
-      },
-      {
-        id: 2,
-        followed: true,
-        avaUrl: "https://avatars.mitosa.net/cat/up-006.jpg",
-        fullName: "Fekla",
-        status: "I am hard to find and easy to lose",
-        location: { city: "Olenegorsk", country: "Russia" },
-      },
-    ]);
+    // после получения api приходит response, в нем сидит data, в ней массив items
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        props.setUsers(response.data.items);
+      });
   }
 
   return (
@@ -30,7 +20,9 @@ const Users = (props) => {
       {props.users.map((user) => (
         <div className={classes.User} key={user.id}>
           <div className={classes.UserAva}>
-            <img src={user.avaUrl} />
+            <img
+              src={user.photos.small != null ? user.photos.small : userAva}
+            />
           </div>
           <div className={classes.UserBtn}>
             {user.followed ? (
@@ -53,12 +45,12 @@ const Users = (props) => {
           </div>
           <div className={classes.UserInfo}>
             <div className={classes.UserPerson}>
-              <div>{user.fullName}</div>
+              <div>{user.name}</div>
               <div>{user.status}</div>
             </div>
             <div className={classes.UserLocation}>
-              <div>{user.location.country}</div>
-              <div>{user.location.city}</div>
+              <div>{"user.location.country"}</div>
+              <div>{"user.location.city"}</div>
             </div>
           </div>
         </div>
