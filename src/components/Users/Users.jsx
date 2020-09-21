@@ -3,20 +3,23 @@ import classes from "./Users.module.scss";
 import * as axios from "axios";
 import userAva from "../../assets/images/ava.png";
 
-const Users = (props) => {
-  // изначально юзеров в стейте нет, если их нет, то задиспатчится setUsers
-  // юзеры запишутся в стейт и компонент перерисуется с ними
-  if (props.users.length === 0) {
-    // после получения api приходит response, в нем сидит data, в ней массив items
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((response) => {
-        props.setUsers(response.data.items);
-      });
-  }
+let Users = (props) => {
+  let getUsers = () => {
+    // изначально юзеров в стейте нет, если их нет, то задиспатчится setUsers
+    // юзеры запишутся в стейт и компонент перерисуется с ними
+    if (props.users.length === 0) {
+      // после получения api приходит response, в нем сидит data, в ней массив items
+      axios
+        .get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((response) => {
+          props.setUsers(response.data.items);
+        });
+    }
+  };
 
   return (
     <div className={classes.Users}>
+      <button onClick={getUsers}>Get users</button>
       {props.users.map((user) => (
         <div className={classes.User} key={user.id}>
           <div className={classes.UserAva}>
