@@ -5,16 +5,12 @@ import userAva from "../../assets/images/ava.png";
 
 export default class Users extends Component {
   componentDidMount() {
-    // изначально юзеров в стейте нет, если их нет, то задиспатчится setUsers
-    // юзеры запишутся в стейт и компонент перерисуется с ними
-    if (this.props.users.length === 0) {
-      // после получения api приходит response, в нем сидит data, в ней массив items
-      axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((response) => {
-          this.props.setUsers(response.data.items);
-        });
-    }
+    // после получения api приходит response, в нем сидит data, в ней массив items
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
   }
 
   render() {

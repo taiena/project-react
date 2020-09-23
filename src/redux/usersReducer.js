@@ -39,7 +39,7 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         // к массиву старых юзеров из стейта добавим новых юзеров, к-е пришли
-        users: [...state.users, ...action.users],
+        users: [...action.users],
       };
 
     default:
