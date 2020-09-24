@@ -1,24 +1,27 @@
 import React, { Component } from "react";
 import * as axios from "axios";
-import Users from "./Users.jsx";
 import {
   followAC,
   unfollowAC,
   setUsersAC,
   setCurrentPageAC,
   setTotalUsersCountAC,
+  toggleIsLoadingAC,
 } from "../../redux/usersReducer.js";
-
 import { connect } from "react-redux";
+import Users from "./Users.jsx";
+import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    // после получения api приходит response, в нем сидит data, в ней массив items
+    this.props.toggleIsLoading(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
       )
+      // после получения api приходит response, в нем сидит data, в ней массив items
       .then((response) => {
+        this.props.toggleIsLoading(false);
         this.props.setUsers(response.data.items);
         this.props.setTotalUsersCount(response.data.totalCount);
       });
@@ -27,26 +30,34 @@ class UsersContainer extends Component {
   // при клике на номер страницы новый запрос апи с pageNumber
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
+    this.props.toggleIsLoading(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
       )
       .then((response) => {
+        this.props.toggleIsLoading(false);
         this.props.setUsers(response.data.items);
       });
   };
 
   render() {
     return (
-      <Users
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-        currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
-        users={this.props.users}
-        follow={this.props.follow}
-        unfollow={this.props.unfollow}
-      />
+      <>
+        {this.props.isLoading ? (
+          <Preloader />
+        ) : (
+          <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            users={this.props.users}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+          />
+        )}
+      </>
     );
   }
 }
@@ -58,6 +69,7 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
+    isLoading: state.usersPage.isLoading,
   };
 };
 
@@ -78,6 +90,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setTotalUsersCount: (totalCount) => {
       dispatch(setTotalUsersCountAC(totalCount));
+    },
+    toggleIsLoading: (isLoading) => {
+      dispatch(toggleIsLoadingAC(isLoading));
     },
   };
 };
