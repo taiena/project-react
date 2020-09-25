@@ -2,7 +2,7 @@ import React from "react";
 import "./scss/App.scss";
 import Header from "./components/header/header.jsx";
 import Nav from "./components/nav/nav.jsx";
-import Main from "./components/main/main.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 import MessagesContainer from "./components/messages/messagesContainer.jsx";
 import UsersContainer from "./components/Users/UsersContainer.jsx";
 import Photos from "./components/photos/photos.jsx";
@@ -15,7 +15,7 @@ const App = (props) => {
       <Header />
       <Nav />
       <div className="wrapper-content">
-        <Route path="/main" render={() => <Main />} />
+        <Route path="/profile" render={() => <Profile />} />
         <Route path="/messages" render={() => <MessagesContainer />} />
         <Route path="/users" render={() => <UsersContainer />} />
         <Route path="/photos" component={Photos} />

@@ -8,8 +8,8 @@ const Nav = () => {
       <ul>
         {/* <li className={`${classes.link} ${classes.active}`}> */}
         <li className={classes.link}>
-          <NavLink to="/main" activeClassName={classes.active}>
-            Main
+          <NavLink to="/profile" activeClassName={classes.active}>
+            Profile
           </NavLink>
         </li>
         <li className={classes.link}>
