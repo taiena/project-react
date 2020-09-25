@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import * as axios from "axios";
 import {
-  followAC,
-  unfollowAC,
-  setUsersAC,
-  setCurrentPageAC,
-  setTotalUsersCountAC,
-  toggleIsLoadingAC,
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  toggleIsLoading,
 } from "../../redux/usersReducer.js";
 import { connect } from "react-redux";
 import Users from "./Users.jsx";
@@ -73,35 +73,19 @@ let mapStateToProps = (state) => {
   };
 };
 
-// в компоненту Users придут колбэки, которые она сможет вызывать
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(followAC(userId));
-    },
-    unfollow: (userId) => {
-      dispatch(unfollowAC(userId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
-    },
-    setCurrentPage: (pageNumber) => {
-      dispatch(setCurrentPageAC(pageNumber));
-    },
-    setTotalUsersCount: (totalCount) => {
-      dispatch(setTotalUsersCountAC(totalCount));
-    },
-    toggleIsLoading: (isLoading) => {
-      dispatch(toggleIsLoadingAC(isLoading));
-    },
-  };
-};
-
 // connect создает контейнерную компоненту,
 // внутри нее рендерит презентационную компоненту,
 // внутрь которой в качестве пропсов передает свойства,
-// которые сидят в mapStateToProps, mapDispatchToProps
+// которые сидят в mapStateToProps
+// и объекты, которые раньше были в mapDispatchToProps
 // каждый раз при изменениях в стейте запускается mapStateToProps
 // и формируется новый объект
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  toggleIsLoading,
+})(UsersContainer);
