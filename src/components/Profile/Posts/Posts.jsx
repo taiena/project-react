@@ -1,6 +1,6 @@
 import React from "react";
-import classes from "./posts.module.scss";
-import Post from "./post/post.jsx";
+import classes from "./Posts.module.scss";
+import Post from "./Post/Post.jsx";
 
 const Posts = (props) => {
   let postsElements = props.posts.map((p) => (

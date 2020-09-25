@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Profile.module.scss";
-import PostsContainer from "./posts/postsContainer.jsx";
+import PostsContainer from "./Posts/PostsContainer.jsx";
 import ProfileInfo from "./ProfileInfo/ProfileInfo.jsx";
 import ProfileHeader from "./ProfileHeader/ProfileHeader.jsx";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./messages.module.scss";
-import Message from "./message/message.jsx";
-import Dialog from "./dialog/dialog.jsx";
+import classes from "./Messages.module.scss";
+import Message from "./Message/Message.jsx";
+import Dialog from "./Dialog/Dialog.jsx";
 
 const Messages = (props) => {
   let state = props.messagesPage;

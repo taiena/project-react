@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./post.module.scss";
+import classes from "./Post.module.scss";
 
 const Post = (props) => {
   return (

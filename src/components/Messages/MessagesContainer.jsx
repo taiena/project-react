@@ -1,5 +1,5 @@
 import React from "react";
-import Messages from "./messages.jsx";
+import Messages from "./Messages.jsx";
 import {
   updateNewMessageBodyCreator,
   sendMessageCreator,
