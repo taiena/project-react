@@ -8,7 +8,7 @@ const Profile = (props) => {
   return (
     <main className={classes.ProfilePage}>
       <ProfileHeader />
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile} />
       <PostsContainer />
     </main>
   );

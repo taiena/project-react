@@ -1,7 +1,26 @@
 @import "../../../scss/vars";
 
-.ProfileInfo {
-  background-color: $color-white;
-  border-radius: 5px;
-  padding: 10px;
+.Profile {
+  &Container {
+    display: flex;
+    background-color: $color-white;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  &Photo {
+    margin-right: 20px;
+  }
+
+  &Info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Contacts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }

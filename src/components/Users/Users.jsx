@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Users.module.scss";
 import userAva from "../../assets/images/ava.png";
+import { NavLink } from "react-router-dom";
 
 let Users = (props) => {
   // подсчет кол-ва страниц (всех юзеров / кол-во юзеров на странице)
@@ -32,9 +33,11 @@ let Users = (props) => {
       {props.users.map((user) => (
         <div className={classes.User} key={user.id}>
           <div className={classes.UserAva}>
-            <img
-              src={user.photos.small != null ? user.photos.small : userAva}
-            />
+            <NavLink to={"/profile/" + user.id}>
+              <img
+                src={user.photos.small != null ? user.photos.small : userAva}
+              />
+            </NavLink>
           </div>
           <div className={classes.UserBtn}>
             {user.followed ? (

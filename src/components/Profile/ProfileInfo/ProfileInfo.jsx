@@ -1,10 +1,34 @@
 import React from "react";
 import classes from "./ProfileInfo.module.scss";
+import Preloader from "../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+  if (!props.profile) {
+    return <Preloader />;
+  }
   return (
-    <div className={classes.ProfileInfo}>
-      <span>Ava + descript</span>
+    <div className={classes.ProfileContainer}>
+      <div className={classes.ProfilePhoto}>
+        <img src={props.profile.photos.large} />
+      </div>
+      <div className={classes.ProfileInfo}>
+        <div>
+          <h3>{props.profile.fullName}</h3>
+        </div>
+        <div>{props.profile.aboutMe}</div>
+        <div className={classes.ProfileContacts}>
+          <div>{props.profile.contacts.facebook}</div>
+          <div>{props.profile.contacts.website}</div>
+          <div>{props.profile.contacts.vk}</div>
+          <div>{props.profile.contacts.twitter}</div>
+          <div>{props.profile.contacts.instagram}</div>
+          <div>{props.profile.contacts.youtube}</div>
+          <div>{props.profile.contacts.github}</div>
+          <div>{props.profile.contacts.mainLink}</div>
+        </div>
+        <div>Ищу работу: {props.profile.lookingForAJob}</div>
+        <div>{props.profile.lookingForAJobDescription}</div>
+      </div>
     </div>
   );
 };

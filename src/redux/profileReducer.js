@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 let initialState = {
   posts: [
@@ -8,9 +9,10 @@ let initialState = {
     { id: 3, message: "It is my first post", likesCount: 5 },
   ],
   newPostText: "Enter your post here", // value from textarea
+  profile: null,
 };
 
-const mainReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     // добавление нового поста на стену
     case ADD_POST: {
@@ -30,8 +32,16 @@ const mainReducer = (state = initialState, action) => {
     // добавление в стейт нового впечатанного символа
     case UPDATE_NEW_POST_TEXT: {
       return {
-        ...state, // возвращаем поверхностную копию стейта
+        ...state,
         newPostText: action.newText, // добавляем впечатанный символ из textarea
+      };
+    }
+
+    // задать страницу пользователя
+    case SET_USER_PROFILE: {
+      return {
+        ...state,
+        profile: action.profile, // получаем профиль
       };
     }
     default:
@@ -40,9 +50,13 @@ const mainReducer = (state = initialState, action) => {
 };
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
+export const setUserProfile = (profile) => ({
+  type: SET_USER_PROFILE,
+  profile,
+});
 export const updateNewPostTextActionCreator = (text) => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: text,
 });
 
-export default mainReducer;
+export default profileReducer;
