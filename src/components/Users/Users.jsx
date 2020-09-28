@@ -15,9 +15,10 @@ let Users = (props) => {
     <div className={classes.Users}>
       {/* вывод массива нормеров страниц */}
       <div>
-        {pages.map((page) => {
+        {pages.map((page, index) => {
           return (
             <span
+              key={index}
               className={props.currentPage === page && classes.selectedPage}
               onClick={(e) => {
                 props.onPageChanged(page);

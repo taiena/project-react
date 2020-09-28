@@ -8,7 +8,7 @@ import UsersContainer from "./components/Users/UsersContainer.jsx";
 
 import { Route } from "react-router-dom";
 
-const App = (props) => {
+const App = () => {
   return (
     <div className="wrapper">
       <Header />
