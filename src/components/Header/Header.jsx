@@ -3,7 +3,7 @@ import classes from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
-  console.log("from header: ", props);
+  console.log("props from header: ", props);
   return (
     <header className={classes.Header}>
       <div>Header is here</div>
