@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Users.module.scss";
 import userAva from "../../assets/images/ava.png";
 import { NavLink } from "react-router-dom";
+import * as axios from "axios";
 
 let Users = (props) => {
   // подсчет кол-ва страниц (всех юзеров / кол-во юзеров на странице)
@@ -44,7 +45,22 @@ let Users = (props) => {
             {user.followed ? (
               <button
                 onClick={() => {
-                  props.unfollow(user.id);
+                  axios
+                    .delete(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                      {
+                        withCredentials: true,
+                        headers: {
+                          "api-key": "daefe237-92b2-4979-a1ea-fd11e7bf92f3",
+                        },
+                      }
+                    )
+                    // после получения api приходит response, в нем сидит data, в ней массив items
+                    .then((response) => {
+                      if (response.data.resultCode == 0) {
+                        props.unfollow(user.id);
+                      }
+                    });
                 }}
               >
                 Unollow
@@ -52,7 +68,23 @@ let Users = (props) => {
             ) : (
               <button
                 onClick={() => {
-                  props.follow(user.id);
+                  axios
+                    .post(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                      {},
+                      {
+                        withCredentials: true,
+                        headers: {
+                          "api-key": "daefe237-92b2-4979-a1ea-fd11e7bf92f3",
+                        },
+                      }
+                    )
+                    // после получения api приходит response, в нем сидит data, в ней массив items
+                    .then((response) => {
+                      if (response.data.resultCode == 0) {
+                        props.follow(user.id);
+                      }
+                    });
                 }}
               >
                 Follow

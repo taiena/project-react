@@ -14,7 +14,7 @@ class HeaderContainer extends Component {
         // 0 значит мы залогинены
         if (response.data.resultCode === 0) {
           // забираем id, email, login из data.data
-          let { id, email, login } = response.data.data;
+          let { id, login, email } = response.data.data;
           // отправляем их в редьюсер
           this.props.setAuthUserData(id, email, login);
         }
