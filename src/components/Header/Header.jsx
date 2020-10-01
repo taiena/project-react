@@ -1,10 +1,15 @@
 import React from "react";
 import classes from "./Header.module.scss";
+import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
   return (
     <header className={classes.Header}>
-      <span>Header is here</span>
+      <div>Header is here</div>
+      <div className={classes.LoginBlock}>
+        {props.isAuth ? props.login : <NavLink to={"/login"}>Login</NavLink>}
+      </div>
     </header>
   );
 };
