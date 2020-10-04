@@ -1,7 +1,7 @@
 const SET_USER_DATA = "SET_USER_DATA";
 
 let initialState = {
-  userId: null,
+  id: null,
   email: null,
   login: null,
   isAuth: false,
@@ -13,8 +13,11 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.data, // сразу все 3 свойства юзера запишутся в стейт
+        //...action.data, // сразу все 3 свойства юзера запишутся в стейт
         isAuth: true,
+        login: action.login,
+        email: action.email,
+        id: action.id,
       };
 
     default:
@@ -23,9 +26,9 @@ const authReducer = (state = initialState, action) => {
 };
 
 // можно вместо (userId, email, login) передать просто data, но так понятней
-export const setAuthUserData = (userId, email, login) => ({
+export const setAuthUserData = (id, email, login) => ({
   type: SET_USER_DATA,
-  userId,
+  id,
   email,
   login,
 });

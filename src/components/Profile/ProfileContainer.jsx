@@ -9,7 +9,7 @@ class ProfileContainer extends Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
 
-    console.log("user id: " + userId);
+    // console.log("user id: " + userId);
 
     if (!userId) {
       userId = 2;

@@ -3,14 +3,14 @@ import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 
 const ProfileInfo = (props) => {
-  console.log("from profileInfo: ", props);
+  // console.log("from profileInfo: ", props);
   if (!props.profile) {
     return <Preloader />;
   }
   return (
     <div className={classes.ProfileContainer}>
       <div className={classes.ProfilePhoto}>
-        <img src={props.profile.photos.large} />
+        <img src={props.profile.photos.large} alt="" />
       </div>
       <div className={classes.ProfileInfo}>
         <div>

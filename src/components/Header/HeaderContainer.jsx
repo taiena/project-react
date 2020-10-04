@@ -9,6 +9,9 @@ class HeaderContainer extends Component {
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         withCredentials: true, // авторизованный запрос
+        headers: {
+          "api-key": "daefe237-92b2-4979-a1ea-fd11e7bf92f3",
+        },
       })
       .then((response) => {
         // 0 значит мы залогинены
@@ -30,6 +33,8 @@ class HeaderContainer extends Component {
 
 let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  id: state.auth.id,
+  email: state.auth.email,
   login: state.auth.login,
 });
 

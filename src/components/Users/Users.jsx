@@ -38,6 +38,7 @@ let Users = (props) => {
             <NavLink to={"/profile/" + user.id}>
               <img
                 src={user.photos.small != null ? user.photos.small : userAva}
+                alt=""
               />
             </NavLink>
           </div>
@@ -57,7 +58,7 @@ let Users = (props) => {
                     )
                     // после получения api приходит response, в нем сидит data, в ней массив items
                     .then((response) => {
-                      if (response.data.resultCode == 0) {
+                      if (response.data.resultCode === 0) {
                         props.unfollow(user.id);
                       }
                     });
@@ -81,7 +82,7 @@ let Users = (props) => {
                     )
                     // после получения api приходит response, в нем сидит data, в ней массив items
                     .then((response) => {
-                      if (response.data.resultCode == 0) {
+                      if (response.data.resultCode === 0) {
                         props.follow(user.id);
                       }
                     });
