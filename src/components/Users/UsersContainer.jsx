@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as axios from "axios";
 import {
   follow,
   unfollow,
