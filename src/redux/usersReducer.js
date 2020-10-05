@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 let initialState = {
   users: [],
@@ -11,6 +12,9 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isLoading: false,
+  // когда идет френдинг, закидываем в массив айди юзера,
+  // когда идет отфрендинг, забираем айди
+  followingInProgress: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -70,6 +74,19 @@ const usersReducer = (state = initialState, action) => {
         isLoading: action.isLoading,
       };
 
+    // юзер в процессе френдинга
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        // если идет френдинг (isLoading true), добавим в массив айди этого юзера
+        followingInProgress: action.isLoading
+          ? [...state.followingInProgress, action.userId]
+          : // если френдинг завершен (isLoading false), отфильтруем из массива юзера,
+            // пропускаем только те айди, которые не равны айди пришедшей из экшена
+            // деструктуризация не нужна, тк фильтрация уже вернет новый массив
+            state.followingInProgress.filter((id) => id != action.userId),
+      };
+
     default:
       return state;
   }
@@ -90,6 +107,11 @@ export const setTotalUsersCount = (totalUsersCount) => ({
 export const toggleIsLoading = (isLoading) => ({
   type: TOGGLE_IS_LOADING,
   isLoading,
+});
+export const toggleFollowingProgress = (isLoading, userId) => ({
+  type: TOGGLE_IS_FOLLOWING_PROGRESS,
+  isLoading,
+  userId,
 });
 
 export default usersReducer;

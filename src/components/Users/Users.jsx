@@ -3,6 +3,7 @@ import classes from "./Users.module.scss";
 import userAva from "../../assets/images/ava.png";
 import { NavLink } from "react-router-dom";
 import * as axios from "axios";
+import { toggleFollowingProgress } from "../../redux/usersReducer.js";
 
 let Users = (props) => {
   // подсчет кол-ва страниц (всех юзеров / кол-во юзеров на странице)
@@ -45,7 +46,12 @@ let Users = (props) => {
           <div className={classes.UserBtn}>
             {user.followed ? (
               <button
+                // если в массиве хоть одна айди = айди пользователя, тогда button disabled
+                disabled={props.followingInProgress.some(
+                  (id) => id === user.id
+                )}
                 onClick={() => {
+                  props.toggleFollowingProgress(true, user.id);
                   axios
                     .delete(
                       `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -56,19 +62,25 @@ let Users = (props) => {
                         },
                       }
                     )
-                    // после получения api приходит response, в нем сидит data, в ней массив items
+
                     .then((response) => {
                       if (response.data.resultCode === 0) {
                         props.unfollow(user.id);
                       }
+                      props.toggleFollowingProgress(false, user.id);
                     });
                 }}
               >
-                Unollow
+                Unfollow
               </button>
             ) : (
               <button
+                // если в массиве хоть одна айди = айди пользователя, тогда button disabled
+                disabled={props.followingInProgress.some(
+                  (id) => id === user.id
+                )}
                 onClick={() => {
+                  props.toggleFollowingProgress(true, user.id);
                   axios
                     .post(
                       `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -80,11 +92,12 @@ let Users = (props) => {
                         },
                       }
                     )
-                    // после получения api приходит response, в нем сидит data, в ней массив items
+
                     .then((response) => {
                       if (response.data.resultCode === 0) {
                         props.follow(user.id);
                       }
+                      props.toggleFollowingProgress(false, user.id);
                     });
                 }}
               >
