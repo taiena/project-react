@@ -11,22 +11,18 @@ import {
 import { connect } from "react-redux";
 import Users from "./Users.jsx";
 import Preloader from "../common/Preloader/Preloader";
+import { usersAPI } from "../../api/api";
 
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-        {
-          withCredentials: true,
-        }
-      )
-      // после получения api приходит response, в нем сидит data, в ней массив items
-      .then((response) => {
+
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsLoading(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
 
@@ -34,17 +30,11 @@ class UsersContainer extends Component {
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        this.props.toggleIsLoading(false);
-        this.props.setUsers(response.data.items);
-      });
+
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
+      this.props.toggleIsLoading(false);
+      this.props.setUsers(data.items);
+    });
   };
 
   render() {
@@ -68,7 +58,6 @@ class UsersContainer extends Component {
   }
 }
 
-// в компоненту Users придут в пропсах данные из стейта
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -78,14 +67,6 @@ let mapStateToProps = (state) => {
     isLoading: state.usersPage.isLoading,
   };
 };
-
-// connect создает контейнерную компоненту,
-// внутри нее рендерит презентационную компоненту,
-// внутрь которой в качестве пропсов передает свойства,
-// которые сидят в mapStateToProps
-// и объекты, которые раньше были в mapDispatchToProps
-// каждый раз при изменениях в стейте запускается mapStateToProps
-// и формируется новый объект
 
 export default connect(mapStateToProps, {
   follow,
