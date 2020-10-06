@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
+import userAva from "../../../assets/images/ava.png";
 
 const ProfileInfo = (props) => {
   // console.log("from profileInfo: ", props);
@@ -10,7 +11,14 @@ const ProfileInfo = (props) => {
   return (
     <div className={classes.ProfileContainer}>
       <div className={classes.ProfilePhoto}>
-        <img src={props.profile.photos.large} alt="" />
+        <img
+          src={
+            props.profile.photos.large != null
+              ? props.profile.photos.large
+              : userAva
+          }
+          alt=""
+        />
       </div>
       <div className={classes.ProfileInfo}>
         <div>
