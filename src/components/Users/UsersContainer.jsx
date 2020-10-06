@@ -18,6 +18,7 @@ class UsersContainer extends Component {
   // при клике на номер страницы новый запрос апи с pageNumber
   onPageChanged = (pageNumber) => {
     this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.setCurrentPage(pageNumber);
   };
 
   render() {
