@@ -119,6 +119,7 @@ export const toggleFollowingProgress = (isLoading, userId) => ({
 export const getUsers = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsLoading(true));
+    dispatch(setCurrentPage(currentPage));
 
     usersAPI.getUsers(currentPage, pageSize).then((data) => {
       dispatch(toggleIsLoading(false));

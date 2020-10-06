@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   follow,
   unfollow,
-  setCurrentPage,
   toggleFollowingProgress,
   getUsers,
 } from "../../redux/usersReducer.js";
@@ -18,7 +17,6 @@ class UsersContainer extends Component {
   // при клике на номер страницы новый запрос апи с pageNumber
   onPageChanged = (pageNumber) => {
     this.props.getUsers(pageNumber, this.props.pageSize);
-    this.props.setCurrentPage(pageNumber);
   };
 
   render() {
@@ -57,7 +55,6 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setCurrentPage,
   toggleFollowingProgress,
   getUsers,
 })(UsersContainer);
