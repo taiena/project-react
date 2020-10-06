@@ -36,13 +36,13 @@ export const setAuthUserData = (id, email, login) => ({
 });
 
 //thunk
-export const getAuth = (id, email, login) => {
+export const getAuthUserData = () => {
   return (dispatch) => {
-    authAPI.getAuthMe(id, email, login).then((data) => {
+    authAPI.getAuthMe().then((response) => {
       // 0 значит мы залогинены
-      if (data.resultCode === 0) {
+      if (response.data.resultCode === 0) {
         // забираем id, email, login из data.data
-        let { id, email, login } = data.data;
+        let { id, email, login } = response.data.data;
         // отправляем их в редьюсер
         dispatch(setAuthUserData(id, email, login));
       }

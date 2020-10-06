@@ -62,10 +62,10 @@ export const updateNewPostTextActionCreator = (text) => ({
 });
 
 //thunk
-export const getProfile = (userId) => {
+export const getUserProfile = (userId) => {
   return (dispatch) => {
-    profileAPI.getProfile(userId).then((data) => {
-      dispatch(setUserProfile(data));
+    profileAPI.getProfile(userId).then((response) => {
+      dispatch(setUserProfile(response.data));
     });
   };
 };
