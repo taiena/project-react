@@ -86,7 +86,7 @@ const usersReducer = (state = initialState, action) => {
           : // если френдинг завершен (isLoading false), отфильтруем из массива юзера,
             // пропускаем только те айди, которые не равны айди пришедшей из экшена
             // деструктуризация не нужна, тк фильтрация уже вернет новый массив
-            state.followingInProgress.filter((id) => id != action.userId),
+            state.followingInProgress.filter((id) => id !== action.userId),
       };
 
     default:
