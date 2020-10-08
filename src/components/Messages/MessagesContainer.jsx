@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import Messages from "./Messages.jsx";
 import {
   updateNewMessageBodyCreator,
@@ -6,11 +6,11 @@ import {
 } from "../../redux/messagesReducer.js";
 
 import { connect } from "react-redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state) => {
   return {
     messagesPage: state.messagesPage,
-    isAuth: state.auth.isAuth,
   };
 };
 
@@ -25,6 +25,8 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
+let AuthRedirectComponent = withAuthRedirect(Messages);
+
 // connect создает контейнерную компоненту,
 // внутри нее рендерит презентационную компоненту,
 // внутрь которой в качестве пропсов передает свойства,
@@ -35,6 +37,6 @@ let mapDispatchToProps = (dispatch) => {
 const MessagesContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Messages);
+)(AuthRedirectComponent);
 
 export default MessagesContainer;
