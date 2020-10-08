@@ -5,6 +5,7 @@ import Nav from "./components/Nav/Nav.jsx";
 import ProfileContainer from "./components/Profile/ProfileContainer.jsx";
 import MessagesContainer from "./components/Messages/MessagesContainer.jsx";
 import UsersContainer from "./components/Users/UsersContainer.jsx";
+import Login from "./components/Login/Login.jsx";
 
 import { Route } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
         <Route path="/messages" render={() => <MessagesContainer />} />
         <Route path="/users" render={() => <UsersContainer />} />
+        <Route path="/login" render={() => <Login />} />
       </div>
     </div>
   );
