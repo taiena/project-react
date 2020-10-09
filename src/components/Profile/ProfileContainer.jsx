@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Profile from "./Profile";
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends Component {
   componentDidMount() {
@@ -19,16 +20,16 @@ class ProfileContainer extends Component {
   }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-// когда функция возвращает объект, ставим круглые скобки
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
 });
 
-// компонента закидывает данные из Урла в ProfileContainer
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+// compose закинет ProfileContainer в функцию withAuthRedirect,
+// это все оборачивается withRouter
+// результат этого направит в функцию connect
 
-export default connect(mapStateToProps, { getUserProfile })(
-  WithUrlDataContainerComponent
-);
+export default compose(
+  connect(mapStateToProps, { getUserProfile }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);

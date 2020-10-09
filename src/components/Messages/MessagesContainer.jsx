@@ -7,6 +7,7 @@ import {
 
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -25,18 +26,10 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-let AuthRedirectComponent = withAuthRedirect(Messages);
+// compose закинет messages в функцию withAuthRedirect,
+// результат этого направит в функцию connect
 
-// connect создает контейнерную компоненту,
-// внутри нее рендерит презентационную компоненту,
-// внутрь которой в качестве пропсов передает свойства,
-// которые сидят в mapStateToProps, mapDispatchToProps
-// каждый раз при изменениях в стейте запускается mapStateToProps
-// и формируется новый объект
-
-const MessagesContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthRedirectComponent);
-
-export default MessagesContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Messages);
