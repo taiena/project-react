@@ -2,9 +2,9 @@ import React from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.png";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
-  // console.log("from profileInfo: ", props);
   if (!props.profile) {
     return <Preloader />;
   }
@@ -21,9 +21,8 @@ const ProfileInfo = (props) => {
         />
       </div>
       <div className={classes.ProfileInfo}>
-        <div>
-          <h3>{props.profile.fullName}</h3>
-        </div>
+        <h3>{props.profile.fullName}</h3>
+        <ProfileStatus status="hey hey hey" />
         <div>{props.profile.aboutMe}</div>
         <div className={classes.ProfileContacts}>
           <div>{props.profile.contacts.facebook}</div>
