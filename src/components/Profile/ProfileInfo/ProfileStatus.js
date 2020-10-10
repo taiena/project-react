@@ -5,24 +5,18 @@ export default class ProfileStatus extends Component {
     editMode: false,
   };
 
-  activateEditMode() {
-    this.setState({
-      editMode: true,
-    });
-  }
-
-  deactivateEditMode() {
-    this.setState({
-      editMode: false,
-    });
-  }
+  onToggleEditMode = () => {
+    this.setState((state) => ({
+      editMode: !state.editMode,
+    }));
+  };
 
   render() {
     return (
       <div>
         {!this.state.editMode && (
           <div>
-            <span onDoubleClick={this.activateEditMode.bind(this)}>
+            <span onDoubleClick={this.onToggleEditMode}>
               status: {this.props.status}
             </span>
           </div>
@@ -31,7 +25,7 @@ export default class ProfileStatus extends Component {
           <div>
             <input
               autoFocus={true}
-              onBlur={this.deactivateEditMode.bind(this)}
+              onBlur={this.onToggleEditMode}
               value={this.props.status}
             />
           </div>
