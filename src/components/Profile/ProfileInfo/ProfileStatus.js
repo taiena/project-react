@@ -11,17 +11,6 @@ export default class ProfileStatus extends Component {
     status: this.props.status,
   };
 
-  // обновляем стейт при изменении входящих пропсов, при этом сравнивая,
-  // равны ли пропсы текущему стейту, чтобы не упасть в бесконечное обновление
-  // и не находимся ли в режиме редактирования статуса,
-  // иначе реакт не даст вбить более одного символа.
-
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if (prevState.status != prevProps.status && !prevState.editMode) {
-  //     this.setState({ status: prevProps.status });
-  //   }
-  // }
-
   activateEditMode = () => {
     this.setState({
       editMode: true,
@@ -42,6 +31,14 @@ export default class ProfileStatus extends Component {
       status: e.currentTarget.value,
     });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({
+        status: this.props.status,
+      });
+    }
+  }
 
   render() {
     return (
