@@ -22,7 +22,10 @@ const ProfileInfo = (props) => {
       </div>
       <div className={classes.ProfileInfo}>
         <h3>{props.profile.fullName}</h3>
-        <ProfileStatus status="hey hey hey" />
+        <ProfileStatus
+          status={props.status}
+          updateUserStatus={props.updateUserStatus}
+        />
         <div>{props.profile.aboutMe}</div>
         <div className={classes.ProfileContacts}>
           <div>{props.profile.contacts.facebook}</div>

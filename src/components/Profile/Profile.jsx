@@ -6,7 +6,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo.jsx";
 const Profile = (props) => {
   return (
     <main className={classes.ProfilePage}>
-      <ProfileInfo profile={props.profile} />
+      <ProfileInfo
+        profile={props.profile}
+        status={props.status}
+        updateUserStatus={props.updateUserStatus}
+      />
       <PostsContainer />
     </main>
   );
