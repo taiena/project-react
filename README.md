@@ -1,1 +1,2 @@
-# My project on react
+# Samurai JS social network project
+
