@@ -11,8 +11,8 @@ const maxLength30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div>
+    <form className={classes.Login} onSubmit={props.handleSubmit}>
+      <div className={classes.Field}>
         <Field
           component={Input}
           placeholder={"Email"}
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
           validate={[required, maxLength30]}
         />
       </div>
-      <div>
+      <div className={classes.Field}>
         <Field
           component={Input}
           type={"password"}
@@ -29,15 +29,13 @@ const LoginForm = (props) => {
           validate={[required, maxLength30]}
         />
       </div>
-      <div>
-        <Field
-          component={Input}
-          type={"checkbox"}
-          name={"rememberMe"}
-          validate={[required]}
-        />{" "}
+      <div className={classes.Field}>
+        <Field component={Input} type={"checkbox"} name={"rememberMe"} />{" "}
         remember me
       </div>
+      {props.error && (
+        <div className={classes.formSummaryError}>{props.error}</div>
+      )}
       <div>
         <button>Login</button>
       </div>
