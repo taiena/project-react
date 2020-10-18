@@ -116,7 +116,7 @@ export const toggleFollowingProgress = (isLoading, userId) => ({
 });
 
 //thunk
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsLoading(true));
     dispatch(setCurrentPage(currentPage));

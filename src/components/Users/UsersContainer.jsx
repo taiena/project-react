@@ -3,20 +3,28 @@ import {
   follow,
   unfollow,
   toggleFollowingProgress,
-  getUsers,
+  requestUsers,
 } from "../../redux/usersReducer.js";
 import { connect } from "react-redux";
 import Users from "./Users.jsx";
 import Preloader from "../common/Preloader/Preloader";
+import {
+  getUsers,
+  getCurrentPage,
+  getFollowingInProgress,
+  getIsLoading,
+  getPageSize,
+  getTotalUsersCount,
+} from "../../redux/usersSelectors";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
 
   // при клике на номер страницы новый запрос апи с pageNumber
   onPageChanged = (pageNumber) => {
-    this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.requestUsers(pageNumber, this.props.pageSize);
   };
 
   render() {
@@ -43,12 +51,12 @@ class UsersContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    followingInProgress: state.usersPage.followingInProgress,
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isLoading: getIsLoading(state),
+    followingInProgress: getFollowingInProgress(state),
   };
 };
 
@@ -56,5 +64,5 @@ export default connect(mapStateToProps, {
   follow,
   unfollow,
   toggleFollowingProgress,
-  getUsers,
+  requestUsers,
 })(UsersContainer);
