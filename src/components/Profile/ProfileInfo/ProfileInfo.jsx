@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.png";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -22,7 +22,7 @@ const ProfileInfo = (props) => {
       </div>
       <div className={classes.ProfileInfo}>
         <h3>{props.profile.fullName}</h3>
-        <ProfileStatus
+        <ProfileStatusHooks
           status={props.status}
           updateUserStatus={props.updateUserStatus}
         />
