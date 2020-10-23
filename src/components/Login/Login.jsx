@@ -1,41 +1,35 @@
 import React from "react";
 import classes from "./Login.module.scss";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { required, maxLengthCreator } from "../../utils/validators/validators";
-import { Input } from "../common/FormsControls/FormsControls";
+import { createField, Input } from "../common/FormsControls/FormsControls";
 import { connect } from "react-redux";
 import { login } from "../../redux/authReducer.js";
 import { Redirect } from "react-router-dom";
 
 const maxLength30 = maxLengthCreator(30);
 
-const LoginForm = (props) => {
+// деструктуризация пропсов: вытащили handleSubmit и error
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <form className={classes.Login} onSubmit={props.handleSubmit}>
-      <div className={classes.Field}>
-        <Field
-          component={Input}
-          placeholder={"Email"}
-          name={"email"}
-          validate={[required, maxLength30]}
-        />
-      </div>
-      <div className={classes.Field}>
-        <Field
-          component={Input}
-          type={"password"}
-          placeholder={"Password"}
-          name={"password"}
-          validate={[required, maxLength30]}
-        />
-      </div>
-      <div className={classes.Field}>
-        <Field component={Input} type={"checkbox"} name={"rememberMe"} />{" "}
-        remember me
-      </div>
-      {props.error && (
-        <div className={classes.formSummaryError}>{props.error}</div>
+    <form className={classes.Login} onSubmit={handleSubmit}>
+      {/* в функцию передаем placeholder, name, validate, component, {...props}, text */}
+      {createField("Email", "email", [required, maxLength30], Input)}
+
+      {createField("Password", "password", [required, maxLength30], Input, {
+        type: "password",
+      })}
+
+      {createField(
+        null, // placeholder
+        "rememberMe", //name
+        [], // validate
+        Input, // component
+        { type: "checkbox" }, // {...props}
+        "remember me" // text
       )}
+
+      {error && <div className={classes.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
       </div>
