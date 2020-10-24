@@ -3,13 +3,13 @@ import classes from "./Profile.module.scss";
 import PostsContainer from "./Posts/PostsContainer.jsx";
 import ProfileInfo from "./ProfileInfo/ProfileInfo.jsx";
 
-const Profile = (props) => {
+const Profile = ({ profile, status, updateUserStatus }) => {
   return (
     <main className={classes.ProfilePage}>
       <ProfileInfo
-        profile={props.profile}
-        status={props.status}
-        updateUserStatus={props.updateUserStatus}
+        profile={profile}
+        status={status}
+        updateUserStatus={updateUserStatus}
       />
       <PostsContainer />
     </main>

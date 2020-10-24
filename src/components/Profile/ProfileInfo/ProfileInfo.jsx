@@ -4,41 +4,37 @@ import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.png";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, updateUserStatus }) => {
+  if (!profile) {
     return <Preloader />;
   }
   return (
     <div className={classes.ProfileContainer}>
       <div className={classes.ProfilePhoto}>
         <img
-          src={
-            props.profile.photos.large != null
-              ? props.profile.photos.large
-              : userAva
-          }
+          src={profile.photos.large != null ? profile.photos.large : userAva}
           alt=""
         />
       </div>
       <div className={classes.ProfileInfo}>
-        <h3>{props.profile.fullName}</h3>
+        <h3>{profile.fullName}</h3>
         <ProfileStatusHooks
-          status={props.status}
-          updateUserStatus={props.updateUserStatus}
+          status={status}
+          updateUserStatus={updateUserStatus}
         />
-        <div>{props.profile.aboutMe}</div>
+        <div>{profile.aboutMe}</div>
         <div className={classes.ProfileContacts}>
-          <div>{props.profile.contacts.facebook}</div>
-          <div>{props.profile.contacts.website}</div>
-          <div>{props.profile.contacts.vk}</div>
-          <div>{props.profile.contacts.twitter}</div>
-          <div>{props.profile.contacts.instagram}</div>
-          <div>{props.profile.contacts.youtube}</div>
-          <div>{props.profile.contacts.github}</div>
-          <div>{props.profile.contacts.mainLink}</div>
+          <div>{profile.contacts.facebook}</div>
+          <div>{profile.contacts.website}</div>
+          <div>{profile.contacts.vk}</div>
+          <div>{profile.contacts.twitter}</div>
+          <div>{profile.contacts.instagram}</div>
+          <div>{profile.contacts.youtube}</div>
+          <div>{profile.contacts.github}</div>
+          <div>{profile.contacts.mainLink}</div>
         </div>
-        <div>Ищу работу: {props.profile.lookingForAJob}</div>
-        <div>{props.profile.lookingForAJobDescription}</div>
+        <div>Ищу работу: {profile.lookingForAJob}</div>
+        <div>{profile.lookingForAJobDescription}</div>
       </div>
     </div>
   );
