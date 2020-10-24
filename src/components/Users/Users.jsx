@@ -2,36 +2,29 @@ import React from "react";
 import classes from "./Users.module.scss";
 import userAva from "../../assets/images/ava.png";
 import { NavLink } from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
 
-let Users = (props) => {
-  // подсчет кол-ва страниц (всех юзеров / кол-во юзеров на странице)
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
+let Users = ({
+  currentPage,
+  onPageChanged,
+  totalUsersCount,
+  pageSize,
+  users,
+  follow,
+  unfollow,
+  followingInProgress,
+}) => {
   return (
     <div className={classes.Users}>
-      {/* вывод массива нормеров страниц */}
-      <div>
-        {pages.map((page, index) => {
-          return (
-            <span
-              key={index}
-              className={props.currentPage === page && classes.selectedPage}
-              onClick={(e) => {
-                props.onPageChanged(page);
-              }}
-            >
-              {page}&nbsp;
-            </span>
-          );
-        })}
-      </div>
+      <Paginator
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+      />
 
       {/* вывод массива users */}
-      {props.users.map((user) => (
+      {users.map((user) => (
         <div className={classes.User} key={user.id}>
           <div className={classes.UserAva}>
             <NavLink to={"/profile/" + user.id}>
@@ -45,11 +38,9 @@ let Users = (props) => {
             {user.followed ? (
               <button
                 // если в массиве хоть одна айди = айди пользователя, тогда button disabled
-                disabled={props.followingInProgress.some(
-                  (id) => id === user.id
-                )}
+                disabled={followingInProgress.some((id) => id === user.id)}
                 onClick={() => {
-                  props.unfollow(user.id);
+                  unfollow(user.id);
                 }}
               >
                 Unfollow
@@ -57,11 +48,9 @@ let Users = (props) => {
             ) : (
               <button
                 // если в массиве хоть одна айди = айди пользователя, тогда button disabled
-                disabled={props.followingInProgress.some(
-                  (id) => id === user.id
-                )}
+                disabled={followingInProgress.some((id) => id === user.id)}
                 onClick={() => {
-                  props.follow(user.id);
+                  follow(user.id);
                 }}
               >
                 Follow
