@@ -1,3 +1,18 @@
-.selectedPage {
+@import "../../../scss/vars";
+
+.Paginator {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.pageNumber {
+  padding: 5px;
+  border: 1px solid $color-border;
+  cursor: pointer;
+}
+
+.pageNumber.selectedPage {
   font-weight: bold;
+  color: $color-white;
+  background-color: $color-active;
 }
