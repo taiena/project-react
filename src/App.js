@@ -18,8 +18,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("App props.initialized: ", this.props.initialized);
-
     if (!this.props.initialized) {
       return <Preloader />;
     }
