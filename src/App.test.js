@@ -1,6 +1,6 @@
 import React from "react";
 // import { render } from "@testing-library/react";
-import App from "./App";
+import MyApp from "./App";
 import ReactDOM from "react-dom";
 
 // test("renders learn react link", () => {
@@ -11,6 +11,6 @@ import ReactDOM from "react-dom";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<MyApp />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
