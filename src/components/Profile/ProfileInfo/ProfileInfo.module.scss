@@ -10,6 +10,13 @@
 
   &Photo {
     margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Image {
+    max-width: 300px;
+    margin-bottom: 10px;
   }
 
   &Info {
