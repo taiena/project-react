@@ -9,6 +9,7 @@ const Profile = ({
   updateUserStatus,
   isOwner,
   saveUserPhoto,
+  saveUserProfile,
 }) => {
   return (
     <main className={classes.ProfilePage}>
@@ -18,6 +19,7 @@ const Profile = ({
         profile={profile}
         status={status}
         updateUserStatus={updateUserStatus}
+        saveUserProfile={saveUserProfile}
       />
       <PostsContainer />
     </main>

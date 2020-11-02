@@ -20,6 +20,14 @@
   }
 
   &Info {
+    display: grid;
+    grid-gap: 5px;
+  }
+
+  &About {
+  }
+
+  &Job {
     display: flex;
     flex-direction: column;
   }
@@ -27,7 +35,5 @@
   &Contacts {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
 }

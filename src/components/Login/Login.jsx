@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Login.module.scss";
+import styles from "../common/FormsControls/FormsControls.module.scss";
 import { reduxForm } from "redux-form";
 import { required, maxLengthCreator } from "../../utils/validators/validators";
 import { createField, Input } from "../common/FormsControls/FormsControls";
@@ -29,7 +30,7 @@ const LoginForm = ({ handleSubmit, error }) => {
         "remember me" // text
       )}
 
-      {error && <div className={classes.formSummaryError}>{error}</div>}
+      {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
       </div>

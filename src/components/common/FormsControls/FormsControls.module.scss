@@ -1,12 +1,18 @@
+@import "../../../scss/vars";
+
 .formsControls.error input,
 .formsControl.error textarea {
-  border: 1px solid red;
+  border: 1px solid $color-error;
 }
 
 .formsControls.error span {
-  color: red;
+  color: $color-error;
 }
 
 .Field {
   margin: 5px;
+}
+
+.formSummaryError {
+  color: $color-error;
 }
