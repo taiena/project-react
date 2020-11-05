@@ -5,7 +5,13 @@ import Nav from "./components/Nav/Nav.jsx";
 import ProfileContainer from "./components/Profile/ProfileContainer.jsx";
 import MessagesContainer from "./components/Messages/MessagesContainer.jsx";
 import UsersContainer from "./components/Users/UsersContainer.jsx";
-import { BrowserRouter, Route, withRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  withRouter,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 import { initializeApp } from "./redux/appReducer.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -30,10 +36,17 @@ class App extends Component {
         <HeaderContainer />
         <Nav />
         <div className={classes.wrapperContent}>
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/messages" render={() => <MessagesContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={withSuspense(Login)} />
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+            <Route
+              path="/profile/:userId?"
+              render={() => <ProfileContainer />}
+            />
+            <Route path="/messages" render={() => <MessagesContainer />} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={withSuspense(Login)} />
+            <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+          </Switch>
         </div>
       </div>
     );
