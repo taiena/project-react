@@ -12,18 +12,36 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { initializeApp } from "./redux/appReducer.js";
+import {
+  initializeApp,
+  globalErrorCatch,
+  globalErrorNull,
+} from "./redux/appReducer.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
+import ErrorModal from "./components/common/ErrorModal/ErrorModal";
 import store from "./redux/redux-store.js";
 import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
 const Login = React.lazy(() => import("./components/Login/Login"));
 
 class App extends Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    let globalError = promiseRejectionEvent.reason.message;
+    this.props.globalErrorCatch(globalError);
+  };
+
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "unhandledrejection",
+      this.catchAllUnhandledErrors
+    );
   }
 
   render() {
@@ -33,6 +51,13 @@ class App extends Component {
 
     return (
       <div className={classes.wrapper}>
+        {this.props.globalError !== null && (
+          <ErrorModal
+            globalError={this.props.globalError}
+            globalErrorNull={this.props.globalErrorNull}
+          />
+        )}
+
         <HeaderContainer />
         <Nav />
         <div className={classes.wrapperContent}>
@@ -55,11 +80,12 @@ class App extends Component {
 
 let mapStateToProps = (state) => ({
   initialized: state.app.initialized,
+  globalError: state.app.globalError,
 });
 
 let AppContainer = compose(
   withRouter,
-  connect(mapStateToProps, { initializeApp })
+  connect(mapStateToProps, { initializeApp, globalErrorCatch, globalErrorNull })
 )(App);
 
 const MyApp = (props) => {

@@ -1,9 +1,12 @@
 import { getAuthUserData } from "./authReducer.js";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
+const GLOBAL_ERROR_CATCHED = "GLOBAL_ERROR_CATCHED";
+const GLOBAL_ERROR_NULLED = "GLOBAL_ERROR_NULLED";
 
 let initialState = {
   initialized: false,
+  globalError: null,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -12,6 +15,18 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         initialized: true,
+      };
+
+    case GLOBAL_ERROR_CATCHED:
+      return {
+        ...state,
+        globalError: action.globalError,
+      };
+
+    case GLOBAL_ERROR_NULLED:
+      return {
+        ...state,
+        globalError: null,
       };
 
     default:
@@ -23,12 +38,31 @@ export const initializedSuccess = () => ({
   type: INITIALIZED_SUCCESS,
 });
 
+export const globalErrorCatched = (globalError) => ({
+  type: GLOBAL_ERROR_CATCHED,
+  globalError,
+});
+
+export const globalErrorNulled = () => ({
+  type: GLOBAL_ERROR_NULLED,
+});
+
+//thunk
 export const initializeApp = () => (dispatch) => {
   let promise = dispatch(getAuthUserData());
 
   Promise.all([promise]).then(() => {
     dispatch(initializedSuccess());
   });
+};
+
+export const globalErrorCatch = (globalError) => async (dispatch) => {
+  dispatch(globalErrorCatched(globalError));
+};
+
+//when closing the ErrorModal
+export const globalErrorNull = () => async (dispatch) => {
+  dispatch(globalErrorNulled());
 };
 
 export default appReducer;
