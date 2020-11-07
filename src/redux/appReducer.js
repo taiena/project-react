@@ -43,6 +43,7 @@ export const globalErrorCatched = (globalError) => ({
   globalError,
 });
 
+//when closing the ErrorModal
 export const globalErrorNulled = () => ({
   type: GLOBAL_ERROR_NULLED,
 });
@@ -54,15 +55,6 @@ export const initializeApp = () => (dispatch) => {
   Promise.all([promise]).then(() => {
     dispatch(initializedSuccess());
   });
-};
-
-export const globalErrorCatch = (globalError) => async (dispatch) => {
-  dispatch(globalErrorCatched(globalError));
-};
-
-//when closing the ErrorModal
-export const globalErrorNull = () => async (dispatch) => {
-  dispatch(globalErrorNulled());
 };
 
 export default appReducer;
