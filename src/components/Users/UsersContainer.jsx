@@ -4,7 +4,7 @@ import {
   unfollow,
   toggleFollowingProgress,
   requestUsers,
-} from "../../redux/usersReducer.js";
+} from "../../redux/usersReducer";
 import { connect } from "react-redux";
 import Users from "./Users.jsx";
 import Preloader from "../common/Preloader/Preloader";

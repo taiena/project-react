@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { logout } from "../../redux/authReducer.js";
+import { logout } from "../../redux/authReducer";
 import { connect } from "react-redux";
 import Header from "./Header.jsx";
 

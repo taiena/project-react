@@ -16,7 +16,7 @@ import {
   initializeApp,
   globalErrorCatched,
   globalErrorNulled,
-} from "./redux/appReducer.js";
+} from "./redux/appReducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";

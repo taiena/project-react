@@ -1,6 +1,6 @@
 // import React from "react";
 import Messages from "./Messages.jsx";
-import { sendMessageCreator } from "../../redux/messagesReducer.js";
+import { sendMessageCreator } from "../../redux/messagesReducer";
 
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";

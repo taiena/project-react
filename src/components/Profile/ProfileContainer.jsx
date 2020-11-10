@@ -5,7 +5,7 @@ import {
   updateUserStatus,
   saveUserPhoto,
   saveUserProfile,
-} from "../../redux/profileReducer.js";
+} from "../../redux/profileReducer";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 import { withRouter } from "react-router-dom";
@@ -39,7 +39,7 @@ class ProfileContainer extends Component {
     return (
       <Profile
         {...this.props}
-        // isOwner true, когда в пропсах не приходит айди (тогда это наша страница)
+        // isOwner true when no id in props (then it is our profile)
         isOwner={!this.props.match.params.userId}
         saveUserPhoto={this.props.saveUserPhoto}
         profile={this.props.profile}
@@ -60,9 +60,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-// compose закинет ProfileContainer в функцию withAuthRedirect,
-// это все оборачивается withRouter
-// результат этого направит в функцию connect
+// compose will place ProfileContainer to function withAuthRedirect,
+// all this will wrap with withRouter
+// and result of this will send to function connect
 
 export default compose(
   connect(mapStateToProps, {
