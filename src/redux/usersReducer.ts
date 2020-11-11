@@ -1,6 +1,9 @@
 import { usersAPI } from "../api/api";
 import { updateObjectInArray } from "../utils/objectHelpers";
 import { UserType } from "../types/types";
+import { AppStateType } from "./redux-store";
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -23,7 +26,10 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+const usersReducer = (
+  state = initialState,
+  action: ActionsTypes
+): InitialStateType => {
   switch (action.type) {
     // function updateObjectInArray takes:
     // array items (transfer state.users),
@@ -87,6 +93,15 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
       return state;
   }
 };
+
+type ActionsTypes =
+  | FollowSuccessActionType
+  | UnfollowSuccessActionType
+  | SetUsersActionType
+  | SetCurrentPageActionType
+  | SetTotalUsersCountActionType
+  | ToggleIsLoadingActionType
+  | ToggleFollowingProgressActionType;
 
 type FollowSuccessActionType = {
   type: typeof FOLLOW;
@@ -169,8 +184,20 @@ export const toggleFollowingProgress = (
   userId,
 });
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
-  return async (dispatch: any) => {
+type GetStateType = () => AppStateType;
+type DispatchType = Dispatch<ActionsTypes>;
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
+
+export const requestUsers = (
+  currentPage: number,
+  pageSize: number
+): ThunkType => {
+  return async (dispatch, getState: GetStateType) => {
     dispatch(toggleIsLoading(true));
     dispatch(setCurrentPage(currentPage));
 
@@ -182,11 +209,13 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
   };
 };
 
-const followUnfollowFlow = async (
-  dispatch: any,
+const _followUnfollowFlow = async (
+  dispatch: DispatchType,
   userId: number,
   apiMethod: any,
-  actionCreator: any
+  actionCreator: (
+    userId: number
+  ) => FollowSuccessActionType | UnfollowSuccessActionType
 ) => {
   dispatch(toggleFollowingProgress(true, userId));
 
@@ -200,15 +229,15 @@ const followUnfollowFlow = async (
   dispatch(toggleFollowingProgress(false, userId));
 };
 
-export const follow = (userId: number) => {
-  return async (dispatch: any) => {
-    followUnfollowFlow(dispatch, userId, usersAPI.follow, followSuccess);
+export const follow = (userId: number): ThunkType => {
+  return async (dispatch) => {
+    _followUnfollowFlow(dispatch, userId, usersAPI.follow, followSuccess);
   };
 };
 
-export const unfollow = (userId: number) => {
-  return async (dispatch: any) => {
-    followUnfollowFlow(dispatch, userId, usersAPI.unfollow, unfollowSuccess);
+export const unfollow = (userId: number): ThunkType => {
+  return async (dispatch) => {
+    _followUnfollowFlow(dispatch, userId, usersAPI.unfollow, unfollowSuccess);
   };
 };
 
