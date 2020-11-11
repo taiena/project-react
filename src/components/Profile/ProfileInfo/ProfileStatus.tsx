@@ -1,11 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, ChangeEvent } from "react";
 
-export default class ProfileStatus extends Component {
-  // из глобального стейта в пропсах приходит статус (отображается в спане),
-  // записывается в локальный стейт (отображается в инпуте),
-  // меняется локальный стейт в инпуте, диспатчится в редакс
-  // там меняется глобальный стейт и опять приходит сюда с пропсами
+// Old component (now use ProfileStatusHooks)
+// status comes in props from the global state (displayed in span),
+// then written in local state (displayed in input),
+// then local state in input changed and dispatch to redux
+// then the global state changes and comes to the component in props again
 
+type PropsType = { status: string; updateUserStatus: (status: string) => void };
+
+type StateType = { editMode: boolean; status: string };
+
+export default class ProfileStatus extends Component<PropsType, StateType> {
   state = {
     editMode: false,
     status: this.props.status,
@@ -24,15 +29,13 @@ export default class ProfileStatus extends Component {
     this.props.updateUserStatus(this.state.status);
   };
 
-  // если value в инпуте зафиксировано, вешаем туда onChange
-  // и создаем метод для работы с инпутом
-  onStatusChange = (e) => {
+  onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       status: e.currentTarget.value,
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: PropsType, prevState: StateType) {
     if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.props.status,

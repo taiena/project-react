@@ -2,35 +2,43 @@ import React, { useState } from "react";
 import classes from "./Paginator.module.scss";
 import cn from "classnames";
 
-let Paginator = ({
+type PropsType = {
+  totalItemsCount: number;
+  pageSize: number;
+  currentPage: number;
+  onPageChanged: (pageNumber: number) => void;
+  portionSize?: number;
+};
+
+let Paginator: React.FC<PropsType> = ({
   totalItemsCount,
   pageSize,
   currentPage,
   onPageChanged,
   portionSize = 20,
 }) => {
-  // подсчет кол-ва страниц (всех юзеров / кол-во юзеров на странице)
   let pagesCount = Math.ceil(totalItemsCount / pageSize);
-  let pages = [];
+  let pages: Array<number> = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
-  // подсчет порций (кол-ва номеров страниц, выводимых за раз)
+  // portion is the quantity of page numbers displayed at a time
   let portionCount = Math.ceil(pagesCount / portionSize);
-  // добавление в стейт номера порции
-  // (чтоб при перезагрузке выводилась та порция, в которой номер текущей страницы)
-  let [portionNumber, setPortionNumber] = useState(
+  // adding a portion number to state so that when the page is reloaded,
+  // the portion with the current page number is displayed
+  let [portionNumber, setPortionNumber] = useState<number>(
     Math.ceil(currentPage / portionSize)
   );
-  // крайний левый номер страницы в порции
+
+  // the leftmost page number in the portion
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-  // крайний правый номер страницы в порции
+  // the rightmost page number in the portion
   let rightPortionPageNumber = portionNumber * portionSize;
 
   return (
     <div className={classes.Paginator}>
-      {/* если номер порции больше 1, вывод кнопки prev */}
+      {/* if the portion number > 1 show the button prev */}
       {portionNumber > 1 && (
         <button
           onClick={() => {
@@ -41,7 +49,7 @@ let Paginator = ({
         </button>
       )}
 
-      {/* вывод массива страниц с фильтром на текущую порцию */}
+      {/* outputting an array of pages with the filter of the current portion */}
       {pages
         .filter(
           (page) =>
@@ -66,7 +74,7 @@ let Paginator = ({
           );
         })}
 
-      {/* если порций больше чем текущая порция, вывод кнопки next */}
+      {/* if there are more portions than the current portion, show the button next */}
       {portionCount > portionNumber && (
         <button
           onClick={() => {

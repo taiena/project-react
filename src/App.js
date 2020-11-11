@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import classes from "./scss/App.module.scss";
-import HeaderContainer from "./components/Header/HeaderContainer.jsx";
-import Nav from "./components/Nav/Nav.jsx";
-import ProfileContainer from "./components/Profile/ProfileContainer.jsx";
-import MessagesContainer from "./components/Messages/MessagesContainer.jsx";
-import UsersContainer from "./components/Users/UsersContainer.jsx";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Nav from "./components/Nav/Nav";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import MessagesContainer from "./components/Messages/MessagesContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 import {
   BrowserRouter,
   Route,
@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import ErrorModal from "./components/common/ErrorModal/ErrorModal";
-import store from "./redux/redux-store.js";
+import store from "./redux/redux-store";
 import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
 const Login = React.lazy(() => import("./components/Login/Login"));
@@ -68,7 +68,10 @@ class App extends Component {
               render={() => <ProfileContainer />}
             />
             <Route path="/messages" render={() => <MessagesContainer />} />
-            <Route path="/users" render={() => <UsersContainer />} />
+            <Route
+              path="/users"
+              render={() => <UsersContainer pageTitle={"Find users"} />}
+            />
             <Route path="/login" render={withSuspense(Login)} />
             <Route path="*" render={() => <div>404 NOT FOUND</div>} />
           </Switch>
