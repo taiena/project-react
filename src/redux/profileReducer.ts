@@ -1,4 +1,4 @@
-import { profileAPI } from "../api/api";
+import { profileAPI } from "../api/profileApi";
 import { stopSubmit } from "redux-form";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 
@@ -127,26 +127,26 @@ export const savePhotoSuccess = (
 });
 
 export const getUserProfile = (userId: number) => async (dispatch: any) => {
-  let response = await profileAPI.getProfile(userId);
-  dispatch(setUserProfile(response.data));
+  let data = await profileAPI.getProfile(userId);
+  dispatch(setUserProfile(data));
 };
 
 export const getUserStatus = (userId: number) => async (dispatch: any) => {
-  let response = await profileAPI.getStatus(userId);
-  dispatch(setUserStatus(response.data));
+  let data = await profileAPI.getStatus(userId);
+  dispatch(setUserStatus(data));
 };
 
 export const updateUserStatus = (status: string) => async (dispatch: any) => {
-  let response = await profileAPI.updateStatus(status);
-  if (response.data.resultCode === 0) {
+  let data = await profileAPI.updateStatus(status);
+  if (data.resultCode === 0) {
     dispatch(setUserStatus(status));
   }
 };
 
 export const saveUserPhoto = (file: any) => async (dispatch: any) => {
-  let response = await profileAPI.savePhoto(file);
-  if (response.data.resultCode === 0) {
-    dispatch(savePhotoSuccess(response.data.data.photos));
+  let data = await profileAPI.savePhoto(file);
+  if (data.resultCode === 0) {
+    dispatch(savePhotoSuccess(data.data.photos));
   }
 };
 
@@ -156,13 +156,13 @@ export const saveUserProfile = (profile: ProfileType) => async (
   getState: any
 ) => {
   const userId = getState().auth.id;
-  const response = await profileAPI.saveProfile(profile);
+  const data = await profileAPI.saveProfile(profile);
 
-  if (response.data.resultCode === 0) {
+  if (data.resultCode === 0) {
     dispatch(getUserProfile(userId));
   } else {
-    dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
-    return Promise.reject(response.data.messages[0]);
+    dispatch(stopSubmit("edit-profile", { _error: data.messages[0] }));
+    return Promise.reject(data.messages[0]);
   }
 };
 

@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { usersAPI } from "../api/usersApi";
 import { updateObjectInArray } from "../utils/objectHelpers";
 import { UserType } from "../types/types";
 import { AppStateType, InferActionsTypes } from "./redux-store";
@@ -150,11 +150,11 @@ export const requestUsers = (
     dispatch(actions.toggleIsLoading(true));
     dispatch(actions.setCurrentPage(currentPage));
 
-    let response = await usersAPI.getUsers(currentPage, pageSize);
+    let data = await usersAPI.getUsers(currentPage, pageSize);
 
     dispatch(actions.toggleIsLoading(false));
-    dispatch(actions.setUsers(response.data.items));
-    dispatch(actions.setTotalUsersCount(response.data.totalCount));
+    dispatch(actions.setUsers(data.items));
+    dispatch(actions.setTotalUsersCount(data.totalCount));
   };
 };
 
@@ -167,10 +167,10 @@ const _followUnfollowFlow = async (
   dispatch(actions.toggleFollowingProgress(true, userId));
 
   // apiMethod may be follow / unfollow
-  let response = await apiMethod(userId);
+  let data = await apiMethod(userId);
 
   // actionCreator may be followSuccess / unfollowSuccess
-  if (response.data.resultCode === 0) {
+  if (data.resultCode === 0) {
     dispatch(actionCreator(userId));
   }
   dispatch(actions.toggleFollowingProgress(false, userId));

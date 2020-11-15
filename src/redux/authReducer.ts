@@ -1,9 +1,6 @@
-import {
-  authAPI,
-  securityAPI,
-  ResultCodeForCapctha,
-  ResultCodesEnum,
-} from "../api/api";
+import { ResultCodeForCapcthaEnum, ResultCodesEnum } from "../api/api";
+import { authAPI } from "../api/authApi";
+import { securityAPI } from "../api/securityApi";
 import { stopSubmit } from "redux-form";
 
 const SET_USER_DATA = "SET_USER_DATA";
@@ -90,7 +87,7 @@ export const login = (
   if (loginData.resultCode === ResultCodesEnum.Success) {
     dispatch(getAuthUserData());
   } else {
-    if (loginData.resultCode === ResultCodeForCapctha.CaptchaIsRequired) {
+    if (loginData.resultCode === ResultCodeForCapcthaEnum.CaptchaIsRequired) {
       dispatch(getCaptchaUrl());
     }
     let message =
@@ -107,8 +104,8 @@ export const logout = () => async (dispatch: any) => {
 };
 
 export const getCaptchaUrl = () => async (dispatch: any) => {
-  let response = await securityAPI.getCaptchaUrl();
-  let captchaUrl = response.data.url;
+  let data = await securityAPI.getCaptchaUrl();
+  let captchaUrl = data.url;
   dispatch(getCaptchaUrlSuccess(captchaUrl));
 };
 
