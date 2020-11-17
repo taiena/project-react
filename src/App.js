@@ -14,8 +14,8 @@ import {
 } from "react-router-dom";
 import {
   initializeApp,
-  globalErrorCatched,
-  globalErrorNulled,
+  globalErrorCatch,
+  globalErrorNull,
 } from "./redux/appReducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -29,7 +29,7 @@ const Login = React.lazy(() => import("./components/Login/Login"));
 class App extends Component {
   catchAllUnhandledErrors = (promiseRejectionEvent) => {
     let globalError = promiseRejectionEvent.reason.message;
-    this.props.globalErrorCatched(globalError);
+    this.props.globalErrorCatch(globalError);
   };
 
   componentDidMount() {
@@ -54,7 +54,7 @@ class App extends Component {
         {this.props.globalError !== null && (
           <ErrorModal
             globalError={this.props.globalError}
-            globalErrorNull={this.props.globalErrorNulled}
+            globalErrorNull={this.props.globalErrorNull}
           />
         )}
 
@@ -90,8 +90,8 @@ let AppContainer = compose(
   withRouter,
   connect(mapStateToProps, {
     initializeApp,
-    globalErrorCatched,
-    globalErrorNulled,
+    globalErrorCatch,
+    globalErrorNull,
   })
 )(App);
 

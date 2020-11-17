@@ -1,6 +1,6 @@
-// import React from "react";
+import React from "react";
 import Messages from "./Messages.jsx";
-import { sendMessageCreator } from "../../redux/messagesReducer";
+import { actions } from "../../redux/messagesReducer";
 
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
@@ -15,7 +15,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (newMessageBody) => {
-      dispatch(sendMessageCreator(newMessageBody));
+      dispatch(actions.sendMessageCreator(newMessageBody));
     },
   };
 };

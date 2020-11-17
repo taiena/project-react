@@ -1,34 +1,33 @@
 import { getAuthUserData } from "./authReducer";
+import { BaseThunkType, InferActionsTypes } from "./redux-store";
 
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
-const GLOBAL_ERROR_CATCHED = "GLOBAL_ERROR_CATCHED";
-const GLOBAL_ERROR_NULLED = "GLOBAL_ERROR_NULLED";
-
-export type InitialStateType = {
-  initialized: boolean;
-  globalError: string | null;
-};
-
-let initialState: InitialStateType = {
+let initialState = {
   initialized: false,
-  globalError: null,
+  globalError: null as string | null,
 };
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+export type InitialStateType = typeof initialState;
+type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsTypes>;
+
+const appReducer = (
+  state = initialState,
+  action: ActionsTypes
+): InitialStateType => {
   switch (action.type) {
-    case INITIALIZED_SUCCESS:
+    case "INITIALIZED_SUCCESS":
       return {
         ...state,
         initialized: true,
       };
 
-    case GLOBAL_ERROR_CATCHED:
+    case "GLOBAL_ERROR_CATCHED":
       return {
         ...state,
         globalError: action.globalError,
       };
 
-    case GLOBAL_ERROR_NULLED:
+    case "GLOBAL_ERROR_NULLED":
       return {
         ...state,
         globalError: null,
@@ -39,43 +38,42 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-type InitializedSuccessActionType = {
-  type: typeof INITIALIZED_SUCCESS;
+export const actions = {
+  initializedSuccess: () =>
+    ({
+      type: "INITIALIZED_SUCCESS",
+    } as const),
+
+  globalErrorCatched: (globalError: string | null) =>
+    ({
+      type: "GLOBAL_ERROR_CATCHED",
+      globalError,
+    } as const),
+
+  globalErrorNulled: () =>
+    ({
+      type: "GLOBAL_ERROR_NULLED",
+    } as const),
 };
 
-export const initializedSuccess = (): InitializedSuccessActionType => ({
-  type: INITIALIZED_SUCCESS,
-});
-
-//when error is catched
-type GlobalErrorCatchedActionType = {
-  type: typeof GLOBAL_ERROR_CATCHED;
-  globalError: string | null;
-};
-
-export const globalErrorCatched = (
-  globalError: string | null
-): GlobalErrorCatchedActionType => ({
-  type: GLOBAL_ERROR_CATCHED,
-  globalError,
-});
-
-//when closing the ErrorModal
-type GlobalErrorNulledActionType = {
-  type: typeof GLOBAL_ERROR_NULLED;
-};
-
-export const globalErrorNulled = (): GlobalErrorNulledActionType => ({
-  type: GLOBAL_ERROR_NULLED,
-});
-
-//thunk initialized
 export const initializeApp = () => (dispatch: any) => {
   let promise = dispatch(getAuthUserData());
 
   Promise.all([promise]).then(() => {
-    dispatch(initializedSuccess());
+    dispatch(actions.initializedSuccess());
   });
+};
+
+// when error is catched
+export const globalErrorCatch = (
+  globalError: string | null
+): ThunkType => async (dispatch) => {
+  dispatch(actions.globalErrorCatched(globalError));
+};
+
+//when closing the ErrorModal
+export const globalErrorNull = (): ThunkType => async (dispatch) => {
+  dispatch(actions.globalErrorNulled());
 };
 
 export default appReducer;
