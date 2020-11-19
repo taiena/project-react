@@ -5,10 +5,20 @@ import {
   createField,
   Input,
   Textarea,
+  GetStringKeys,
 } from "../../common/FormsControls/FormsControls";
-import { reduxForm } from "redux-form";
+import { InjectedFormProps, reduxForm } from "redux-form";
+import { ProfileType } from "../../../types/types";
 
-const ProfileDataForm = ({ profile, handleSubmit, error }) => {
+type PropsType = {
+  profile: ProfileType;
+};
+
+type ProfileTypeKeys = GetStringKeys<ProfileType>;
+
+const ProfileDataForm: React.FC<
+  InjectedFormProps<ProfileType, PropsType> & PropsType
+> = ({ profile, handleSubmit, error }) => {
   return (
     <form className={styles.ProfileInfo} onSubmit={handleSubmit}>
       <div>
@@ -64,8 +74,8 @@ const ProfileDataForm = ({ profile, handleSubmit, error }) => {
   );
 };
 
-const ProfileDataFormReduxForm = reduxForm({ form: "edit-profile" })(
-  ProfileDataForm
-);
+const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({
+  form: "edit-profile",
+})(ProfileDataForm);
 
 export default ProfileDataFormReduxForm;

@@ -3,7 +3,11 @@ import classes from "./Login.module.scss";
 import styles from "../common/FormsControls/FormsControls.module.scss";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import { required, maxLengthCreator } from "../../utils/validators/validators";
-import { createField, Input } from "../common/FormsControls/FormsControls";
+import {
+  createField,
+  Input,
+  GetStringKeys,
+} from "../common/FormsControls/FormsControls";
 import { connect } from "react-redux";
 import { login } from "../../redux/authReducer";
 import { Redirect } from "react-router-dom";
@@ -92,7 +96,7 @@ type LoginFormValuesType = {
   captcha: string;
 };
 
-type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>;
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>;
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
   // all values ​​from forms will come to onSubmit (formData)

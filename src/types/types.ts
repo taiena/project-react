@@ -5,12 +5,13 @@ export type PostType = {
 };
 
 export type ProfileType = {
-  userId: number;
+  userId: number | null;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
   contacts: ContactsType;
   photos: PhotosType;
+  aboutMe: string;
 };
 
 export type ContactsType = {

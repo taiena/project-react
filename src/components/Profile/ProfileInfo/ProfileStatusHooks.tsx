@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 
-const ProfileStatusHooks = (props) => {
+type PropsType = {
+  status: string;
+  updateUserStatus: (status: string) => void;
+};
+
+const ProfileStatusHooks: React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 
-  // выполняется после отрисовки, когда приходят новые пропсы
-  // зависимость от [props.status]
   useEffect(() => {
     setStatus(props.status);
   }, [props.status]);
@@ -19,7 +22,7 @@ const ProfileStatusHooks = (props) => {
     props.updateUserStatus(status);
   };
 
-  const onStatusChange = (e) => {
+  const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value);
   };
 
