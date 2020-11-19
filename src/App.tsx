@@ -21,13 +21,21 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import ErrorModal from "./components/common/ErrorModal/ErrorModal";
-import store from "./redux/redux-store";
+import store, { AppStateType } from "./redux/redux-store";
 import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
+
 const Login = React.lazy(() => import("./components/Login/Login"));
 
-class App extends Component {
-  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+type MapPropsType = ReturnType<typeof mapStateToProps>;
+type DispatchPropsType = {
+  initializeApp: () => void;
+  globalErrorCatch: (globalError: string | null) => void;
+  globalErrorNull: () => void;
+};
+
+class App extends Component<MapPropsType & DispatchPropsType> {
+  catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
     let globalError = promiseRejectionEvent.reason.message;
     this.props.globalErrorCatch(globalError);
   };
@@ -81,12 +89,13 @@ class App extends Component {
   }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
   globalError: state.app.globalError,
 });
 
-let AppContainer = compose(
+//26 min
+let AppContainer = compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, {
     initializeApp,
@@ -95,7 +104,7 @@ let AppContainer = compose(
   })
 )(App);
 
-const MyApp = (props) => {
+const MyApp: React.FC = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>

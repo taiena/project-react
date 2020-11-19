@@ -31,7 +31,6 @@ type MapDispatchPropsType = {
 
 type OwnPropsType = {
   pageTitle: string;
-  onPageChanged: (pageNumber: number) => void;
 };
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
