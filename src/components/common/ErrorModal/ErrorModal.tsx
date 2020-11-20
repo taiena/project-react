@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import classes from "./ErrorModal.module.scss";
 
-const ErrorModal = ({ globalError, globalErrorNull }) => {
+type PropsType = {
+  globalError: string | null;
+  globalErrorNull: () => void;
+};
+
+const ErrorModal: React.FC<PropsType> = ({ globalError, globalErrorNull }) => {
   let [isOpen, setIsOpen] = useState(true);
 
   const onModalClose = () => {
