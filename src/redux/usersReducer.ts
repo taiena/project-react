@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/usersApi";
+import { APIResponseType } from "../api/api";
 import { updateObjectInArray } from "../utils/objectHelpers";
 import { UserType } from "../types/types";
 import { InferActionsTypes, BaseThunkType } from "./redux-store";
@@ -13,9 +14,14 @@ let initialState = {
   // put the user id into the array followingInProgress while following
   // remove the user id from the array when followed / unfollowed
   followingInProgress: [] as Array<number>,
+  filter: {
+    term: "",
+    friend: null as null | boolean,
+  },
 };
 
 export type InitialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
 type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes>;
 
@@ -82,6 +88,12 @@ const usersReducer = (
             state.followingInProgress.filter((id) => id !== action.userId),
       };
 
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter: action.payload,
+      };
+
     default:
       return state;
   }
@@ -130,17 +142,30 @@ export const actions = {
       isLoading,
       userId,
     } as const),
+
+  setFilter: (filter: FilterType) =>
+    ({
+      type: "SET_FILTER",
+      payload: filter,
+    } as const),
 };
 
 export const requestUsers = (
   currentPage: number,
-  pageSize: number
+  pageSize: number,
+  filter: FilterType
 ): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleIsLoading(true));
     dispatch(actions.setCurrentPage(currentPage));
+    dispatch(actions.setFilter(filter));
 
-    let data = await usersAPI.getUsers(currentPage, pageSize);
+    let data = await usersAPI.getUsers(
+      currentPage,
+      pageSize,
+      filter.term,
+      filter.friend
+    );
 
     dispatch(actions.toggleIsLoading(false));
     dispatch(actions.setUsers(data.items));
@@ -151,7 +176,7 @@ export const requestUsers = (
 const _followUnfollowFlow = async (
   dispatch: Dispatch<ActionsTypes>,
   userId: number,
-  apiMethod: any,
+  apiMethod: (userId: number) => Promise<APIResponseType>,
   actionCreator: (userId: number) => ActionsTypes
 ) => {
   dispatch(actions.toggleFollowingProgress(true, userId));
