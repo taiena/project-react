@@ -4,7 +4,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Nav from "./components/Nav/Nav";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
-import UsersContainer from "./components/Users/UsersContainer";
+import { UsersPage } from "./components/Users/UsersContainer";
 import {
   BrowserRouter,
   Route,
@@ -25,7 +25,7 @@ import store, { AppStateType } from "./redux/redux-store";
 import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
 
-const Login = React.lazy(() => import("./components/Login/Login"));
+const Login = React.lazy(() => import("./components/Login/LoginPage"));
 const SuspendedLogin = withSuspense(Login);
 
 type MapPropsType = ReturnType<typeof mapStateToProps>;
@@ -79,7 +79,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
             <Route path="/messages" render={() => <MessagesContainer />} />
             <Route
               path="/users"
-              render={() => <UsersContainer pageTitle={"Find users"} />}
+              render={() => <UsersPage pageTitle={"Find users"} />}
             />
             <Route path="/login" render={SuspendedLogin} />
             <Route path="*" render={() => <div>404 NOT FOUND</div>} />
