@@ -1,24 +1,30 @@
 import React from "react";
 import classes from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
+import { selectIsAuth, selectLogin } from "../../redux/authSelectors";
+import { logout } from "../../redux/authReducer";
+import { useSelector, useDispatch } from "react-redux";
 
-export type MapPropsType = {
-  isAuth: boolean;
-  login: string | null;
-};
-export type DispatchPropsType = {
-  logout: () => void;
-};
+export type MapPropsType = {};
 
-const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+const Header: React.FC<MapPropsType> = (props) => {
+  const isAuth = useSelector(selectIsAuth);
+  const login = useSelector(selectLogin);
+
+  const dispatch = useDispatch();
+
+  const logoutCallback = () => {
+    dispatch(logout());
+  };
+
   return (
     <header className={classes.Header}>
       <div>Header is here</div>
       <div className={classes.LoginBlock}>
-        {props.isAuth ? (
+        {isAuth ? (
           <div>
-            {props.login}
-            <button onClick={props.logout}>Log out</button>
+            {login}
+            <button onClick={logoutCallback}>Log out</button>
           </div>
         ) : (
           <NavLink to={"/login"}>Login</NavLink>

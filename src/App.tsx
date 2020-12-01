@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import classes from "./scss/App.module.scss";
-import HeaderContainer from "./components/Header/HeaderContainer";
+import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
@@ -67,7 +67,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
           />
         )}
 
-        <HeaderContainer />
+        <Header />
         <Nav />
         <div className={classes.wrapperContent}>
           <Switch>
