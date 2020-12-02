@@ -1,28 +1,46 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.png";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import ProfileDataFormReduxForm from "./ProfileDataForm";
 import { ContactsType, ProfileType } from "../../../types/types";
+import { selectProfile, selectStatus } from "../../../redux/profileSelectors";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  saveUserPhoto,
+  // saveUserProfile,
+} from "../../../redux/profileReducer";
 
 type PropsType = {
-  profile: ProfileType | null;
-  status: string;
-  updateUserStatus: (status: string) => void;
+  // profile: ProfileType | null;
   isOwner: boolean;
-  saveUserPhoto: (file: File) => void;
+  // saveUserPhoto: (file: File) => void;
   saveUserProfile: (profile: ProfileType) => Promise<any>;
 };
 
 const ProfileInfo: React.FC<PropsType> = ({
-  profile,
-  status,
-  updateUserStatus,
+  // profile,
   isOwner,
-  saveUserPhoto,
+  // saveUserPhoto,
   saveUserProfile,
 }) => {
+  const profile = useSelector(selectProfile);
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(());
+  // }, []);
+
+  const savePhoto = (file: File) => {
+    dispatch(saveUserPhoto(file));
+  };
+
+  // const saveProfile = (profile: ProfileType) => {
+  //   dispatch(saveUserProfile(profile));
+  // };
+
   let [editMode, setEditMode] = useState(false);
 
   if (!profile) {
@@ -31,7 +49,7 @@ const ProfileInfo: React.FC<PropsType> = ({
 
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      saveUserPhoto(e.target.files[0]);
+      savePhoto(e.target.files[0]);
     }
   };
 
@@ -69,7 +87,7 @@ const ProfileInfo: React.FC<PropsType> = ({
         />
       )}
 
-      <ProfileStatusHooks status={status} updateUserStatus={updateUserStatus} />
+      <ProfileStatusHooks />
     </div>
   );
 };

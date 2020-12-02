@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import {
   getUserProfile,
   getUserStatus,
-  updateUserStatus,
-  saveUserPhoto,
+  // saveUserPhoto,
   saveUserProfile,
 } from "../../redux/profileReducer";
-import { selectProfile, selectStatus } from "../../redux/profileSelectors";
+// import { selectProfile } from "../../redux/profileSelectors";
 import { selectIsAuth, selectId } from "../../redux/authSelectors";
 import { connect } from "react-redux";
 import Profile from "./Profile";
@@ -21,8 +20,7 @@ type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   getUserProfile: (userId: number) => void;
   getUserStatus: (userId: number) => void;
-  updateUserStatus: (status: string) => void;
-  saveUserPhoto: (file: File) => void;
+  // saveUserPhoto: (file: File) => void;
   saveUserProfile: (profile: ProfileType) => Promise<any>;
 };
 
@@ -68,10 +66,8 @@ class ProfileContainer extends Component<PropsType> {
         {...this.props}
         // isOwner true when no id in props (then it is our profile)
         isOwner={!this.props.match.params.userId}
-        saveUserPhoto={this.props.saveUserPhoto}
-        profile={this.props.profile}
-        status={this.props.status}
-        updateUserStatus={this.props.updateUserStatus}
+        // saveUserPhoto={this.props.saveUserPhoto}
+        // profile={this.props.profile}
         saveUserProfile={this.props.saveUserProfile}
       />
     );
@@ -80,8 +76,7 @@ class ProfileContainer extends Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType) => {
   return {
-    profile: selectProfile(state),
-    status: selectStatus(state),
+    // profile: selectProfile(state),
     authorizedUserId: selectId(state),
     isAuth: selectIsAuth(state),
   };
@@ -95,8 +90,7 @@ export default compose<React.ComponentType>(
   connect(mapStateToProps, {
     getUserProfile,
     getUserStatus,
-    updateUserStatus,
-    saveUserPhoto,
+    // saveUserPhoto,
     saveUserProfile,
   }),
   withRouter,

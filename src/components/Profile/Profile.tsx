@@ -5,30 +5,24 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { ProfileType } from "../../types/types";
 
 type PropsType = {
-  profile: ProfileType | null;
-  status: string;
+  // profile: ProfileType | null;
   isOwner: boolean;
-  updateUserStatus: (status: string) => void;
-  saveUserPhoto: (file: File) => void;
+  // saveUserPhoto: (file: File) => void;
   saveUserProfile: (profile: ProfileType) => Promise<any>;
 };
 
 const Profile: React.FC<PropsType> = ({
-  profile,
-  status,
-  updateUserStatus,
+  // profile,
   isOwner,
-  saveUserPhoto,
+  // saveUserPhoto,
   saveUserProfile,
 }) => {
   return (
     <main className={classes.ProfilePage}>
       <ProfileInfo
         isOwner={isOwner}
-        saveUserPhoto={saveUserPhoto}
-        profile={profile}
-        status={status}
-        updateUserStatus={updateUserStatus}
+        // saveUserPhoto={saveUserPhoto}
+        // profile={profile}
         saveUserProfile={saveUserProfile}
       />
       <PostsContainer />
