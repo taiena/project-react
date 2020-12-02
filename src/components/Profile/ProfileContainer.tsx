@@ -6,6 +6,8 @@ import {
   saveUserPhoto,
   saveUserProfile,
 } from "../../redux/profileReducer";
+import { selectProfile, selectStatus } from "../../redux/profileSelectors";
+import { selectIsAuth, selectId } from "../../redux/authSelectors";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -78,10 +80,10 @@ class ProfileContainer extends Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType) => {
   return {
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.id,
-    isAuth: state.auth.isAuth,
+    profile: selectProfile(state),
+    status: selectStatus(state),
+    authorizedUserId: selectId(state),
+    isAuth: selectIsAuth(state),
   };
 };
 
