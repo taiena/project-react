@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Users } from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { getIsLoading } from "../../redux/usersSelectors";
+import { selectIsLoading } from "../../redux/usersSelectors";
 
 type UsersPagePropsType = { pageTitle: string };
 
 export const UsersPage: React.FC<UsersPagePropsType> = (props) => {
-  const isLoading = useSelector(getIsLoading);
+  const isLoading = useSelector(selectIsLoading);
 
   return (
     <>

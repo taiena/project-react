@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { FilterType } from "../../../redux/usersReducer";
 import { useSelector } from "react-redux";
-import { getUserFilter } from "../../../redux/usersSelectors";
+import { selectUserFilter } from "../../../redux/usersSelectors";
 
 const usersSearchFormValidate = (values: any) => {
   const errors = {};
@@ -21,7 +21,7 @@ type PropsType = {
 };
 
 const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
-  const filter = useSelector(getUserFilter);
+  const filter = useSelector(selectUserFilter);
   const submit = (
     values: FormType,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }

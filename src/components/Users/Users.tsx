@@ -11,12 +11,12 @@ import {
 } from "../../redux/usersReducer";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getUsers,
-  getCurrentPage,
-  getFollowingInProgress,
-  getPageSize,
-  getTotalUsersCount,
-  getUserFilter,
+  selectUsers,
+  selectCurrentPage,
+  selectFollowingInProgress,
+  selectPageSize,
+  selectTotalUsersCount,
+  selectUserFilter,
 } from "../../redux/usersSelectors";
 import { useHistory } from "react-router-dom";
 import * as queryString from "querystring";
@@ -26,12 +26,12 @@ type PropsType = {};
 type QueryParamsType = { term?: string; page?: string; friend?: string };
 
 export const Users: React.FC<PropsType> = () => {
-  const users = useSelector(getUsers);
-  const totalUsersCount = useSelector(getTotalUsersCount);
-  const currentPage = useSelector(getCurrentPage);
-  const pageSize = useSelector(getPageSize);
-  const filter = useSelector(getUserFilter);
-  const followingInProgress = useSelector(getFollowingInProgress);
+  const users = useSelector(selectUsers);
+  const totalUsersCount = useSelector(selectTotalUsersCount);
+  const currentPage = useSelector(selectCurrentPage);
+  const pageSize = useSelector(selectPageSize);
+  const filter = useSelector(selectUserFilter);
+  const followingInProgress = useSelector(selectFollowingInProgress);
   const history = useHistory();
 
   const dispatch = useDispatch();

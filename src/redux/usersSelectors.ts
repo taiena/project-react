@@ -5,30 +5,30 @@ const getUsersSelector = (state: AppStateType) => {
   return state.usersPage.users;
 };
 
-export const getUsers = createSelector(getUsersSelector, (users) => {
+export const selectUsers = createSelector(getUsersSelector, (users) => {
   return users.filter((u) => true);
 });
 
-export const getPageSize = (state: AppStateType) => {
+export const selectPageSize = (state: AppStateType) => {
   return state.usersPage.pageSize;
 };
 
-export const getTotalUsersCount = (state: AppStateType) => {
+export const selectTotalUsersCount = (state: AppStateType) => {
   return state.usersPage.totalUsersCount;
 };
 
-export const getCurrentPage = (state: AppStateType) => {
+export const selectCurrentPage = (state: AppStateType) => {
   return state.usersPage.currentPage;
 };
 
-export const getIsLoading = (state: AppStateType) => {
+export const selectIsLoading = (state: AppStateType) => {
   return state.usersPage.isLoading;
 };
 
-export const getFollowingInProgress = (state: AppStateType) => {
+export const selectFollowingInProgress = (state: AppStateType) => {
   return state.usersPage.followingInProgress;
 };
 
-export const getUserFilter = (state: AppStateType) => {
+export const selectUserFilter = (state: AppStateType) => {
   return state.usersPage.filter;
 };
