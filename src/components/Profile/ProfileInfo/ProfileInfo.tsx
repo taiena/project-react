@@ -5,41 +5,26 @@ import userAva from "../../../assets/images/ava.png";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import ProfileDataFormReduxForm from "./ProfileDataForm";
 import { ContactsType, ProfileType } from "../../../types/types";
-import { selectProfile, selectStatus } from "../../../redux/profileSelectors";
+import { selectProfile } from "../../../redux/profileSelectors";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  saveUserPhoto,
-  // saveUserProfile,
-} from "../../../redux/profileReducer";
+import { saveUserPhoto, saveUserProfile } from "../../../redux/profileReducer";
 
 type PropsType = {
-  // profile: ProfileType | null;
   isOwner: boolean;
-  // saveUserPhoto: (file: File) => void;
-  saveUserProfile: (profile: ProfileType) => Promise<any>;
 };
 
-const ProfileInfo: React.FC<PropsType> = ({
-  // profile,
-  isOwner,
-  // saveUserPhoto,
-  saveUserProfile,
-}) => {
+const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
   const profile = useSelector(selectProfile);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(());
-  // }, []);
 
   const savePhoto = (file: File) => {
     dispatch(saveUserPhoto(file));
   };
 
-  // const saveProfile = (profile: ProfileType) => {
-  //   dispatch(saveUserProfile(profile));
-  // };
+  const saveProfile = (profile: ProfileType) => {
+    dispatch(saveUserProfile(profile));
+  };
 
   let [editMode, setEditMode] = useState(false);
 
@@ -54,9 +39,8 @@ const ProfileInfo: React.FC<PropsType> = ({
   };
 
   const onSubmit = (formData: ProfileType) => {
-    saveUserProfile(formData).then(() => {
-      setEditMode(false);
-    });
+    saveProfile(formData);
+    setEditMode(false);
   };
 
   return (

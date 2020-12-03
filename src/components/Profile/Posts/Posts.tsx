@@ -2,22 +2,23 @@ import React from "react";
 import classes from "./Posts.module.scss";
 import Post from "./Post/Post";
 import AddPostForm, { AddPostFormValuesType } from "./AddPostForm/AddPostForm";
-import { PostType } from "../../../types/types";
+import { selectPosts } from "../../../redux/profileSelectors";
+import { useSelector, useDispatch } from "react-redux";
+import { actions } from "../../../redux/profileReducer";
 
-export type MapPropsType = {
-  posts: Array<PostType>;
-};
-export type DispatchPropsType = {
-  addPost: (newPostBody: string) => void;
-};
+type PropsType = {};
 
-const Posts: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+const Posts: React.FC<PropsType> = () => {
+  const posts = useSelector(selectPosts);
+
+  const dispatch = useDispatch();
+
   let addNewPost = (values: AddPostFormValuesType) => {
-    props.addPost(values.newPostBody);
+    dispatch(actions.addPostActionCreator(values.newPostBody));
   };
 
-  let postsElements = props.posts.map((p, index) => (
-    <Post message={p.message} likesCount={p.likesCount} key={index} />
+  let postsElements = posts.map((post, index) => (
+    <Post post={post} key={index} />
   ));
 
   return (

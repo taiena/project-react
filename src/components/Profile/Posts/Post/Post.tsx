@@ -1,18 +1,18 @@
 import React from "react";
 import classes from "./Post.module.scss";
+import { PostType } from "../../../../types/types";
 
 type PropsType = {
-  message: string;
-  likesCount: number;
+  post: PostType;
 };
 
-const Post: React.FC<PropsType> = (props) => {
+const Post: React.FC<PropsType> = ({ post }) => {
   return (
     <div className={classes.post}>
-      {props.message}
+      {post.message}
       <div>
         <span>like </span>
-        {props.likesCount}
+        {post.likesCount}
       </div>
     </div>
   );
