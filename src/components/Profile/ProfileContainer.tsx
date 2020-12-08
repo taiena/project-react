@@ -1,34 +1,28 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { getUserProfile, getUserStatus } from "../../redux/profileReducer";
-import { selectIsAuth, selectId } from "../../redux/authSelectors";
-import { connect } from "react-redux";
+import { selectId } from "../../redux/authSelectors";
 import Profile from "./Profile";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
-import { AppStateType } from "../../redux/redux-store";
-
-type MapStatePropsType = ReturnType<typeof mapStateToProps>;
-
-type MapDispatchPropsType = {
-  getUserProfile: (userId: number) => void;
-  getUserStatus: (userId: number) => void;
-};
+import { useSelector, useDispatch } from "react-redux";
 
 type PathParamsType = {
   userId: string;
 };
-type PropsType = MapStatePropsType &
-  MapDispatchPropsType &
-  RouteComponentProps<PathParamsType>;
+type ProfilePagePropsType = RouteComponentProps<PathParamsType>;
 
-class ProfileContainer extends Component<PropsType> {
-  refreshProfile() {
-    let userId: number | null = +this.props.match.params.userId;
+const ProfilePage: React.FC<ProfilePagePropsType> = (props) => {
+  const authorizedUserId = useSelector(selectId);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let userId: number | null = +props.match.params.userId;
     if (!userId) {
-      userId = this.props.authorizedUserId;
+      userId = authorizedUserId;
       if (!userId) {
-        this.props.history.push("/login");
+        props.history.push("/login");
       }
     }
     if (!userId) {
@@ -36,48 +30,20 @@ class ProfileContainer extends Component<PropsType> {
         "ID should exists in URI params or in state ('authorizedUserId')"
       );
     } else {
-      this.props.getUserProfile(userId);
-      this.props.getUserStatus(userId);
+      dispatch(getUserProfile(userId));
+      dispatch(getUserStatus(userId));
     }
-  }
+  }, []);
 
-  componentDidMount() {
-    this.refreshProfile();
-  }
-
-  componentDidUpdate(prevProps: PropsType, prevState: PropsType) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
-      this.refreshProfile();
-    }
-  }
-
-  render() {
-    return (
-      <Profile
-        {...this.props}
-        // isOwner true when no id in props (then it is our profile)
-        isOwner={!this.props.match.params.userId}
-      />
-    );
-  }
-}
-
-let mapStateToProps = (state: AppStateType) => {
-  return {
-    authorizedUserId: selectId(state),
-    isAuth: selectIsAuth(state),
-  };
+  // isOwner true when no id in props (then it is our profile)
+  return (
+    <>
+      <Profile isOwner={!props.match.params.userId} />
+    </>
+  );
 };
 
-// compose will place ProfileContainer to function withAuthRedirect,
-// all this will wrap with withRouter
-// and result of this will send to function connect
-
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {
-    getUserProfile,
-    getUserStatus,
-  }),
   withRouter,
   withAuthRedirect
-)(ProfileContainer);
+)(ProfilePage);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import ProfilePage from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import { UsersPage } from "./components/Users/UsersContainer";
 import {
@@ -72,10 +72,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
         <div className={classes.wrapperContent}>
           <Switch>
             <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
-            <Route
-              path="/profile/:userId?"
-              render={() => <ProfileContainer />}
-            />
+            <Route path="/profile/:userId?" render={() => <ProfilePage />} />
             <Route path="/messages" render={() => <MessagesContainer />} />
             <Route
               path="/users"
@@ -95,7 +92,6 @@ let mapStateToProps = (state: AppStateType) => ({
   globalError: state.app.globalError,
 });
 
-//26 min
 let AppContainer = compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, {
