@@ -3,7 +3,7 @@ import classes from "./Messages.module.scss";
 import Message from "./Message/Message";
 import { selectMessages } from "../../../redux/messagesSelectors";
 import { useSelector } from "react-redux";
-import AddMessageForm from "../AddMessageForm/AddMessageForm";
+import AddMessageForm from "./AddMessageForm/AddMessageForm";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../redux/messagesReducer";
 
