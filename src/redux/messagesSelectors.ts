@@ -7,3 +7,7 @@ export const selectMessages = (state: AppStateType) => {
 export const selectDialogs = (state: AppStateType) => {
   return state.messagesPage.dialogs;
 };
+
+export const selectIsLoading = (state: AppStateType) => {
+  return state.messagesPage.isLoading;
+};

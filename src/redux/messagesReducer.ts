@@ -20,6 +20,7 @@ let initialState = {
     { id: 1, message: "Hi" },
     { id: 2, message: "Hello" },
   ] as Array<MessageType>,
+  isLoading: false as boolean,
 };
 
 export type InitialStateType = typeof initialState;
@@ -37,6 +38,11 @@ const messagesReducer = (
         // add a new message to a copy of the messages array
         messages: [...state.messages, { id: 6, message: body }],
       };
+    case "MESSAGES_PAGE_IS_LOADING":
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
 
     default:
       return state;
@@ -48,6 +54,11 @@ export const actions = {
     ({
       type: "SEND_MESSAGE",
       newMessageBody,
+    } as const),
+  messagesPageIsLoading: (isLoading: boolean) =>
+    ({
+      type: "MESSAGES_PAGE_IS_LOADING",
+      isLoading,
     } as const),
 };
 

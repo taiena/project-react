@@ -1,13 +1,7 @@
 @import "../../scss/vars";
 
-.messages {
+.MessagesPage {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 2fr 8fr;
-}
-
-.dialogList,
-.messageList {
-  display: flex;
-  flex-direction: column;
 }

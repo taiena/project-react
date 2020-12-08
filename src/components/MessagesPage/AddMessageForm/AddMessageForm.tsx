@@ -8,7 +8,7 @@ import {
   required,
   maxLengthCreator,
 } from "../../../utils/validators/validators";
-import { NewMessageFormValuesType } from "../Messages";
+import { NewMessageFormValuesType } from "../MessagesPage";
 
 const maxLength50 = maxLengthCreator(50);
 
