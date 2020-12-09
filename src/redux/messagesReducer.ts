@@ -1,4 +1,6 @@
-import { InferActionsTypes } from "./redux-store";
+import { messagesAPI } from "../api/messagesApi";
+import { InferActionsTypes, BaseThunkType } from "./redux-store";
+import { Dispatch } from "redux";
 
 type DialogType = {
   id: number;
@@ -11,10 +13,7 @@ type MessageType = {
 };
 
 let initialState = {
-  dialogs: [
-    { id: 1, name: "Lena" },
-    { id: 2, name: "Vova" },
-  ] as Array<DialogType>,
+  dialogs: [] as Array<DialogType>,
 
   messages: [
     { id: 1, message: "Hi" },
@@ -25,6 +24,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsTypes>;
 
 const messagesReducer = (
   state = initialState,
@@ -44,6 +44,12 @@ const messagesReducer = (
         isLoading: action.isLoading,
       };
 
+    case "SET_DIALOGS":
+      return {
+        ...state,
+        dialogs: [...action.dialogs],
+      };
+
     default:
       return state;
   }
@@ -60,6 +66,22 @@ export const actions = {
       type: "MESSAGES_PAGE_IS_LOADING",
       isLoading,
     } as const),
+  setDialogs: (dialogs: Array<DialogType>) =>
+    ({
+      type: "SET_DIALOGS",
+      dialogs,
+    } as const),
+};
+
+export const getDialogs = (): ThunkType => {
+  return async (dispatch) => {
+    dispatch(actions.messagesPageIsLoading(true));
+
+    let data = await messagesAPI.getDialogs();
+
+    dispatch(actions.messagesPageIsLoading(false));
+    dispatch(actions.setDialogs(data));
+  };
 };
 
 export default messagesReducer;

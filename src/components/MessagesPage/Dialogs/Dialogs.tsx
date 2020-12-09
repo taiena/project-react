@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Dialogs.module.scss";
 import Dialog from "./Dialog/Dialog";
 import { selectDialogs } from "../../../redux/messagesSelectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getDialogs } from "../../../redux/messagesReducer";
 
 type PropsType = {};
 
 const Dialogs: React.FC<PropsType> = (props) => {
   const dialogs = useSelector(selectDialogs);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDialogs());
+  }, []);
 
   let dialogsElements = dialogs.map((d) => (
     <Dialog name={d.name} id={d.id} key={d.id} />
