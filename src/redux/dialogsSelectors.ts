@@ -1,13 +1,13 @@
 import { AppStateType } from "./redux-store";
 
 export const selectMessages = (state: AppStateType) => {
-  return state.messagesPage.messages;
+  return state.dialogsPage.messages;
 };
 
 export const selectDialogs = (state: AppStateType) => {
-  return state.messagesPage.dialogs;
+  return state.dialogsPage.dialogs;
 };
 
 export const selectIsLoading = (state: AppStateType) => {
-  return state.messagesPage.isLoading;
+  return state.dialogsPage.isLoading;
 };

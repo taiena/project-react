@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Messages.module.scss";
 import Message from "./Message/Message";
-import { selectMessages } from "../../../redux/messagesSelectors";
+import { selectMessages } from "../../../redux/dialogsSelectors";
 import { useSelector } from "react-redux";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 import { useDispatch } from "react-redux";
-import { actions } from "../../../redux/messagesReducer";
+import { actions, getMessages } from "../../../redux/dialogsReducer";
 
 type PropsType = {};
 
@@ -13,13 +13,17 @@ export type NewMessageFormValuesType = {
   newMessageBody: string;
 };
 
-const Messages: React.FC<PropsType> = (props) => {
+const Messages: React.FC<PropsType> = (userId) => {
   const messages = useSelector(selectMessages);
 
   const dispatch = useDispatch();
 
-  let addNewMessage = (values: NewMessageFormValuesType) => {
-    dispatch(actions.sendMessage(values.newMessageBody));
+  // useEffect(() => {
+  //   dispatch(getMessages(userId));
+  // }, []);
+
+  let addNewMessage = (userId: number, values: NewMessageFormValuesType) => {
+    dispatch(actions.sendMessage(userId, values.newMessageBody));
   };
 
   let messagesElements = messages.map((m) => (
@@ -29,7 +33,7 @@ const Messages: React.FC<PropsType> = (props) => {
   return (
     <div className={classes.Messages}>
       <div>{messagesElements}</div>
-      <AddMessageForm onSubmit={addNewMessage} />
+      {/* <AddMessageForm onSubmit={addNewMessage} /> */}
     </div>
   );
 };

@@ -1,20 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MessagesPage from "./MessagesPage";
+import DialogsPage from "./DialogsPage";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
-import { selectIsLoading } from "../../redux/messagesSelectors";
+import { selectIsLoading } from "../../redux/dialogsSelectors";
 import Preloader from "../common/Preloader/Preloader";
 
-type MessagesPagePropsType = {};
+type DialogsPagePropsType = {};
 
-const MessagesContainer: React.FC<MessagesPagePropsType> = (props) => {
+const MessagesContainer: React.FC<DialogsPagePropsType> = (props) => {
   const isLoading = useSelector(selectIsLoading);
 
   return (
     <>
       {isLoading ? <Preloader /> : null}
-      <MessagesPage />
+      <DialogsPage />
     </>
   );
 };

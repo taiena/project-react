@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import classes from "./Dialogs.module.scss";
 import Dialog from "./Dialog/Dialog";
-import { selectDialogs } from "../../../redux/messagesSelectors";
+import { selectDialogs } from "../../../redux/dialogsSelectors";
 import { useSelector, useDispatch } from "react-redux";
-import { getDialogs } from "../../../redux/messagesReducer";
+import { getDialogs } from "../../../redux/dialogsReducer";
 
 type PropsType = {};
 
@@ -16,13 +16,12 @@ const Dialogs: React.FC<PropsType> = (props) => {
     dispatch(getDialogs());
   }, []);
 
-  let dialogsElements = dialogs.map((d) => (
-    <Dialog name={d.name} id={d.id} key={d.id} />
-  ));
-
   return (
     <div className={classes.Dialogs}>
-      <div>{dialogsElements}</div>
+      <h3>Dialogs</h3>
+      {dialogs.map((d: any) => (
+        <Dialog name={d.name} id={d.id} key={d.id} />
+      ))}
     </div>
   );
 };

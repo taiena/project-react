@@ -1,15 +1,14 @@
 import React from "react";
-import classes from "./MessagesPage.module.scss";
-import Messages from "./Messages/Messages";
+import classes from "./DialogsPage.module.scss";
 import Dialogs from "./Dialogs/Dialogs";
 
 type PropsType = {};
 
 const MessagesPage: React.FC<PropsType> = (props) => {
   return (
-    <div className={classes.MessagesPage}>
+    <div className={classes.DialogsPage}>
+      <h2>Dialogs page</h2>
       <Dialogs />
-      <Messages />
     </div>
   );
 };

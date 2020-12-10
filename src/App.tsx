@@ -3,7 +3,7 @@ import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import ProfilePage from "./components/Profile/ProfileContainer";
-import MessagesContainer from "./components/MessagesPage/MessagesContainer";
+import DialogsContainer from "./components/DialogsPage/DialogsContainer";
 import { UsersPage } from "./components/Users/UsersContainer";
 import {
   BrowserRouter,
@@ -73,7 +73,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
           <Switch>
             <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
             <Route path="/profile/:userId?" render={() => <ProfilePage />} />
-            <Route path="/messages" render={() => <MessagesContainer />} />
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
             <Route
               path="/users"
               render={() => <UsersPage pageTitle={"Find users"} />}

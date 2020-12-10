@@ -12,8 +12,8 @@ const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li className={classes.link}>
-          <NavLink to="/messages" activeClassName={classes.active}>
-            Messages
+          <NavLink to="/dialogs" activeClassName={classes.active}>
+            Dialogs
           </NavLink>
         </li>
         <li className={classes.link}>

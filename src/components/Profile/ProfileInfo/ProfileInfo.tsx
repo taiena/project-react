@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState } from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.png";

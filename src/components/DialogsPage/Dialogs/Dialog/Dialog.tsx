@@ -7,12 +7,12 @@ type PropsType = {
   name: string;
 };
 
-const Dialog: React.FC<PropsType> = (props) => {
-  let path = "/messages/" + props.id;
+const Dialog: React.FC<PropsType> = ({ name, id, ...props }) => {
+  let path = `messages/${id}`;
 
   return (
     <div className={classes.dialog + " " + classes.active}>
-      <NavLink to={path}>{props.name}</NavLink>
+      <NavLink to={path}>{name}</NavLink>
     </div>
   );
 };

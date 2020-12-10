@@ -48,7 +48,7 @@ const LoginForm: React.FC<
         "remember me" // text
       )}
 
-      {captchaUrl && <img src={captchaUrl} />}
+      {captchaUrl && <img src={captchaUrl} alt="" />}
       {captchaUrl &&
         createField<LoginFormValuesTypeKeys>(
           "Symbols from image",

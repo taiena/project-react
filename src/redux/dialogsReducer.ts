@@ -1,6 +1,5 @@
 import { messagesAPI } from "../api/messagesApi";
 import { InferActionsTypes, BaseThunkType } from "./redux-store";
-import { Dispatch } from "redux";
 
 type DialogType = {
   id: number;
@@ -15,10 +14,7 @@ type MessageType = {
 let initialState = {
   dialogs: [] as Array<DialogType>,
 
-  messages: [
-    { id: 1, message: "Hi" },
-    { id: 2, message: "Hello" },
-  ] as Array<MessageType>,
+  messages: [] as Array<MessageType>,
   isLoading: false as boolean,
 };
 
@@ -50,16 +46,23 @@ const messagesReducer = (
         dialogs: [...action.dialogs],
       };
 
+    case "SET_MESSAGES":
+      return {
+        ...state,
+        messages: [...action.messages],
+      };
+
     default:
       return state;
   }
 };
 
 export const actions = {
-  sendMessage: (newMessageBody: string) =>
+  sendMessage: (userId: number, newMessageBody: string) =>
     ({
       type: "SEND_MESSAGE",
       newMessageBody,
+      userId,
     } as const),
   messagesPageIsLoading: (isLoading: boolean) =>
     ({
@@ -71,6 +74,12 @@ export const actions = {
       type: "SET_DIALOGS",
       dialogs,
     } as const),
+
+  setMessages: (messages: Array<MessageType>) =>
+    ({
+      type: "SET_MESSAGES",
+      messages,
+    } as const),
 };
 
 export const getDialogs = (): ThunkType => {
@@ -81,6 +90,35 @@ export const getDialogs = (): ThunkType => {
 
     dispatch(actions.messagesPageIsLoading(false));
     dispatch(actions.setDialogs(data));
+  };
+};
+
+export const getMessages = (
+  userId: number
+  // page: number,
+  // count: number
+): ThunkType => {
+  return async (dispatch) => {
+    dispatch(actions.messagesPageIsLoading(true));
+
+    // let data = await messagesAPI.getMessages(userId, page, count);
+    let data = await messagesAPI.getMessages(userId);
+
+    dispatch(actions.messagesPageIsLoading(false));
+    dispatch(actions.setMessages(data));
+  };
+};
+
+export const sendMessage = (
+  userId: number,
+  newMessageBody: string
+): ThunkType => {
+  return async (dispatch) => {
+    let data = await messagesAPI.sendMessage(userId, newMessageBody);
+
+    if (data.resultCode === 0) {
+      dispatch(actions.sendMessage(userId, newMessageBody));
+    }
   };
 };
 
