@@ -8,7 +8,7 @@ type PropsType = {
 };
 
 const Dialog: React.FC<PropsType> = ({ name, id, ...props }) => {
-  let path = `messages/${id}`;
+  let path = `dialogs/messages/${id}`;
 
   return (
     <div className={classes.dialog + " " + classes.active}>

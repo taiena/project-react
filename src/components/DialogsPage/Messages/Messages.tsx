@@ -6,36 +6,48 @@ import { useSelector } from "react-redux";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 import { useDispatch } from "react-redux";
 import { actions, getMessages } from "../../../redux/dialogsReducer";
+import { compose } from "redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
 
-type PropsType = {};
+type PathParamsType = {
+  id: string;
+};
+
+type MessagesPagePropsType = RouteComponentProps<PathParamsType>;
 
 export type NewMessageFormValuesType = {
   newMessageBody: string;
 };
 
-const Messages: React.FC<PropsType> = (userId) => {
+const Messages: React.FC<MessagesPagePropsType> = (props) => {
   const messages = useSelector(selectMessages);
+  let userId: number = +props.match.params.id;
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getMessages(userId));
-  // }, []);
+  useEffect(() => {
+    dispatch(getMessages(userId));
+  }, []);
 
   let addNewMessage = (userId: number, values: NewMessageFormValuesType) => {
     dispatch(actions.sendMessage(userId, values.newMessageBody));
   };
 
-  let messagesElements = messages.map((m) => (
-    <Message message={m.message} key={m.id} />
-  ));
-
   return (
     <div className={classes.Messages}>
-      <div>{messagesElements}</div>
+      <h3>Messages with user: {userId}</h3>
+      <div>
+        {messages.map((m: any) => (
+          <Message message={m.message} key={m.id} />
+        ))}
+      </div>
       {/* <AddMessageForm onSubmit={addNewMessage} /> */}
     </div>
   );
 };
 
-export default Messages;
+export default compose<React.ComponentType>(
+  withRouter,
+  withAuthRedirect
+)(Messages);

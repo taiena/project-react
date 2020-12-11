@@ -105,7 +105,7 @@ export const getMessages = (
     let data = await messagesAPI.getMessages(userId);
 
     dispatch(actions.messagesPageIsLoading(false));
-    dispatch(actions.setMessages(data));
+    dispatch(actions.setMessages(data.items));
   };
 };
 
