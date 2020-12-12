@@ -109,4 +109,14 @@ export const sendMessage = (
   };
 };
 
+export const startChatting = (userId: number): ThunkType => {
+  return async (dispatch) => {
+    let data = await messagesAPI.startChatting(userId);
+
+    if (data.resultCode === 0) {
+      dispatch(getMessages(userId));
+    }
+  };
+};
+
 export default messagesReducer;

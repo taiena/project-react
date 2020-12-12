@@ -9,6 +9,7 @@ import {
   follow,
   unfollow,
 } from "../../redux/usersReducer";
+import { startChatting } from "../../redux/dialogsReducer";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectUsers,
@@ -90,6 +91,10 @@ export const Users: React.FC<PropsType> = () => {
     dispatch(unfollow(userId));
   };
 
+  const startChatWithUser = (userId: number) => {
+    dispatch(startChatting(userId));
+  };
+
   return (
     <div className={classes.Users}>
       <UsersSearchForm onFilterChanged={onFilterChanged} />
@@ -107,6 +112,7 @@ export const Users: React.FC<PropsType> = () => {
           follow={followUser}
           unfollow={unfollowUser}
           followingInProgress={followingInProgress}
+          startChatting={startChatWithUser}
         />
       ))}
     </div>

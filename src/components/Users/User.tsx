@@ -9,11 +9,13 @@ type PropsType = {
   followingInProgress: Array<number>;
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
+  startChatting: (userId: number) => void;
 };
 
 let User: React.FC<PropsType> = ({
   follow,
   unfollow,
+  startChatting,
   followingInProgress,
   user,
 }) => {
@@ -49,6 +51,13 @@ let User: React.FC<PropsType> = ({
             Follow
           </button>
         )}
+        <button
+          onClick={() => {
+            startChatting(user.id);
+          }}
+        >
+          Start chatting
+        </button>
       </div>
       <div className={classes.UserInfo}>
         <div className={classes.UserPerson}>
