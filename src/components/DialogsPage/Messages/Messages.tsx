@@ -5,7 +5,7 @@ import { selectMessages } from "../../../redux/dialogsSelectors";
 import { useSelector } from "react-redux";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 import { useDispatch } from "react-redux";
-import { actions, getMessages } from "../../../redux/dialogsReducer";
+import { getMessages, sendMessage } from "../../../redux/dialogsReducer";
 import { compose } from "redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
@@ -31,7 +31,7 @@ const Messages: React.FC<MessagesPagePropsType> = (props) => {
   }, []);
 
   let addNewMessage = (userId: number, values: NewMessageFormValuesType) => {
-    dispatch(actions.sendMessage(userId, values.newMessageBody));
+    dispatch(sendMessage(userId, values.newMessageBody));
   };
 
   return (

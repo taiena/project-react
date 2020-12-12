@@ -27,13 +27,6 @@ const messagesReducer = (
   action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
-    case "SEND_MESSAGE":
-      let body = action.newMessageBody; // take text from textarea
-      return {
-        ...state,
-        // add a new message to a copy of the messages array
-        messages: [...state.messages, { id: 6, message: body }],
-      };
     case "MESSAGES_PAGE_IS_LOADING":
       return {
         ...state,
@@ -58,12 +51,6 @@ const messagesReducer = (
 };
 
 export const actions = {
-  sendMessage: (userId: number, newMessageBody: string) =>
-    ({
-      type: "SEND_MESSAGE",
-      newMessageBody,
-      userId,
-    } as const),
   messagesPageIsLoading: (isLoading: boolean) =>
     ({
       type: "MESSAGES_PAGE_IS_LOADING",
@@ -117,7 +104,7 @@ export const sendMessage = (
     let data = await messagesAPI.sendMessage(userId, newMessageBody);
 
     if (data.resultCode === 0) {
-      dispatch(actions.sendMessage(userId, newMessageBody));
+      dispatch(getMessages(userId));
     }
   };
 };
