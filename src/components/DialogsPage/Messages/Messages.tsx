@@ -17,7 +17,7 @@ type PathParamsType = {
 type MessagesPagePropsType = RouteComponentProps<PathParamsType>;
 
 export type NewMessageFormValuesType = {
-  newMessageBody: string;
+  body: string;
 };
 
 const Messages: React.FC<MessagesPagePropsType> = (props) => {
@@ -30,8 +30,9 @@ const Messages: React.FC<MessagesPagePropsType> = (props) => {
     dispatch(getMessages(userId));
   }, []);
 
-  let addNewMessage = (userId: number, values: NewMessageFormValuesType) => {
-    dispatch(sendMessage(userId, values.newMessageBody));
+  let addNewMessage = (values: NewMessageFormValuesType) => {
+    let id = userId;
+    dispatch(sendMessage(id, values.body));
   };
 
   return (
@@ -39,10 +40,10 @@ const Messages: React.FC<MessagesPagePropsType> = (props) => {
       <h3>Messages with user: {userId}</h3>
       <div>
         {messages.map((m: any) => (
-          <Message message={m.message} key={m.id} />
+          <Message message={m.body} key={m.id} />
         ))}
       </div>
-      {/* <AddMessageForm onSubmit={addNewMessage} /> */}
+      <AddMessageForm onSubmit={addNewMessage} />
     </div>
   );
 };

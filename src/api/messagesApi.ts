@@ -26,7 +26,7 @@ export const messagesAPI = {
   sendMessage(userId: number, body: string) {
     return instance
       .post<APIResponseType>(`dialogs/${userId}/messages`, {
-        newMessageBody: body,
+        body,
       })
       .then((response) => response.data);
   },

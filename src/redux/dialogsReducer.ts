@@ -96,12 +96,9 @@ export const getMessages = (
   };
 };
 
-export const sendMessage = (
-  userId: number,
-  newMessageBody: string
-): ThunkType => {
+export const sendMessage = (userId: number, body: string): ThunkType => {
   return async (dispatch) => {
-    let data = await messagesAPI.sendMessage(userId, newMessageBody);
+    let data = await messagesAPI.sendMessage(userId, body);
 
     if (data.resultCode === 0) {
       dispatch(getMessages(userId));

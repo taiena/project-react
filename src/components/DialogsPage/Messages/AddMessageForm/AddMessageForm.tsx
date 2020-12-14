@@ -27,7 +27,7 @@ const AddMessageForm: React.FC<
       <div>
         {createField<NewMessageFormValuesKeysType>(
           "Enter your message",
-          "newMessageBody",
+          "body",
           [required, maxLength50],
           Textarea
         )}
