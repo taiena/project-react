@@ -4,15 +4,17 @@ import { NavLink } from "react-router-dom";
 
 type PropsType = {
   id: number;
-  name: string;
+  userName: string;
 };
 
-const Dialog: React.FC<PropsType> = ({ name, id, ...props }) => {
+const Dialog: React.FC<PropsType> = ({ userName, id, ...props }) => {
   let path = `dialogs/messages/${id}`;
 
   return (
     <div className={classes.dialog + " " + classes.active}>
-      <NavLink to={path}>{name}</NavLink>
+      <NavLink to={path}>
+        {userName} id: {id}{" "}
+      </NavLink>
     </div>
   );
 };
