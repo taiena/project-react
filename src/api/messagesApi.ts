@@ -30,4 +30,39 @@ export const messagesAPI = {
       })
       .then((response) => response.data);
   },
+
+  // viewed messages
+  viewedMessages(messageId: number) {
+    return instance
+      .get(`dialogs/messages/${messageId}/viewed`)
+      .then((response) => response.data);
+  },
+
+  // add message to spam
+  spamMessage(messageId: number) {
+    return instance
+      .post<APIResponseType>(`dialogs/messages/${messageId}/spam`)
+      .then((response) => response.data);
+  },
+
+  // delete message
+  deleteMessage(messageId: number) {
+    return instance
+      .delete(`dialogs/messages/${messageId}`)
+      .then((response) => response.data);
+  },
+
+  // restore message from deleted and spam
+  restoreMessage(messageId: number) {
+    return instance
+      .put<APIResponseType>(`dialogs/messages/${messageId}/restore`)
+      .then((response) => response.data);
+  },
+
+  // return messages newest than date
+  newMessages(userId: number, date: string) {
+    return instance
+      .get(`dialogs/${userId}/messages/new?newerThen=${date}`)
+      .then((response) => response.data);
+  },
 };
