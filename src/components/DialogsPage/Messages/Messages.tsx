@@ -8,6 +8,7 @@ import {
   getMessages,
   sendMessage,
   deleteMessage,
+  spamMessage,
 } from "../../../redux/dialogsReducer";
 
 type PropsType = {
@@ -36,6 +37,10 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
     dispatch(deleteMessage(messageId, userId));
   };
 
+  const addTospamUserMessage = (messageId: number, userId: number) => {
+    dispatch(spamMessage(messageId, userId));
+  };
+
   return (
     <div className={classes.Messages}>
       <h3>Messages with user: {userId} </h3>
@@ -46,6 +51,7 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
             key={message.id}
             message={message}
             deleteMessage={deleteUserMessage}
+            spamMessage={addTospamUserMessage}
           />
         ))}
       </div>

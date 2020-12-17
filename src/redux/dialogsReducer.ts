@@ -125,4 +125,14 @@ export const deleteMessage = (messageId: number, userId: number): ThunkType => {
   };
 };
 
+export const spamMessage = (messageId: number, userId: number): ThunkType => {
+  return async (dispatch) => {
+    let data = await messagesAPI.spamMessage(messageId);
+
+    if (data.resultCode === 0) {
+      dispatch(getMessages(userId));
+    }
+  };
+};
+
 export default messagesReducer;
