@@ -4,7 +4,11 @@ import Message from "./Message/Message";
 import { selectMessages } from "../../../redux/dialogsSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
-import { getMessages, sendMessage } from "../../../redux/dialogsReducer";
+import {
+  getMessages,
+  sendMessage,
+  deleteMessage,
+} from "../../../redux/dialogsReducer";
 
 type PropsType = {
   userId: number;
@@ -28,12 +32,20 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
     dispatch(sendMessage(id, values.body));
   };
 
+  const deleteUserMessage = (messageId: number) => {
+    dispatch(deleteMessage(messageId));
+  };
+
   return (
     <div className={classes.Messages}>
       <h3>Messages with user: {userId} </h3>
       <div>
-        {messages.map((m: any) => (
-          <Message message={m.body} key={m.id} />
+        {messages.map((message: any) => (
+          <Message
+            key={message.id}
+            message={message}
+            deleteMessage={deleteUserMessage}
+          />
         ))}
       </div>
       <AddMessageForm onSubmit={addNewMessage} />

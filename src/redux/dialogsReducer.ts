@@ -116,4 +116,22 @@ export const startChatting = (userId: number): ThunkType => {
   };
 };
 
+// export const viewedMessages = (messageId: number): ThunkType => {
+//   return async (dispatch) => {
+//     let data = await messagesAPI.viewedMessages(messageId);
+
+//     dispatch(getMessages(messageId));
+//   };
+// };
+
+export const deleteMessage = (messageId: number): ThunkType => {
+  return async (dispatch) => {
+    let data = await messagesAPI.deleteMessage(messageId);
+
+    // if (data.resultCode === 0) {
+    //   dispatch(getMessages(userId));
+    // }
+  };
+};
+
 export default messagesReducer;

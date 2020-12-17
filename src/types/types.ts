@@ -37,3 +37,14 @@ export type UserType = {
   photos: PhotosType;
   followed: boolean;
 };
+
+export type MessageType = {
+  id: number;
+  body: string;
+  translatedBody: null;
+  addedAt: Date;
+  senderId: number;
+  senderName: string;
+  recipientId: number;
+  viewed: boolean;
+};
