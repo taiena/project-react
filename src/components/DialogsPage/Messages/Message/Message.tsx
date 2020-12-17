@@ -4,10 +4,11 @@ import { MessageType } from "../../../../types/types";
 
 type PropsType = {
   message: MessageType;
-  deleteMessage: (messageId: number) => void;
+  deleteMessage: (messageId: number, userId: number) => void;
+  userId: number;
 };
 
-const Message: React.FC<PropsType> = ({ message, deleteMessage }) => {
+const Message: React.FC<PropsType> = ({ userId, message, deleteMessage }) => {
   // const Message: React.FC<PropsType> = ({ message }) => {
   return (
     <div className={classes.message}>
@@ -22,7 +23,7 @@ const Message: React.FC<PropsType> = ({ message, deleteMessage }) => {
 
       <button
         onClick={() => {
-          deleteMessage(message.id);
+          deleteMessage(message.id, userId);
         }}
       >
         delete

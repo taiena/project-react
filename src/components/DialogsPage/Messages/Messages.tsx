@@ -32,8 +32,8 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
     dispatch(sendMessage(id, values.body));
   };
 
-  const deleteUserMessage = (messageId: number) => {
-    dispatch(deleteMessage(messageId));
+  const deleteUserMessage = (messageId: number, userId: number) => {
+    dispatch(deleteMessage(messageId, userId));
   };
 
   return (
@@ -42,6 +42,7 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
       <div>
         {messages.map((message: any) => (
           <Message
+            userId={userId}
             key={message.id}
             message={message}
             deleteMessage={deleteUserMessage}

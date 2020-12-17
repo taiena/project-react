@@ -48,3 +48,8 @@ export type MessageType = {
   recipientId: number;
   viewed: boolean;
 };
+
+export type DialogType = {
+  id: number;
+  name: string;
+};

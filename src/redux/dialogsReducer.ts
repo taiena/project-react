@@ -1,15 +1,6 @@
 import { messagesAPI } from "../api/messagesApi";
 import { InferActionsTypes, BaseThunkType } from "./redux-store";
-
-type DialogType = {
-  id: number;
-  name: string;
-};
-
-type MessageType = {
-  id: number;
-  message: string;
-};
+import { MessageType, DialogType } from "../types/types";
 
 let initialState = {
   dialogs: [] as Array<DialogType>,
@@ -124,13 +115,13 @@ export const startChatting = (userId: number): ThunkType => {
 //   };
 // };
 
-export const deleteMessage = (messageId: number): ThunkType => {
+export const deleteMessage = (messageId: number, userId: number): ThunkType => {
   return async (dispatch) => {
     let data = await messagesAPI.deleteMessage(messageId);
 
-    // if (data.resultCode === 0) {
-    //   dispatch(getMessages(userId));
-    // }
+    if (data.resultCode === 0) {
+      dispatch(getMessages(userId));
+    }
   };
 };
 
