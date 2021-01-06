@@ -21,6 +21,11 @@ const Nav: React.FC = () => {
             Find Users
           </NavLink>
         </li>
+        <li className={classes.link}>
+          <NavLink to="/chat" activeClassName={classes.active}>
+            Chat
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

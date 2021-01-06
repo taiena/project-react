@@ -27,7 +27,9 @@ import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
 
 const Login = React.lazy(() => import("./components/Login/LoginPage"));
+const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"));
 const SuspendedLogin = withSuspense(Login);
+const SuspendedChat = withSuspense(ChatPage);
 
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
@@ -83,6 +85,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
               path="/users"
               render={() => <UsersPage pageTitle={"Find users"} />}
             />
+            <Route path="/chat" render={SuspendedChat} />
             <Route path="/login" render={SuspendedLogin} />
             <Route path="*" render={() => <div>404 NOT FOUND</div>} />
           </Switch>

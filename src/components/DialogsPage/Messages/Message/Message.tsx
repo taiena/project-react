@@ -15,7 +15,6 @@ const Message: React.FC<PropsType> = ({
   deleteMessage,
   spamMessage,
 }) => {
-  // const Message: React.FC<PropsType> = ({ message }) => {
   return (
     <div className={classes.message}>
       <div>Message id: {message.id}</div>
