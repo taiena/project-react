@@ -1,4 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import classes from "./ChatPage.module.scss";
+
+const wsChannel = new WebSocket(
+  "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
+);
+
+export type ChatMessageType = {
+  message: string;
+  photo: string;
+  userId: number;
+  userName: string;
+};
 
 const ChatPage: React.FC = () => {
   return (
@@ -18,9 +30,31 @@ const Chat: React.FC = () => {
 };
 
 const Messages: React.FC = () => {
+  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+
+  useEffect(() => {
+    wsChannel.addEventListener("message", (e: MessageEvent) => {
+      let newMessages = JSON.parse(e.data);
+      setMessages((prevMessages) => [...prevMessages, ...newMessages]);
+    });
+  }, []);
+
+  return (
+    <div className={classes.messages}>
+      {messages.map((m, index) => (
+        <Message key={index} message={m} />
+      ))}
+    </div>
+  );
+};
+
+const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
   return (
     <div>
-      <h3>Messages</h3>
+      <img src={message.photo} />
+      <div>{message.userName}</div>
+      <div>{message.message}</div>
+      <hr />
     </div>
   );
 };
