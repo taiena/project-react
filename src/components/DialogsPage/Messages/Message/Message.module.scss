@@ -1,11 +1,6 @@
 @import "../../../../scss/vars";
 
-.message {
+.Message {
   display: flex;
   flex-direction: column;
-  background-color: $color-white;
-  border: 1px solid $color-border;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
 }

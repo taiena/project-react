@@ -17,7 +17,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $color-bg;
 }
 
 code {
@@ -32,4 +31,9 @@ a {
 ul,
 li {
   list-style-type: none;
+}
+
+section {
+  border-radius: 5px;
+  padding: 10px;
 }

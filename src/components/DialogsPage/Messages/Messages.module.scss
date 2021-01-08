@@ -1,6 +1,11 @@
 @import "../../../scss/vars";
 
 .Messages {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-gap: 10px;
+}
+
+.MessagesPage {
+  display: grid;
+  grid-gap: 10px;
 }

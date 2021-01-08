@@ -1,6 +1,6 @@
 @import "../../../scss/vars";
 
 .Dialogs {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-gap: 10px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Users.module.scss";
+import classes from "./User.module.scss";
 import userAva from "../../assets/images/ava.png";
 import { NavLink } from "react-router-dom";
 import { UserType } from "../../types/types";
@@ -20,7 +20,7 @@ let User: React.FC<PropsType> = ({
   user,
 }) => {
   return (
-    <div className={classes.User}>
+    <section className={classes.User}>
       <div className={classes.UserAva}>
         <NavLink to={"/profile/" + user.id}>
           <img
@@ -69,7 +69,7 @@ let User: React.FC<PropsType> = ({
           <div>{"user.location.city"}</div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

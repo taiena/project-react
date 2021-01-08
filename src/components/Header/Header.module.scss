@@ -3,13 +3,24 @@
 .Header {
   display: flex;
   justify-content: space-between;
-  background-color: $color-main;
-  color: $color-white;
+  background-color: $color-bg-dark;
   grid-area: header;
   border-radius: 0 0 5px 5px;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .LoginBlock a {
-  color: $color-white;
+}
+
+.Logo {
+  font-weight: bold;
+  font-size: 2rem;
+
+  &Social {
+    color: $color-main;
+  }
+
+  &Dev {
+    color: $color-active;
+  }
 }

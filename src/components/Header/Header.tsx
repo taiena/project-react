@@ -19,7 +19,10 @@ const Header: React.FC<MapPropsType> = (props) => {
 
   return (
     <header className={classes.Header}>
-      <div>Header is here</div>
+      <div className={classes.Logo}>
+        <span className={classes.LogoSocial}>SOCIAL</span>
+        <span className={classes.LogoDev}>DEV</span>
+      </div>
       <div className={classes.LoginBlock}>
         {isAuth ? (
           <div>

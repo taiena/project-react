@@ -11,11 +11,11 @@ const Dialog: React.FC<PropsType> = ({ userName, id, ...props }) => {
   let path = `dialogs/messages/${id}`;
 
   return (
-    <div className={classes.dialog + " " + classes.active}>
+    <section className={classes.dialog}>
       <NavLink to={path}>
-        {userName} id: {id}{" "}
+        <div className={classes.name}>{userName}</div>
       </NavLink>
-    </div>
+    </section>
   );
 };
 

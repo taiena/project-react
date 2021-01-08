@@ -8,13 +8,13 @@ type PropsType = {
 
 const Post: React.FC<PropsType> = ({ post }) => {
   return (
-    <div className={classes.post}>
+    <section className={classes.post}>
       {post.message}
       <div>
         <span>like </span>
         {post.likesCount}
       </div>
-    </div>
+    </section>
   );
 };
 

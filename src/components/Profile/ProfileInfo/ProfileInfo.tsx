@@ -44,7 +44,7 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
   };
 
   return (
-    <div className={classes.ProfileContainer}>
+    <section className={classes.ProfileContainer}>
       <div className={classes.ProfilePhoto}>
         <img
           src={profile.photos.large || userAva}
@@ -72,7 +72,7 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
       )}
 
       <ProfileStatusHooks />
-    </div>
+    </section>
   );
 };
 

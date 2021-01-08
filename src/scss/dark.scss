@@ -1,0 +1,13 @@
+@import "/vars";
+
+body {
+  background-color: $color-bg-dark;
+  color: $color-text-dark;
+}
+
+section {
+  background-color: $color-section-dark;
+  border: 1px solid $color-border-dark;
+  border-radius: 5px;
+  padding: 10px;
+}

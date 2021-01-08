@@ -16,7 +16,7 @@ const Message: React.FC<PropsType> = ({
   spamMessage,
 }) => {
   return (
-    <div className={classes.message}>
+    <section className={classes.Message}>
       <div>Message id: {message.id}</div>
       <div>Message body: {message.body}</div>
       <div>translatedBody: {message.translatedBody}</div>
@@ -40,7 +40,7 @@ const Message: React.FC<PropsType> = ({
       >
         add to spam
       </button>
-    </div>
+    </section>
   );
 };
 
