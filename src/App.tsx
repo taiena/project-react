@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import classes from "./scss/App.module.scss";
-import "./scss/dark.scss";
-// import "./scss/light.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import ProfilePage from "./components/Profile/ProfileContainer";

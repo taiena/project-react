@@ -2,12 +2,13 @@ $color-main: #c145fa;
 $color-active: #f8a408;
 
 $color-bg-dark: #2b2a2a;
-$color-section-dark: #545455;
-$color-border-dark: #797878;
 $color-text-dark: #ffffff;
 
 $color-bg-light: #f5f5f5;
-$color-section-light: #ffffff;
-$color-border-light: #d2d6d6;
 $color-text-light: #000000;
+
 $color-error: #b40303;
+
+$color-section: rgba(255, 255, 255, 0.15);
+$color-border: rgba(0, 0, 0, 0.2);
+$color-header: rgba(0, 0, 0, 0.7);
