@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
@@ -13,108 +13,83 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import {
-  initializeApp,
-  globalErrorCatch,
-  globalErrorNull,
-} from "./redux/appReducer";
-import { connect } from "react-redux";
+import { initializeApp, globalErrorCatch } from "./redux/appReducer";
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import ErrorModal from "./components/common/ErrorModal/ErrorModal";
 import store, { AppStateType } from "./redux/redux-store";
 import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
+import { selectIsGlobalError, selectIsInitialized } from "./redux/appSelectors";
+import { useSelector, useDispatch } from "react-redux";
 
 const Login = React.lazy(() => import("./components/Login/LoginPage"));
 const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"));
 const SuspendedLogin = withSuspense(Login);
 const SuspendedChat = withSuspense(ChatPage);
 
-type MapPropsType = ReturnType<typeof mapStateToProps>;
-type DispatchPropsType = {
-  initializeApp: () => void;
-  globalErrorCatch: (globalError: string | null) => void;
-  globalErrorNull: () => void;
-};
+type PropsType = {};
 
-class App extends Component<MapPropsType & DispatchPropsType> {
-  catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
+const App: React.FC<PropsType> = (props) => {
+  const globalError = useSelector(selectIsGlobalError);
+  const initialized = useSelector(selectIsInitialized);
+
+  const dispatch = useDispatch();
+
+  const catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
     let globalError = promiseRejectionEvent.reason.message;
-    this.props.globalErrorCatch(globalError);
+    dispatch(globalErrorCatch(globalError));
   };
 
-  componentDidMount() {
-    this.props.initializeApp();
-    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+  useEffect(() => {
+    dispatch(initializeApp());
+    window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
+  }, []);
+
+  // componentWillUnmount() {
+  //   window.removeEventListener(
+  //     "unhandledrejection",
+  //     this.catchAllUnhandledErrors
+  //   );
+  // }
+
+  if (!initialized) {
+    return <Preloader />;
   }
 
-  componentWillUnmount() {
-    window.removeEventListener(
-      "unhandledrejection",
-      this.catchAllUnhandledErrors
-    );
-  }
-
-  render() {
-    if (!this.props.initialized) {
-      return <Preloader />;
-    }
-
-    return (
+  return (
+    <div className={classes.darkMode}>
+      {/* <div className={darkMode ? classes.darkMode : classes.lightMode}> */}
       <div className={classes.wrapper}>
-        {this.props.globalError !== null && (
-          <ErrorModal
-            globalError={this.props.globalError}
-            globalErrorNull={this.props.globalErrorNull}
-          />
-        )}
+        {globalError !== null && <ErrorModal globalError={globalError} />}
 
         <Header />
         <Nav />
-        {/* <div className={darkMode ? classes.darkMode : classes.lightMode}> */}
-        <div className={classes.darkMode}>
-          <div className={classes.wrapperContent}>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => <Redirect to={"/profile"} />}
-              />
-              <Route path="/profile/:userId?" render={() => <ProfilePage />} />
-              <Route
-                path="/dialogs/messages/:id?"
-                render={() => <MessagesPage />}
-              />
-              <Route path="/dialogs" render={() => <DialogsPage />} />
-              <Route
-                path="/users"
-                render={() => <UsersPage pageTitle={"Find users"} />}
-              />
-              <Route path="/chat" render={SuspendedChat} />
-              <Route path="/login" render={SuspendedLogin} />
-              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-            </Switch>
-          </div>
+
+        <div className={classes.wrapperContent}>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+            <Route path="/profile/:userId?" render={() => <ProfilePage />} />
+            <Route
+              path="/dialogs/messages/:id?"
+              render={() => <MessagesPage />}
+            />
+            <Route path="/dialogs" render={() => <DialogsPage />} />
+            <Route
+              path="/users"
+              render={() => <UsersPage pageTitle={"Find users"} />}
+            />
+            <Route path="/chat" render={SuspendedChat} />
+            <Route path="/login" render={SuspendedLogin} />
+            <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+          </Switch>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-let mapStateToProps = (state: AppStateType) => ({
-  initialized: state.app.initialized,
-  globalError: state.app.globalError,
-});
-
-let AppContainer = compose<React.ComponentType>(
-  withRouter,
-  connect(mapStateToProps, {
-    initializeApp,
-    globalErrorCatch,
-    globalErrorNull,
-  })
-)(App);
+let AppContainer = compose<React.ComponentType>(withRouter)(App);
 
 const MyApp: React.FC = () => {
   return (
