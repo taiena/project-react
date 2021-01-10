@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useState } from "react";
 import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
@@ -72,23 +72,30 @@ class App extends Component<MapPropsType & DispatchPropsType> {
 
         <Header />
         <Nav />
-        <div className={classes.wrapperContent}>
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
-            <Route path="/profile/:userId?" render={() => <ProfilePage />} />
-            <Route
-              path="/dialogs/messages/:id?"
-              render={() => <MessagesPage />}
-            />
-            <Route path="/dialogs" render={() => <DialogsPage />} />
-            <Route
-              path="/users"
-              render={() => <UsersPage pageTitle={"Find users"} />}
-            />
-            <Route path="/chat" render={SuspendedChat} />
-            <Route path="/login" render={SuspendedLogin} />
-            <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-          </Switch>
+        {/* <div className={darkMode ? classes.darkMode : classes.lightMode}> */}
+        <div className={classes.darkMode}>
+          <div className={classes.wrapperContent}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <Redirect to={"/profile"} />}
+              />
+              <Route path="/profile/:userId?" render={() => <ProfilePage />} />
+              <Route
+                path="/dialogs/messages/:id?"
+                render={() => <MessagesPage />}
+              />
+              <Route path="/dialogs" render={() => <DialogsPage />} />
+              <Route
+                path="/users"
+                render={() => <UsersPage pageTitle={"Find users"} />}
+              />
+              <Route path="/chat" render={SuspendedChat} />
+              <Route path="/login" render={SuspendedLogin} />
+              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+            </Switch>
+          </div>
         </div>
       </div>
     );
