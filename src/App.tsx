@@ -31,7 +31,7 @@ const SuspendedChat = withSuspense(ChatPage);
 type PropsType = {};
 
 const App: React.FC<PropsType> = (props) => {
-  // if darkMode return true
+  // function return true if darkMode
   const getInitialMode = () => {
     const item = localStorage.getItem("dark");
     const savedMode = JSON.parse(`${item}`);
@@ -39,6 +39,10 @@ const App: React.FC<PropsType> = (props) => {
   };
 
   const [darkMode, setDarkMode] = useState(getInitialMode());
+
+  const changeTheme = () => {
+    setDarkMode((prevMode: boolean) => !prevMode);
+  };
 
   const globalError = useSelector(selectIsGlobalError);
   const initialized = useSelector(selectIsInitialized);
@@ -68,12 +72,8 @@ const App: React.FC<PropsType> = (props) => {
     <div className={darkMode ? classes.darkMode : classes.lightMode}>
       <div className={classes.wrapper}>
         {globalError !== null && <ErrorModal globalError={globalError} />}
-        <div className={classes.toggleContainer}>
-          <button onClick={() => setDarkMode((prevMode: boolean) => !prevMode)}>
-            theme
-          </button>
-        </div>
-        <Header />
+
+        <Header changeTheme={changeTheme} />
         <Nav />
 
         <div className={classes.wrapperContent}>

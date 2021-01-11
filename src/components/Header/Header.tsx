@@ -5,9 +5,11 @@ import { selectIsAuth, selectLogin } from "../../redux/authSelectors";
 import { logout } from "../../redux/authReducer";
 import { useSelector, useDispatch } from "react-redux";
 
-export type MapPropsType = {};
+export type PropsType = {
+  changeTheme: () => void;
+};
 
-const Header: React.FC<MapPropsType> = (props) => {
+const Header: React.FC<PropsType> = ({ changeTheme }) => {
   const isAuth = useSelector(selectIsAuth);
   const login = useSelector(selectLogin);
 
@@ -23,6 +25,10 @@ const Header: React.FC<MapPropsType> = (props) => {
         <span className={classes.LogoSocial}>SOCIAL</span>
         <span className={classes.LogoDev}>DEV</span>
       </div>
+      <div className={classes.Theme}>
+        <button onClick={changeTheme}>change theme</button>
+      </div>
+
       <div className={classes.LoginBlock}>
         {isAuth ? (
           <div>
