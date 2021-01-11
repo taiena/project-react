@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
@@ -31,6 +31,15 @@ const SuspendedChat = withSuspense(ChatPage);
 type PropsType = {};
 
 const App: React.FC<PropsType> = (props) => {
+  // if darkMode return true
+  const getInitialMode = () => {
+    const item = localStorage.getItem("dark");
+    const savedMode = JSON.parse(`${item}`);
+    return savedMode || false;
+  };
+
+  const [darkMode, setDarkMode] = useState(getInitialMode());
+
   const globalError = useSelector(selectIsGlobalError);
   const initialized = useSelector(selectIsInitialized);
 
@@ -46,23 +55,24 @@ const App: React.FC<PropsType> = (props) => {
     window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
   }, []);
 
-  // componentWillUnmount() {
-  //   window.removeEventListener(
-  //     "unhandledrejection",
-  //     this.catchAllUnhandledErrors
-  //   );
-  // }
+  useEffect(() => {
+    localStorage.setItem("dark", JSON.stringify(darkMode));
+  }, [darkMode]);
 
   if (!initialized) {
     return <Preloader />;
   }
 
   return (
-    <div className={classes.darkMode}>
-      {/* <div className={darkMode ? classes.darkMode : classes.lightMode}> */}
+    // <div className={classes.darkMode}>
+    <div className={darkMode ? classes.darkMode : classes.lightMode}>
       <div className={classes.wrapper}>
         {globalError !== null && <ErrorModal globalError={globalError} />}
-
+        <div className={classes.toggleContainer}>
+          <button onClick={() => setDarkMode((prevMode: boolean) => !prevMode)}>
+            theme
+          </button>
+        </div>
         <Header />
         <Nav />
 
