@@ -1,0 +1,19 @@
+@import "../../../../scss/vars";
+
+.Button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 0px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: $color-main;
+}
+
+.Button:focus {
+  background-color: $color-active;
+}
+
+.Button:active {
+  box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+}

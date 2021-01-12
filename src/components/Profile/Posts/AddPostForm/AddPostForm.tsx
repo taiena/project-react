@@ -6,6 +6,7 @@ import {
   Textarea,
 } from "../../../common/FormsControls/FormsControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
+import Button from "../../../common/buttons/Button/Button";
 
 type PropsType = {};
 
@@ -30,7 +31,7 @@ const AddPostForm: React.FC<
         )}
       </div>
       <div>
-        <button>Add post</button>
+        <Button>Add post</Button>
       </div>
     </form>
   );
