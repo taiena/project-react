@@ -22,7 +22,7 @@ import { Provider } from "react-redux";
 import { withSuspense } from "./hoc/withSuspense";
 import { selectIsGlobalError, selectIsInitialized } from "./redux/appSelectors";
 import { useSelector, useDispatch } from "react-redux";
-import darkMode from "./hoc/darkMode/darkMode";
+import changeThemes from "./hoc/changeThemes/changeThemes";
 
 const Login = React.lazy(() => import("./components/Login/LoginPage"));
 const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"));
@@ -79,8 +79,10 @@ const App: React.FC<PropsType> = (props) => {
   );
 };
 
-let AppWithDarkMode = darkMode(App);
-let AppContainer = compose<React.ComponentType>(withRouter)(AppWithDarkMode);
+let AppWithChangeThemes = changeThemes(App);
+let AppContainer = compose<React.ComponentType>(withRouter)(
+  AppWithChangeThemes
+);
 
 const MyApp: React.FC = () => {
   return (

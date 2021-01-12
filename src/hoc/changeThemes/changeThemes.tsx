@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import classes from "./darkMode.module.scss";
+import classes from "./changeThemes.module.scss";
 
-type DarkModeProps = {
+type ChangeThemesProps = {
   changeTheme: () => void;
 };
 
-const darkMode = <WCP extends object>(
+const changeThemes = <WCP extends object>(
   WrappedComponent: React.ComponentType<WCP>
-): React.FC<WCP & DarkModeProps> => ({ ...props }: DarkModeProps) => {
+): React.FC<WCP & ChangeThemesProps> => ({ ...props }: ChangeThemesProps) => {
   // function return true if darkMode
   const getInitialMode = () => {
     const item = localStorage.getItem("dark");
@@ -31,4 +31,4 @@ const darkMode = <WCP extends object>(
     </div>
   );
 };
-export default darkMode;
+export default changeThemes;
