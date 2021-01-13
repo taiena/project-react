@@ -5,7 +5,7 @@
   justify-content: space-between;
   background-color: $color-header;
   grid-area: header;
-  border-radius: 0 0 5px 5px;
+  // border-radius: 0 0 5px 5px;
   padding: 10px 20px;
 }
 
@@ -17,10 +17,13 @@
   font-size: 2rem;
 
   &Social {
-    color: $color-main;
+    color: $color-active;
+    // color: #fff;
   }
 
   &Dev {
-    color: $color-active;
+    color: $color-main-lighter;
+    // color: #fff;
+    // color: $color-active;
   }
 }
