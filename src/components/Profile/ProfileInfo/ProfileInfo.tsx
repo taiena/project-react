@@ -55,23 +55,23 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
         {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
       </div>
 
-      {editMode ? (
-        <ProfileDataFormReduxForm
-          initialValues={profile}
-          profile={profile}
-          onSubmit={onSubmit}
-        />
-      ) : (
-        <ProfileData
-          goToEditMode={() => {
-            setEditMode(true);
-          }}
-          profile={profile}
-          isOwner={isOwner}
-        />
-      )}
-
-      <ProfileStatusHooks />
+      <div className={classes.ProfileData}>
+        {editMode ? (
+          <ProfileDataFormReduxForm
+            initialValues={profile}
+            profile={profile}
+            onSubmit={onSubmit}
+          />
+        ) : (
+          <ProfileData
+            goToEditMode={() => {
+              setEditMode(true);
+            }}
+            profile={profile}
+            isOwner={isOwner}
+          />
+        )}
+      </div>
     </section>
   );
 };
@@ -89,24 +89,19 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
 }) => {
   return (
     <div className={classes.ProfileInfo}>
-      <h2>{profile.fullName}</h2>
+      <div className={classes.ProfileName}>
+        <h2>{profile.fullName}</h2>
+      </div>
+
+      <div className={classes.ProfileStatus}>
+        <ProfileStatusHooks />
+      </div>
 
       <div className={classes.ProfileAbout}>
         <b>About me: </b>
         {profile.aboutMe}
       </div>
-      <div className={classes.ProfileContacts}>
-        <b>My contacts: </b>
-        {Object.keys(profile.contacts).map((key) => {
-          return (
-            <Contact
-              key={key}
-              contactTitle={key}
-              contactValue={profile.contacts[key as keyof ContactsType]}
-            />
-          );
-        })}
-      </div>
+
       <div className={classes.ProfileJob}>
         <div>
           <b>Looking for a job: </b>
@@ -119,8 +114,22 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
           </div>
         )}
       </div>
+
+      <div className={classes.ProfileContacts}>
+        <b>My contacts: </b>
+        {Object.keys(profile.contacts).map((key) => {
+          return (
+            <Contact
+              key={key}
+              contactTitle={key}
+              contactValue={profile.contacts[key as keyof ContactsType]}
+            />
+          );
+        })}
+      </div>
+
       {isOwner && (
-        <div>
+        <div className={classes.EditBtn}>
           <button onClick={goToEditMode}>edit</button>
         </div>
       )}

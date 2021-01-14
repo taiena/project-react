@@ -3,10 +3,11 @@
 .Profile {
   &Container {
     display: flex;
+    padding: 20px;
   }
 
   &Photo {
-    margin-right: 20px;
+    margin-right: 40px;
     display: flex;
     flex-direction: column;
   }
@@ -18,7 +19,8 @@
 
   &Info {
     display: grid;
-    grid-gap: 5px;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
   }
 
   &About {

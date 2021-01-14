@@ -40,11 +40,11 @@ const Messages: React.FC = () => {
   }, []);
 
   return (
-    <div className={classes.messages}>
+    <section className={classes.messages}>
       {messages.map((m, index) => (
         <Message key={index} message={m} />
       ))}
-    </div>
+    </section>
   );
 };
 

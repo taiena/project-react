@@ -26,7 +26,7 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
         <span className={classes.LogoDev}>DEV</span>
       </div>
       <div className={classes.Theme}>
-        <button onClick={changeTheme}>change theme</button>
+        <span onClick={changeTheme}>change theme</span>
       </div>
 
       <div className={classes.LoginBlock}>
