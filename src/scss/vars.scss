@@ -1,18 +1,17 @@
 $color-main: #8105c9;
-$color-main-lighter: #c745fa;
+$color-main-lighter: lighten($color-main, 25%);
+$color-main-darker: darken($color-main, 25%);
 $color-active: #f8a408;
 
-$color-bg-dark: #303030;
+$color-bg-dark: #333333;
 $color-text-dark: #ffffff;
-$color-section-dark: #535353;
-$color-border-dark: #636363;
+$color-section-dark: #505050;
 $color-border-inputs-dark: #8d8d8d;
 
 $color-bg-light: #e4e4e4;
 $color-text-light: #000000;
 $color-section-light: #ffffff;
-$color-border-light: #d6d6d6;
 $color-border-inputs-light: #adadad;
 
-$color-error: #b40303;
+$color-error: #e4008d;
 $color-header: rgba(0, 0, 0, 0.7);

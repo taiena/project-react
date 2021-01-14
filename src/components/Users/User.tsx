@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./User.module.scss";
-import userAva from "../../assets/images/ava.png";
+import userAva from "../../assets/images/ava.svg";
 import { NavLink } from "react-router-dom";
 import { UserType } from "../../types/types";
 

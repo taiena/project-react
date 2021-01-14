@@ -1,13 +1,15 @@
 @import "../../../scss/vars";
 
 .Profile {
+  // contains Photo & Data component
   &Container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 30px;
     padding: 20px;
   }
 
   &Photo {
-    margin-right: 40px;
     display: flex;
     flex-direction: column;
   }
@@ -17,22 +19,54 @@
     margin-bottom: 10px;
   }
 
+  // contains Upper & Lower sections
   &Info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &UpperSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &LowerSection {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 1fr 1fr;
+    padding-top: 20px;
   }
 
   &About {
+    padding-bottom: 20px;
   }
 
   &Job {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-gap: 10px;
+
+    &Title {
+      opacity: 0.7;
+    }
   }
 
   &Contacts {
     display: flex;
     flex-direction: column;
+  }
+
+  &ContactsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+  }
+
+  &Contact {
+    padding: 2px;
+
+    &Title {
+      opacity: 0.7;
+    }
   }
 }

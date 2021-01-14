@@ -38,8 +38,6 @@ const ProfilePage: React.FC<ProfilePagePropsType> = (props) => {
 
   useEffect(() => {
     refreshProfile();
-    console.log("refreshed!");
-    console.log("user id: ", props.match.params.userId);
   }, [props.match.params.userId]);
 
   // isOwner true when no id in props (then it is our profile)
