@@ -1,39 +1,39 @@
 import React from "react";
 import classes from "./Nav.module.scss";
 import { NavLink } from "react-router-dom";
-import ButtonNav from "../common/buttons/ButtonNav/ButtonNav";
+import { Button, ButtonTypes } from "../common/buttons/Button/Button";
 
 const Nav: React.FC = () => {
   return (
     <nav className={classes.nav}>
       <ul>
         <li className={classes.link}>
-          <ButtonNav>
+          <Button type={ButtonTypes.Nav}>
             <NavLink to="/profile" activeClassName={classes.active}>
               PROFILE
             </NavLink>
-          </ButtonNav>
+          </Button>
         </li>
         <li className={classes.link}>
-          <ButtonNav>
+          <Button type={ButtonTypes.Nav}>
             <NavLink to="/dialogs" activeClassName={classes.active}>
               DIALOGS
             </NavLink>
-          </ButtonNav>
+          </Button>
         </li>
         <li className={classes.link}>
-          <ButtonNav>
+          <Button type={ButtonTypes.Nav}>
             <NavLink to="/users" activeClassName={classes.active}>
               USERS
             </NavLink>
-          </ButtonNav>
+          </Button>
         </li>
         <li className={classes.link}>
-          <ButtonNav>
+          <Button type={ButtonTypes.Nav}>
             <NavLink to="/chat" activeClassName={classes.active}>
               CHAT
             </NavLink>
-          </ButtonNav>
+          </Button>
         </li>
       </ul>
     </nav>

@@ -1,20 +1,70 @@
 @import "../../../../scss/vars";
 
 .Button {
-  padding: 5px 10px;
-  border-radius: 10px;
-  border: 0px;
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
-  background-color: $color-main;
   color: #fff;
 }
 
-.Button:focus {
-  background-color: $color-active;
+.Nav {
+  position: relative;
+  width: 200px;
+  height: 30px;
+  border: 0px;
+
+  cursor: pointer;
+  background-color: $color-main;
+
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;
+
+  &:hover {
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.7s ease;
+  }
 }
 
-.Button:active {
-  box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+.InterfaceType1 {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 0px;
+  background-color: $color-main;
+
+  &:hover {
+    background-color: $color-main-lighter;
+    transition: all 0.7s ease;
+  }
+
+  &:active {
+    background-color: $color-active;
+  }
+}
+
+.InterfaceType2 {
+  padding: 5px 10px;
+  border: 0px;
+  background-color: $color-button;
+
+  &:hover {
+    background-color: $color-button-lighter;
+    transition: all 0.7s ease;
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+  }
 }

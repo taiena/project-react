@@ -8,6 +8,7 @@ import { ContactsType, ProfileType } from "../../../types/types";
 import { selectProfile } from "../../../redux/profileSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserPhoto, saveUserProfile } from "../../../redux/profileReducer";
+import { Button, ButtonTypes } from "../../common/buttons/Button/Button";
 
 type PropsType = {
   isOwner: boolean;
@@ -95,7 +96,13 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
         </div>
 
         <div className={classes.EditBtn}>
-          {isOwner && <button onClick={goToEditMode}>EDIT PROFILE</button>}
+          {isOwner && (
+            <Button
+              type={ButtonTypes.InterfaceType2}
+              text="edit profile"
+              onClick={goToEditMode}
+            />
+          )}
         </div>
       </div>
       <hr />

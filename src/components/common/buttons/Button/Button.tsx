@@ -1,25 +1,23 @@
-import React, { MouseEvent } from "react";
+import React from "react";
 import classes from "./Button.module.scss";
 
-export interface IButtonProps {
+enum ButtonTypes {
+  Nav = "Nav",
+  InterfaceType1 = "InterfaceType1",
+  InterfaceType2 = "InterfaceType2",
+}
+interface IButtonProps {
   children?: React.ReactNode;
-  props?: any;
+  text?: string;
+  type: ButtonTypes;
   onClick?: any;
 }
-
-const Button: React.FC<IButtonProps> = ({
-  children,
-  onClick = () => {},
-  ...props
-}) => {
-  const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onClick(e);
-  };
+const Button = ({ children, text, type, onClick = () => {} }: IButtonProps) => {
   return (
-    <button className={classes.Button} onClick={handleOnClick} {...props}>
-      {children}
+    <button className={`${classes.Button} ${classes[type]}`} onClick={onClick}>
+      {text} {children}
     </button>
   );
 };
 
-export default Button;
+export { Button, ButtonTypes };
