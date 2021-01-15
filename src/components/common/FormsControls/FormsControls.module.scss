@@ -17,3 +17,21 @@
 // input {
 
 // }
+
+.Textarea {
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.Input {
+  min-width: 30px;
+  height: 25px;
+  padding: 5px;
+  margin: 5px 20px 5px 0px;
+}
+
+// input[type="checkbox"]:checked,
+// input[type="checkbox"]:not(:checked) {
+//   position: absolute;
+//   left: -9999px;
+// }
