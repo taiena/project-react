@@ -58,7 +58,7 @@ export function createField<FormKeysType extends string>(
   text = ""
 ) {
   return (
-    <div>
+    <>
       <Field
         placeholder={placeholder}
         name={name}
@@ -67,7 +67,7 @@ export function createField<FormKeysType extends string>(
         {...props}
       />{" "}
       {text}
-    </div>
+    </>
   );
 }
 

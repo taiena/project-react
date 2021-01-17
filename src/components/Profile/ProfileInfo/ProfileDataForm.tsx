@@ -10,6 +10,7 @@ import {
 import { InjectedFormProps, reduxForm } from "redux-form";
 import { ProfileType } from "../../../types/types";
 import { Button, ButtonTypes } from "../../common/buttons/Button/Button";
+import { Field } from "redux-form";
 
 type PropsType = {
   profile: ProfileType;
@@ -50,15 +51,22 @@ const ProfileDataForm: React.FC<
                 <b>Looking for a job: </b>
               </div>
               <div className={classes.ProfileJobCheckbox}>
-                {createField("", "lookingForAJob", [], Input, {
+                <Field
+                  name="lookingForAJob"
+                  component="input"
+                  type="checkbox"
+                  id="checkjob"
+                />{" "}
+                {/* {createField("", "lookingForAJob", [], Input, {
                   type: "checkbox",
-                })}
+                  id: "check",
+                })} */}
+                <label htmlFor="checkjob" />
               </div>
             </div>
 
             <div>
               <b>My professional skills: </b>
-
               {createField(
                 "My professional skills",
                 "lookingForAJobDescription",
