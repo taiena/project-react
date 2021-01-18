@@ -80,6 +80,19 @@
   }
 }
 
+.EditPhotoBtn {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 2fr 3fr;
+}
+
+.Dropzone {
+  border: 1px dashed #aaa;
+  color: #aaa;
+  padding: 2px;
+  text-align: center;
+}
+
 input[type="checkbox"],
 input[type="file"] {
   display: none;

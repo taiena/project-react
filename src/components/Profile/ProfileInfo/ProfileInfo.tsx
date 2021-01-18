@@ -9,6 +9,7 @@ import { selectProfile } from "../../../redux/profileSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserPhoto, saveUserProfile } from "../../../redux/profileReducer";
 import { Button, ButtonTypes } from "../../common/buttons/Button/Button";
+import Dropzone from "react-dropzone";
 
 type PropsType = {
   isOwner: boolean;
@@ -46,6 +47,12 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
     }
   };
 
+  const onMainPhotoDropped = (files: any) => {
+    if (files?.length) {
+      savePhoto(files[0]);
+    }
+  };
+
   const onSubmit = (formData: ProfileType) => {
     saveProfile(formData);
     setEditMode(false);
@@ -63,17 +70,29 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
         </div>
         {isOwner && (
           <div className={classes.EditPhotoBtn}>
-            <input
-              ref={inputPhoto}
-              type="file"
-              onChange={onMainPhotoSelected}
-            />
+            <div>
+              <input
+                ref={inputPhoto}
+                type="file"
+                onChange={onMainPhotoSelected}
+              />
 
-            <Button
-              onClick={onBtnClickLoadPhoto}
-              type={ButtonTypes.InterfaceType2}
-              text="load photo"
-            />
+              <Button
+                onClick={onBtnClickLoadPhoto}
+                type={ButtonTypes.InterfaceType2}
+                text="load photo"
+              />
+            </div>
+            <div>
+              <Dropzone onDrop={(files: any) => onMainPhotoDropped(files)}>
+                {({ getRootProps, getInputProps }) => (
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <div className={classes.Dropzone}>Or drop file here</div>
+                  </div>
+                )}
+              </Dropzone>
+            </div>
           </div>
         )}
       </div>
