@@ -8,7 +8,7 @@ import { ContactsType, ProfileType } from "../../../types/types";
 import { selectProfile } from "../../../redux/profileSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserPhoto, saveUserProfile } from "../../../redux/profileReducer";
-import { Button, ButtonTypes } from "../../common/buttons/Button/Button";
+import { Button, ButtonTypes } from "../../common/Button/Button";
 import Dropzone from "react-dropzone";
 
 type PropsType = {

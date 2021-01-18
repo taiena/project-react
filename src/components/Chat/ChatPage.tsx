@@ -51,7 +51,7 @@ const Messages: React.FC = () => {
 const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
   return (
     <div>
-      <img src={message.photo} />
+      <img src={message.photo} alt={message.userName} />
       <div>{message.userName}</div>
       <div>{message.message}</div>
       <hr />

@@ -6,7 +6,7 @@ import {
   Textarea,
 } from "../../../common/FormsControls/FormsControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
-import { Button, ButtonTypes } from "../../../common/buttons/Button/Button";
+import { Button, ButtonTypes } from "../../../common/Button/Button";
 
 type PropsType = {};
 
@@ -32,11 +32,7 @@ const AddPostForm: React.FC<
       </div>
 
       <div>
-        <Button
-          type={ButtonTypes.InterfaceType1}
-          text="Add post"
-          onClick={console.log("Button pressed")}
-        />
+        <Button type={ButtonTypes.InterfaceType1} text="Add post" />
       </div>
     </form>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Nav.module.scss";
 import { NavLink } from "react-router-dom";
-import { Button, ButtonTypes } from "../common/buttons/Button/Button";
+import { Button, ButtonTypes } from "../common/Button/Button";
 
 const Nav: React.FC = () => {
   return (

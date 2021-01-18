@@ -9,7 +9,7 @@ import {
 } from "../../common/FormsControls/FormsControls";
 import { InjectedFormProps, reduxForm } from "redux-form";
 import { ProfileType } from "../../../types/types";
-import { Button, ButtonTypes } from "../../common/buttons/Button/Button";
+import { Button, ButtonTypes } from "../../common/Button/Button";
 import { Field } from "redux-form";
 
 type PropsType = {
