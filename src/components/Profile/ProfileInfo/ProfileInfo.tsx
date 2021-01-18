@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useRef } from "react";
 import classes from "./ProfileInfo.module.scss";
 import Preloader from "../../common/Preloader/Preloader";
 import userAva from "../../../assets/images/ava.svg";
@@ -15,6 +15,13 @@ type PropsType = {
 };
 
 const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
+  const inputPhoto = useRef<HTMLInputElement>(null);
+  const onBtnClickLoadPhoto = () => {
+    if (inputPhoto && inputPhoto.current) {
+      inputPhoto.current.click();
+    }
+  };
+
   const profile = useSelector(selectProfile);
 
   const dispatch = useDispatch();
@@ -54,7 +61,21 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
             alt=""
           />
         </div>
-        {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
+        {isOwner && (
+          <div className={classes.EditPhotoBtn}>
+            <input
+              ref={inputPhoto}
+              type="file"
+              onChange={onMainPhotoSelected}
+            />
+
+            <Button
+              onClick={onBtnClickLoadPhoto}
+              type={ButtonTypes.InterfaceType2}
+              text="load photo"
+            />
+          </div>
+        )}
       </div>
 
       {editMode ? (
@@ -95,7 +116,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
           <ProfileStatusHooks />
         </div>
 
-        <div className={classes.EditBtn}>
+        <div>
           {isOwner && (
             <Button
               type={ButtonTypes.InterfaceType2}
