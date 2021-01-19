@@ -41,7 +41,11 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
             />
           </div>
         ) : (
-          <NavLink to={"/login"}>Login</NavLink>
+          <div>
+            <Button type={ButtonTypes.Login}>
+              <NavLink to={"/login"}>LOGIN</NavLink>
+            </Button>
+          </div>
         )}
       </div>
     </header>
