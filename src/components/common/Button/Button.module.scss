@@ -68,3 +68,18 @@
     box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
   }
 }
+
+.Login {
+  padding: 5px 10px;
+  border: 0px;
+  background-color: $color-button-darker;
+
+  &:hover {
+    background-color: $color-button;
+    transition: all 0.7s ease;
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+  }
+}

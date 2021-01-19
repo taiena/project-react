@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { selectIsAuth, selectLogin } from "../../redux/authSelectors";
 import { logout } from "../../redux/authReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { Button, ButtonTypes } from "../common/Button/Button";
 
 export type PropsType = {
   changeTheme: () => void;
@@ -31,9 +32,13 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
 
       <div className={classes.LoginBlock}>
         {isAuth ? (
-          <div>
-            {login}
-            <button onClick={logoutCallback}>Log out</button>
+          <div className={classes.Logined}>
+            <div className={classes.Login}>{login}</div>
+            <Button
+              onClick={logoutCallback}
+              type={ButtonTypes.Login}
+              text="logout"
+            />
           </div>
         ) : (
           <NavLink to={"/login"}>Login</NavLink>

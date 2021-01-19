@@ -3,6 +3,7 @@ import classes from "./Button.module.scss";
 
 enum ButtonTypes {
   Nav = "Nav",
+  Login = "Login",
   InterfaceType1 = "InterfaceType1",
   InterfaceType2 = "InterfaceType2",
 }
