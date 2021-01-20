@@ -3,33 +3,39 @@
 .lightMode {
   background-color: $color-bg-light;
   color: $color-text-light;
+
+  & section {
+    background-color: $color-section-light;
+  }
+
+  & textarea,
+  & input {
+    background-color: $color-section-light;
+    border: 1px solid $color-border-inputs-light;
+    color: $color-text-light;
+  }
+
+  & a {
+    color: #000;
+  }
 }
 
 .darkMode {
   background-color: $color-bg-dark;
   color: $color-text-dark;
-}
 
-.darkMode section {
-  background-color: $color-section-dark;
-  // border: 1px solid $color-border-dark;
-}
+  & section {
+    background-color: $color-section-dark;
+  }
 
-.lightMode section {
-  background-color: $color-section-light;
-  // border: 1px solid $color-border-light;
-}
+  & textarea,
+  & input {
+    background-color: $color-section-dark;
+    border: 1px solid $color-border-inputs-dark;
+    color: $color-text-dark;
+  }
 
-.darkMode textarea,
-.darkMode input {
-  background-color: $color-section-dark;
-  border: 1px solid $color-border-inputs-dark;
-  color: $color-text-dark;
-}
-
-.lightMode textarea,
-.lightMode input {
-  background-color: $color-section-light;
-  border: 1px solid $color-border-inputs-light;
-  color: $color-text-light;
+  & a {
+    color: #fff;
+  }
 }

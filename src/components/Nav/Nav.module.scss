@@ -15,7 +15,11 @@
     // font-weight: 700;
 
     &.active {
-      color: $color-active;
+      color: $color-active !important;
+    }
+
+    &.unactive {
+      color: #fff;
     }
   }
 }

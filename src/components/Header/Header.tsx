@@ -43,7 +43,9 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
         ) : (
           <div>
             <Button type={ButtonTypes.Login}>
-              <NavLink to={"/login"}>LOGIN</NavLink>
+              <NavLink to={"/login"}>
+                <span className={classes.LoginLink}>LOGIN</span>
+              </NavLink>
             </Button>
           </div>
         )}
