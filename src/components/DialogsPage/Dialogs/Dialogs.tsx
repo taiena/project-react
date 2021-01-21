@@ -17,11 +17,21 @@ const Dialogs: React.FC<PropsType> = (props) => {
   }, []);
 
   return (
-    <div className={classes.Dialogs}>
-      <h3>Dialogs</h3>
-      {dialogs.map((d: any) => (
-        <Dialog userName={d.userName} id={d.id} key={d.id} />
-      ))}
+    <div className={classes.Container}>
+      <div className={classes.Dialogs}>
+        {dialogs.map((d: any) => (
+          <Dialog
+            userName={d.userName}
+            id={d.id}
+            key={d.id}
+            hasNewMessages={d.hasNewMessages}
+            lastDialogActivityDate={d.lastDialogActivityDate}
+            lastUserActivityDate={d.lastUserActivityDate}
+            newMessagesCount={d.newMessagesCount}
+            photos={d.photos}
+          />
+        ))}
+      </div>
     </div>
   );
 };

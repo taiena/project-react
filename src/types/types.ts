@@ -51,5 +51,10 @@ export type MessageType = {
 
 export type DialogType = {
   id: number;
-  name: string;
+  userName: string;
+  hasNewMessages: boolean;
+  lastDialogActivityDate: Date;
+  lastUserActivityDate: Date;
+  newMessagesCount: number;
+  photos: PhotosType;
 };

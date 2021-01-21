@@ -8,6 +8,13 @@
     background-color: $color-section-light;
   }
 
+  & article {
+    background-color: $color-section-light;
+    &:hover {
+      background-color: $color-article-hover-light;
+    }
+  }
+
   & textarea,
   & input {
     background-color: $color-section-light;
@@ -26,6 +33,13 @@
 
   & section {
     background-color: $color-section-dark;
+  }
+
+  & article {
+    background-color: $color-section-dark;
+    &:hover {
+      background-color: $color-article-hover-dark;
+    }
   }
 
   & textarea,
