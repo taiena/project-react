@@ -29,23 +29,30 @@ const Message: React.FC<PropsType> = ({
 
       <div className={classes.Name}>{message.senderName}</div>
       <div>{message.body}</div>
-      <div className={classes.Date}>{formatDate(messageDate)}</div>
-      <div className={classes.Buttons}>
-        <Button
-          onClick={() => {
-            spamMessage(message.id, userId);
-          }}
-          type={ButtonTypes.InterfaceType2}
-          text="to spam"
-        />
-
-        <Button
-          onClick={() => {
-            deleteMessage(message.id, userId);
-          }}
-          type={ButtonTypes.InterfaceType2}
-          text="delete"
-        />
+      <div className={classes.RightBlock}>
+        <div className={classes.Date}>{formatDate(messageDate)}</div>
+        <div className={classes.Buttons}>
+          {userId == message.senderId && (
+            <div>
+              <Button
+                onClick={() => {
+                  spamMessage(message.id, userId);
+                }}
+                type={ButtonTypes.InterfaceType2}
+                text="to spam"
+              />
+            </div>
+          )}
+          <div>
+            <Button
+              onClick={() => {
+                deleteMessage(message.id, userId);
+              }}
+              type={ButtonTypes.InterfaceType2}
+              text="delete"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
