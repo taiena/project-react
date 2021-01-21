@@ -43,7 +43,6 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
 
   return (
     <div className={classes.MessagesPage}>
-      <h3>Messages with user: {userId} </h3>
       <div className={classes.Messages}>
         {messages.map((message: any) => (
           <Message

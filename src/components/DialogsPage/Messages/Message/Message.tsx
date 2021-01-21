@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./Message.module.scss";
 import { MessageType } from "../../../../types/types";
+import { formatDate } from "../../../../utils/formatDate";
+import { Button, ButtonTypes } from "../../../common/Button/Button";
 
 type PropsType = {
   message: MessageType;
@@ -15,31 +17,36 @@ const Message: React.FC<PropsType> = ({
   deleteMessage,
   spamMessage,
 }) => {
+  let messageDate = new Date(message.addedAt);
+
   return (
     <section className={classes.Message}>
-      <div>Message id: {message.id}</div>
-      <div>Message body: {message.body}</div>
-      <div>translatedBody: {message.translatedBody}</div>
+      {/* <div>Message id: {message.id}</div>
       <div>senderId: {message.senderId}</div>
-      <div>senderName: {message.senderName}</div>
       <div>recipientId: {message.recipientId}</div>
-      <div>Date: {message.addedAt}</div>
       <div>Viewed: {message.viewed}</div>
+      <div>translatedBody: {message.translatedBody}</div> */}
 
-      <button
-        onClick={() => {
-          deleteMessage(message.id, userId);
-        }}
-      >
-        delete
-      </button>
-      <button
-        onClick={() => {
-          spamMessage(message.id, userId);
-        }}
-      >
-        add to spam
-      </button>
+      <div className={classes.Name}>{message.senderName}</div>
+      <div>{message.body}</div>
+      <div className={classes.Date}>{formatDate(messageDate)}</div>
+      <div className={classes.Buttons}>
+        <Button
+          onClick={() => {
+            spamMessage(message.id, userId);
+          }}
+          type={ButtonTypes.InterfaceType2}
+          text="to spam"
+        />
+
+        <Button
+          onClick={() => {
+            deleteMessage(message.id, userId);
+          }}
+          type={ButtonTypes.InterfaceType2}
+          text="delete"
+        />
+      </div>
     </section>
   );
 };

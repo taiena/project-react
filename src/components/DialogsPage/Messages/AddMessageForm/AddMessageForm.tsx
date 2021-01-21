@@ -9,6 +9,8 @@ import {
   maxLengthCreator,
 } from "../../../../utils/validators/validators";
 import { NewMessageFormValuesType } from "../Messages";
+import { Button, ButtonTypes } from "../../../common/Button/Button";
+import classes from "./AddMessageForm.module.scss";
 
 const maxLength50 = maxLengthCreator(50);
 
@@ -24,16 +26,18 @@ const AddMessageForm: React.FC<
 > = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <div>
-        {createField<NewMessageFormValuesKeysType>(
-          "Enter your message",
-          "body",
-          [required, maxLength50],
-          Textarea
-        )}
-      </div>
-      <div>
-        <button>Send</button>
+      <div className={classes.Form}>
+        <div>
+          {createField<NewMessageFormValuesKeysType>(
+            "Enter your message",
+            "body",
+            [required, maxLength50],
+            Textarea
+          )}
+        </div>
+        <div>
+          <Button type={ButtonTypes.InterfaceType1} text="send" />
+        </div>
       </div>
     </form>
   );
