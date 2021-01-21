@@ -3,6 +3,7 @@ import classes from "./Dialog.module.scss";
 import { NavLink } from "react-router-dom";
 import { PhotosType } from "../../../../types/types";
 import userAva from "../../../../assets/images/ava.svg";
+import { formatDate } from "../../../../utils/formatDate";
 
 type PropsType = {
   id: number;
@@ -25,6 +26,9 @@ const Dialog: React.FC<PropsType> = ({
 }) => {
   let path = `dialogs/messages/${id}`;
 
+  let dialogDate = new Date(lastDialogActivityDate);
+  let wasOnlineDate = new Date(lastUserActivityDate);
+
   return (
     <article>
       <NavLink to={path}>
@@ -44,12 +48,12 @@ const Dialog: React.FC<PropsType> = ({
 
           <div className={classes.Dates}>
             <div>
-              <span>last message: </span>
-              {lastDialogActivityDate}
+              <span>last dialog: </span>
+              {formatDate(dialogDate)}
             </div>
             <div>
               <span>was online: </span>
-              {lastUserActivityDate}
+              {formatDate(wasOnlineDate)}
             </div>
           </div>
         </div>
