@@ -11,11 +11,16 @@ interface IButtonProps {
   children?: React.ReactNode;
   text?: string;
   type: ButtonTypes;
-  onClick?: any;
+  onClick?: () => void;
+  disabled?: boolean;
 }
-const Button = ({ children, text, type, onClick = () => {} }: IButtonProps) => {
+const Button = ({ children, text, type, onClick, disabled }: IButtonProps) => {
   return (
-    <button className={`${classes.Button} ${classes[type]}`} onClick={onClick}>
+    <button
+      className={`${classes.Button} ${classes[type]}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {text} {children}
     </button>
   );

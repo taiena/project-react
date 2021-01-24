@@ -2,24 +2,35 @@
 
 .User {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 1fr 1fr 10fr;
+  grid-gap: 20px;
+  grid-template-columns: 100px 2fr 1fr;
+}
 
-  &Ava {
-  }
+.Photo img {
+  width: 100px;
+  height: 100px;
+}
 
-  &Btn {
-  }
+.Info {
+  padding-top: 10px;
+}
 
-  &Info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
+.Name {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
 
-  &Person {
-  }
+.Status {
+}
 
-  &Location {
+.Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  padding-top: 10px;
+
+  & div {
+    margin-left: 10px;
   }
 }
