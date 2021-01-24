@@ -25,8 +25,7 @@ const ProfileDataForm: React.FC<
     <form className={classes.ProfileInfo} onSubmit={handleSubmit}>
       <div className={classes.ProfileUpperSection}>
         <div className={classes.ProfileMainData}>
-          <b>Full name: </b>
-
+          <div className={classes.ProfileDataTitle}>Full name:</div>
           {/* placeholder, name, validate, component, {...props}, text */}
           {createField("Full name", "fullName", [], Input)}
         </div>
@@ -40,16 +39,14 @@ const ProfileDataForm: React.FC<
       <div className={classes.ProfileLowerSection}>
         <div className={classes.ProfileSecondData}>
           <div className={classes.ProfileAbout}>
-            <b>About me: </b>
+            <div className={classes.ProfileDataTitle}>About me:</div>
 
             {createField("About me", "aboutMe", [], Textarea)}
           </div>
 
           <div className={classes.ProfileJob}>
             <div className={classes.ProfileJobLooking}>
-              <div className={classes.ProfileJobTitle}>
-                <b>Looking for a job: </b>
-              </div>
+              <div className={classes.ProfileJobTitle}>Looking for a job:</div>
               <div className={classes.ProfileJobCheckbox}>
                 <Field
                   name="lookingForAJob"
@@ -65,8 +62,10 @@ const ProfileDataForm: React.FC<
               </div>
             </div>
 
-            <div>
-              <b>My professional skills: </b>
+            <div className={classes.ProfileJobSkills}>
+              <div className={classes.ProfileDataTitle}>
+                My professional skills:
+              </div>
               {createField(
                 "My professional skills",
                 "lookingForAJobDescription",
@@ -81,7 +80,7 @@ const ProfileDataForm: React.FC<
             <div className={classes.ProfileContactsList}>
               {Object.keys(profile.contacts).map((key) => {
                 return (
-                  <div key={key}>
+                  <div className={classes.ProfileContact} key={key}>
                     {/* placeholder = key (vk), 
                  name = "contacts." + key (contacta.vk),
                  validate = [], component = Input */}

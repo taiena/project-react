@@ -22,10 +22,8 @@ const Posts: React.FC<PropsType> = () => {
   ));
 
   return (
-    <div className={classes.posts}>
-      <div className={classes.inputpost}>
-        <AddPostForm onSubmit={addNewPost} />
-      </div>
+    <div className={classes.Posts}>
+      <AddPostForm onSubmit={addNewPost} />
       {postsElements}
     </div>
   );

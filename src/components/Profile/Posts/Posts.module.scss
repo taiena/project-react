@@ -1,15 +1,16 @@
 @import "../../../scss/vars";
 
-.posts {
+.Posts {
   display: grid;
   grid-gap: 10px;
 }
 
-.inputpost {
+.Form {
   display: flex;
-}
+  flex-direction: row;
+  margin-bottom: 10px;
 
-textarea {
-  border-radius: 5px;
-  padding: 5px;
+  & div {
+    margin-right: 5px;
+  }
 }

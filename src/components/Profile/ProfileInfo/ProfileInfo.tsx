@@ -150,20 +150,20 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
       <div className={classes.ProfileLowerSection}>
         <div className={classes.ProfileSecondData}>
           <div className={classes.ProfileAbout}>
-            <b>About me: </b>
+            <span className={classes.ProfileDataTitle}>About me: </span>
             {profile.aboutMe}
           </div>
 
           <div className={classes.ProfileJob}>
             <div>
-              <span className={classes.ProfileJobTitle}>
+              <span className={classes.ProfileDataTitle}>
                 Looking for a job:{" "}
               </span>
               {profile.lookingForAJob ? "yes" : "no"}
             </div>
             {profile.lookingForAJob && (
               <div>
-                <span className={classes.ProfileJobTitle}>
+                <span className={classes.ProfileDataTitle}>
                   My professional skills:{" "}
                 </span>
                 {profile.lookingForAJobDescription}

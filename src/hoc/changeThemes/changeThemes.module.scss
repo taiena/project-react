@@ -17,9 +17,13 @@
 
   & textarea,
   & input {
-    background-color: $color-section-light;
+    background-color: $color-inputs-light;
     border: 1px solid $color-border-inputs-light;
     color: $color-text-light;
+
+    &:focus {
+      border: 1px solid $color-main-lighter;
+    }
   }
 
   & a {
@@ -44,9 +48,13 @@
 
   & textarea,
   & input {
-    background-color: $color-section-dark;
+    background-color: $color-inputs-dark;
     border: 1px solid $color-border-inputs-dark;
     color: $color-text-dark;
+
+    &:focus {
+      border: 1px solid $color-main-lighter;
+    }
   }
 
   & a {
