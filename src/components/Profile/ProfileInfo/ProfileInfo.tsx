@@ -88,7 +88,7 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
-                    <div className={classes.Dropzone}>Or drop file here</div>
+                    <div className={classes.Dropzone}>or drop file here</div>
                   </div>
                 )}
               </Dropzone>
@@ -173,7 +173,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
         </div>
 
         <div className={classes.ProfileContacts}>
-          <b>My contacts: </b>
+          My contacts:
           <div className={classes.ProfileContactsList}>
             {Object.keys(profile.contacts).map((key) => {
               return (

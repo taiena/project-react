@@ -17,10 +17,12 @@
 .Input {
   padding: 5px;
   outline: none;
+  transition: 0.2s ease;
 }
 
 .Textarea {
-  border-radius: 0px;
+  resize: none;
+  width: 100%;
 }
 
 .Input {

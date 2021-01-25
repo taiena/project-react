@@ -6,8 +6,8 @@
 }
 
 .Form {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 12fr 1fr;
   margin-bottom: 10px;
 
   & div {

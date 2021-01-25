@@ -41,7 +41,7 @@
   &DataTitle {
     margin-bottom: 5px;
     margin-right: 10px;
-    font-weight: bold;
+    opacity: 0.8;
   }
 
   &About {
@@ -62,7 +62,7 @@
     }
 
     &Title {
-      font-weight: bold;
+      opacity: 0.8;
       margin-right: 33px;
     }
   }
@@ -76,11 +76,18 @@
   &ContactsList {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 10px;
+    padding-top: 15px;
   }
 
   &Contact {
     margin-bottom: 5px;
+
+    &Edit {
+      display: grid;
+      grid-gap: 5px;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
 
     &Title {
       opacity: 0.7;
@@ -97,8 +104,9 @@
 .Dropzone {
   border: 1px dashed #aaa;
   color: #aaa;
-  padding: 2px;
+  padding: 3px;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 input[type="checkbox"],
@@ -110,8 +118,8 @@ input[type="checkbox"] + label:before {
   content: "\2714";
   color: transparent;
   display: inline-block;
-  border: 1px solid #ccc;
-  font-size: 20px;
+  border: 1px solid rgba(140, 140, 140, 0.7);
+  font-size: 1.5rem;
   font-weight: 900;
   line-height: 22px;
   margin: -5px 5px 0 0;
@@ -123,6 +131,5 @@ input[type="checkbox"] + label:before {
 }
 
 input[type="checkbox"]:checked + label:before {
-  color: $color-main;
-  border-color: #000;
+  color: $color-main-lighter;
 }

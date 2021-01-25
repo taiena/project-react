@@ -76,11 +76,11 @@ const ProfileDataForm: React.FC<
           </div>
 
           <div className={classes.ProfileContacts}>
-            <b>My contacts: </b>
+            <div className={classes.ProfileDataTitle}>My contacts:</div>
             <div className={classes.ProfileContactsList}>
               {Object.keys(profile.contacts).map((key) => {
                 return (
-                  <div className={classes.ProfileContact} key={key}>
+                  <div className={classes.ProfileContactEdit} key={key}>
                     {/* placeholder = key (vk), 
                  name = "contacts." + key (contacta.vk),
                  validate = [], component = Input */}
