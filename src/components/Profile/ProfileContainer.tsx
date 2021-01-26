@@ -41,9 +41,16 @@ const ProfilePage: React.FC<ProfilePagePropsType> = (props) => {
   }, [props.match.params.userId]);
 
   // isOwner true when no id in props (then it is our profile)
+  let isOwner = !props.match.params.userId;
+  let userId: number | null = +props.match.params.userId;
+
   return (
     <>
-      <Profile isOwner={!props.match.params.userId} />
+      {isOwner ? (
+        <Profile isOwner={isOwner} />
+      ) : (
+        <Profile isOwner={isOwner} userId={userId} />
+      )}
     </>
   );
 };

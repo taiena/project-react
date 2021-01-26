@@ -10,13 +10,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { saveUserPhoto, saveUserProfile } from "../../../redux/profileReducer";
 import { Button, ButtonTypes } from "../../common/Button/Button";
 import Dropzone from "react-dropzone";
+import { startChatting } from "../../../redux/dialogsReducer";
 
 type PropsType = {
   isOwner: boolean;
+  userId?: number;
 };
 
-const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
+const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId }) => {
+  let [editMode, setEditMode] = useState(false);
+
   const inputPhoto = useRef<HTMLInputElement>(null);
+
   const onBtnClickLoadPhoto = () => {
     if (inputPhoto && inputPhoto.current) {
       inputPhoto.current.click();
@@ -35,12 +40,6 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
     dispatch(saveUserProfile(profile));
   };
 
-  let [editMode, setEditMode] = useState(false);
-
-  if (!profile) {
-    return <Preloader />;
-  }
-
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       savePhoto(e.target.files[0]);
@@ -58,17 +57,25 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
     setEditMode(false);
   };
 
+  const startChatWithUser = (userId: number) => {
+    dispatch(startChatting(userId));
+  };
+
+  if (!profile) {
+    return <Preloader />;
+  }
+
   return (
     <section className={classes.ProfileContainer}>
       <div className={classes.ProfilePhoto}>
-        <div>
+        <div className={classes.ProfileAva}>
           <img
             src={profile.photos.large || userAva}
             className={classes.ProfileImage}
             alt=""
           />
         </div>
-        {isOwner && (
+        {isOwner ? (
           <div className={classes.EditPhotoBtn}>
             <div>
               <input
@@ -93,6 +100,20 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner }) => {
                 )}
               </Dropzone>
             </div>
+          </div>
+        ) : (
+          <div>
+            {userId ? (
+              <Button
+                onClick={() => {
+                  startChatWithUser(userId);
+                }}
+                type={ButtonTypes.InterfaceType2}
+                text="Start chatting"
+              />
+            ) : (
+              <div>No user id</div>
+            )}
           </div>
         )}
       </div>
