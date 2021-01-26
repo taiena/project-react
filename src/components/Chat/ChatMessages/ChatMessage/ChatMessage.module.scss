@@ -1,0 +1,22 @@
+.Message {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  padding: 10px;
+
+  &Block {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
+}
+
+.Photo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.Name {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
