@@ -3,7 +3,9 @@ import classes from "./Messages.module.scss";
 import Message from "./Message/Message";
 import { selectMessages } from "../../../redux/dialogsSelectors";
 import { useSelector, useDispatch } from "react-redux";
-import AddMessageForm from "./AddMessageForm/AddMessageForm";
+import AddMessageForm, {
+  NewMessageFormValuesType,
+} from "../../common/AddMessageForm/AddMessageForm";
 import {
   getMessages,
   sendMessage,
@@ -13,10 +15,6 @@ import {
 
 type PropsType = {
   userId: number;
-};
-
-export type NewMessageFormValuesType = {
-  body: string;
 };
 
 const Messages: React.FC<PropsType> = ({ userId }) => {
@@ -54,7 +52,11 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
           />
         ))}
       </div>
-      <AddMessageForm onSubmit={addNewMessage} />
+      <AddMessageForm
+        onSubmit={addNewMessage}
+        text={"send message"}
+        placeholder={"Enter message here"}
+      />
     </div>
   );
 };

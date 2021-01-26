@@ -8,6 +8,10 @@ import {
 } from "../../redux/chatReducer";
 import { ChatMessageAPIType } from "../../api/chatApi";
 import { AppStateType } from "../../redux/redux-store";
+// import Messages from "./Messages/Messages";
+import AddMessageForm, {
+  NewMessageFormValuesType,
+} from "../common/AddMessageForm/AddMessageForm";
 
 const ChatPage: React.FC = () => {
   return (
@@ -29,6 +33,13 @@ const Chat: React.FC = () => {
     };
   }, []);
 
+  let addNewMessage = (values: NewMessageFormValuesType) => {
+    if (!values.body) {
+      return;
+    }
+    dispatch(sendMessage(values.body));
+  };
+
   return (
     <div>
       {status === "error" && (
@@ -36,7 +47,12 @@ const Chat: React.FC = () => {
       )}
       <>
         <Messages />
-        <AddMessageForm />
+        <AddMessageForm
+          onSubmit={addNewMessage}
+          status={status}
+          text={"send message"}
+          placeholder={"Enter message here"}
+        />
       </>
     </div>
   );
@@ -88,33 +104,5 @@ const Message: React.FC<{ message: ChatMessageAPIType }> = React.memo(
     );
   }
 );
-
-const AddMessageForm: React.FC<{}> = () => {
-  const [message, setMessage] = useState("");
-
-  const dispatch = useDispatch();
-
-  const status = useSelector((state: AppStateType) => state.chat.status);
-
-  const sendMessageHandler = () => {
-    if (!message) {
-      return;
-    }
-    dispatch(sendMessage(message));
-    setMessage("");
-  };
-
-  return (
-    <div>
-      <textarea
-        onChange={(e) => setMessage(e.currentTarget.value)}
-        value={message}
-      ></textarea>
-      <button disabled={status !== "ready"} onClick={sendMessageHandler}>
-        Send
-      </button>
-    </div>
-  );
-};
 
 export default ChatPage;

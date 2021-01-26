@@ -1,10 +1,12 @@
 import React from "react";
 import classes from "./Posts.module.scss";
 import Post from "./Post/Post";
-import AddPostForm, { AddPostFormValuesType } from "./AddPostForm/AddPostForm";
 import { selectPosts } from "../../../redux/profileSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../../../redux/profileReducer";
+import AddMessageForm, {
+  NewMessageFormValuesType,
+} from "../../common/AddMessageForm/AddMessageForm";
 
 type PropsType = {};
 
@@ -13,8 +15,8 @@ const Posts: React.FC<PropsType> = () => {
 
   const dispatch = useDispatch();
 
-  let addNewPost = (values: AddPostFormValuesType) => {
-    dispatch(actions.addPostActionCreator(values.newPostBody));
+  let addNewPost = (values: NewMessageFormValuesType) => {
+    dispatch(actions.addPostActionCreator(values.body));
   };
 
   let postsElements = posts.map((post, index) => (
@@ -23,7 +25,11 @@ const Posts: React.FC<PropsType> = () => {
 
   return (
     <div className={classes.Posts}>
-      <AddPostForm onSubmit={addNewPost} />
+      <AddMessageForm
+        onSubmit={addNewPost}
+        text={"add post"}
+        placeholder={"Enter post here"}
+      />
       {postsElements}
     </div>
   );
