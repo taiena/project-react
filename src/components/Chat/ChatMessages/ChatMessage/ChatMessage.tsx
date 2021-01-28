@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./ChatMessage.module.scss";
 import { ChatMessageAPIType } from "../../../../api/chatApi";
+import { NavLink } from "react-router-dom";
+import userAva from "../../../../assets/images/ava.svg";
 
 const ChatMessage: React.FC<{ message: ChatMessageAPIType }> = React.memo(
   ({ message }) => {
@@ -9,7 +11,12 @@ const ChatMessage: React.FC<{ message: ChatMessageAPIType }> = React.memo(
         <hr />
         <div className={classes.Message}>
           <div className={classes.Photo}>
-            <img src={message.photo} alt={message.userName} />
+            <NavLink to={"/profile/" + message.userId}>
+              <img
+                src={message.photo !== null ? message.photo : userAva}
+                alt={message.userName}
+              />
+            </NavLink>
           </div>
           <div className={classes.MessageBlock}>
             <div className={classes.Name}>{message.userName}</div>

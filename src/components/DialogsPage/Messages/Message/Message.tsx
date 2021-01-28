@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./Message.module.scss";
 import { MessageType } from "../../../../types/types";
 import { formatDate } from "../../../../utils/formatDate";
 import { Button, ButtonTypes } from "../../../common/Button/Button";
 import {} from "../../../../redux/dialogsSelectors";
 import {} from "../../../../redux/dialogsReducer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import userAva from "../../../../assets/images/ava.svg";
+import { NavLink } from "react-router-dom";
 
 type PropsType = {
   message: MessageType;
@@ -46,9 +47,13 @@ const Message: React.FC<PropsType> = ({
 
       <div className={classes.Photo}>
         {message.senderId == ownerId ? (
-          <img src={ownerPhoto !== null ? ownerPhoto : userAva} alt="" />
+          <NavLink to={"/profile"}>
+            <img src={ownerPhoto !== null ? ownerPhoto : userAva} alt="" />
+          </NavLink>
         ) : (
-          <img src={userPhoto !== null ? userPhoto : userAva} alt="" />
+          <NavLink to={"/profile/" + userId}>
+            <img src={userPhoto !== null ? userPhoto : userAva} alt="" />
+          </NavLink>
         )}
       </div>
 
