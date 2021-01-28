@@ -3,6 +3,7 @@ import { authAPI } from "../api/authApi";
 import { securityAPI } from "../api/securityApi";
 import { stopSubmit, FormAction } from "redux-form";
 import { BaseThunkType, InferActionsTypes } from "./redux-store";
+import { profileAPI } from "../api/profileApi";
 
 let initialState = {
   id: null as number | null,
@@ -10,6 +11,7 @@ let initialState = {
   login: null as string | null,
   isAuth: false as boolean,
   captchaUrl: null as string | null,
+  ownerPhoto: null as string | null,
 };
 
 export type InitialStateType = typeof initialState;
@@ -29,6 +31,12 @@ const authReducer = (
       };
 
     case "GET_CAPTCHA_URL_SUCCESS":
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case "SET_OWNER_PHOTO":
       return {
         ...state,
         ...action.payload,
@@ -55,6 +63,12 @@ export const actions = {
     ({
       type: "GET_CAPTCHA_URL_SUCCESS",
       payload: { captchaUrl },
+    } as const),
+
+  setOwnerPhoto: (ownerPhoto: string | null) =>
+    ({
+      type: "SET_OWNER_PHOTO",
+      payload: { ownerPhoto },
     } as const),
 };
 
@@ -96,6 +110,12 @@ export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
   let data = await securityAPI.getCaptchaUrl();
   let captchaUrl = data.url;
   dispatch(actions.getCaptchaUrlSuccess(captchaUrl));
+};
+
+export const getOwnerPhoto = (id: number): ThunkType => async (dispatch) => {
+  let data = await profileAPI.getProfile(id);
+  let photo = data.photos.small;
+  dispatch(actions.setOwnerPhoto(photo));
 };
 
 export default authReducer;

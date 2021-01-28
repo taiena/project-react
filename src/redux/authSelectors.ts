@@ -11,3 +11,7 @@ export const selectLogin = (state: AppStateType) => {
 export const selectId = (state: AppStateType) => {
   return state.auth.id;
 };
+
+export const selectPhoto = (state: AppStateType) => {
+  return state.auth.ownerPhoto;
+};

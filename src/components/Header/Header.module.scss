@@ -3,6 +3,7 @@
 .Header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   grid-area: header;
   padding: 10px 20px;
 
@@ -37,15 +38,26 @@
 .Logined {
   display: flex;
   flex-direction: row;
-  text-align: right;
+  align-items: center;
 }
 
-.Login {
-  margin-right: 10px;
+.Ava {
+  margin: 0px 10px;
   font-weight: bold;
   margin-top: 3px;
+
+  & img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
 }
 
 .LoginLink {
   color: #fff;
+}
+
+.BtnBlock {
+  display: flex;
+  flex-direction: column;
 }
