@@ -5,7 +5,7 @@ import { maxLengthCreator } from "../../../utils/validators/validators";
 import { Button, ButtonTypes } from "../Button/Button";
 import classes from "./AddMessageForm.module.scss";
 
-const maxLength100 = maxLengthCreator(100);
+const maxLength500 = maxLengthCreator(500);
 
 type NewMessageFormValuesKeysType = Extract<
   keyof NewMessageFormValuesType,
@@ -34,7 +34,7 @@ const AddMessageForm: React.FC<
           {createField<NewMessageFormValuesKeysType>(
             props.placeholder,
             "body",
-            [maxLength100],
+            [maxLength500],
             Textarea
           )}
         </div>
