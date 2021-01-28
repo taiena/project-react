@@ -64,6 +64,7 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
   let addNewMessage = (values: NewMessageFormValuesType) => {
     let id = userId;
     dispatch(sendMessage(id, values.body));
+    values.body = "";
   };
 
   const deleteUserMessage = (messageId: number, userId: number) => {

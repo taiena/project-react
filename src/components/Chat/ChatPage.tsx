@@ -38,6 +38,7 @@ const Chat: React.FC = () => {
       return;
     }
     dispatch(sendMessage(values.body));
+    values.body = "";
   };
 
   return (

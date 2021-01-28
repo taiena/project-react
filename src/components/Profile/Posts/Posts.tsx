@@ -17,6 +17,7 @@ const Posts: React.FC<PropsType> = () => {
 
   let addNewPost = (values: NewMessageFormValuesType) => {
     dispatch(actions.addPostActionCreator(values.body));
+    values.body = "";
   };
 
   let postsElements = posts.map((post, index) => (
