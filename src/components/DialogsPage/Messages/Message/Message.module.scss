@@ -3,14 +3,22 @@
 .Message {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 2fr 10fr 3fr;
+  grid-template-columns: 70px 10fr 3fr;
   min-height: 70px;
 }
 .Name {
   font-weight: bold;
+  padding-bottom: 10px;
 }
 
-.RightBlock {
+.Photo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.RightBlock,
+.MidBlock {
   display: flex;
   flex-direction: column;
 }

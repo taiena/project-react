@@ -11,3 +11,7 @@ export const selectDialogs = (state: AppStateType) => {
 export const selectIsLoading = (state: AppStateType) => {
   return state.dialogsPage.isLoading;
 };
+
+export const selectUserPhoto = (state: AppStateType) => {
+  return state.dialogsPage.userPhoto;
+};

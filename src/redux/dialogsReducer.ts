@@ -1,12 +1,15 @@
 import { messagesAPI } from "../api/messagesApi";
 import { InferActionsTypes, BaseThunkType } from "./redux-store";
 import { MessageType, DialogType } from "../types/types";
+import { profileAPI } from "../api/profileApi";
 
 let initialState = {
   dialogs: [] as Array<DialogType>,
 
   messages: [] as Array<MessageType>,
+
   isLoading: false as boolean,
+  userPhoto: null as string | null,
 };
 
 export type InitialStateType = typeof initialState;
@@ -36,6 +39,12 @@ const messagesReducer = (
         messages: [...action.messages],
       };
 
+    case "SET_USER_PHOTO":
+      return {
+        ...state,
+        ...action.payload,
+      };
+
     default:
       return state;
   }
@@ -57,6 +66,12 @@ export const actions = {
     ({
       type: "SET_MESSAGES",
       messages,
+    } as const),
+
+  setUserPhoto: (userPhoto: string | null) =>
+    ({
+      type: "SET_USER_PHOTO",
+      payload: { userPhoto },
     } as const),
 };
 
@@ -133,6 +148,12 @@ export const spamMessage = (messageId: number, userId: number): ThunkType => {
       dispatch(getMessages(userId));
     }
   };
+};
+
+export const getUserPhoto = (id: number): ThunkType => async (dispatch) => {
+  let data = await profileAPI.getProfile(id);
+  let photo = data.photos.small;
+  dispatch(actions.setUserPhoto(photo));
 };
 
 export default messagesReducer;
