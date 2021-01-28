@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
-import { selectIsAuth, selectLogin } from "../../redux/authSelectors";
-import { logout } from "../../redux/authReducer";
+import {
+  selectIsAuth,
+  selectLogin,
+  selectPhoto,
+  selectId,
+} from "../../redux/authSelectors";
+import { logout, getOwnerPhoto } from "../../redux/authReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, ButtonTypes } from "../common/Button/Button";
+import userAva from "../../assets/images/ava.svg";
 
 export type PropsType = {
   changeTheme: () => void;
@@ -13,8 +19,22 @@ export type PropsType = {
 const Header: React.FC<PropsType> = ({ changeTheme }) => {
   const isAuth = useSelector(selectIsAuth);
   const login = useSelector(selectLogin);
-
+  const ownerId = useSelector(selectId);
+  const ownerPhoto = useSelector(selectPhoto);
   const dispatch = useDispatch();
+
+  const getPhoto = () => {
+    let userId: number | null = ownerId;
+    if (!userId) {
+      console.log("no id in header");
+    } else {
+      dispatch(getOwnerPhoto(userId));
+    }
+  };
+
+  useEffect(() => {
+    getPhoto();
+  }, [ownerPhoto]);
 
   const logoutCallback = () => {
     dispatch(logout());
@@ -33,15 +53,20 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
       <div className={classes.LoginBlock}>
         {isAuth ? (
           <div className={classes.Logined}>
-            <div className={classes.Login}>{login}</div>
-            <Button
-              onClick={logoutCallback}
-              type={ButtonTypes.Login}
-              text="logout"
-            />
+            {login}
+            <div className={classes.Ava}>
+              <img src={ownerPhoto || userAva} alt="" />
+            </div>
+            <div>
+              <Button
+                onClick={logoutCallback}
+                type={ButtonTypes.Login}
+                text="logout"
+              />
+            </div>
           </div>
         ) : (
-          <div>
+          <div className={classes.UnLogined}>
             <Button type={ButtonTypes.Login}>
               <NavLink to={"/login"}>
                 <span className={classes.LoginLink}>LOGIN</span>
