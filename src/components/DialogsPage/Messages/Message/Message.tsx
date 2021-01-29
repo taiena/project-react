@@ -3,9 +3,6 @@ import classes from "./Message.module.scss";
 import { MessageType } from "../../../../types/types";
 import { formatDate } from "../../../../utils/formatDate";
 import { Button, ButtonTypes } from "../../../common/Button/Button";
-import {} from "../../../../redux/dialogsSelectors";
-import {} from "../../../../redux/dialogsReducer";
-import { useDispatch } from "react-redux";
 import userAva from "../../../../assets/images/ava.svg";
 import { NavLink } from "react-router-dom";
 
@@ -30,13 +27,6 @@ const Message: React.FC<PropsType> = ({
 }) => {
   let messageDate = new Date(message.addedAt);
 
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getSenderPhoto(message.senderId));
-  //   dispatch(getRecipientPhoto(message.recipientId));
-  // }, [message.senderId, message.recipientId]);
-
   return (
     <section className={classes.Message}>
       {/* <div>Message id: {message.id}</div>
@@ -46,7 +36,7 @@ const Message: React.FC<PropsType> = ({
       <div>translatedBody: {message.translatedBody}</div> */}
 
       <div className={classes.Photo}>
-        {message.senderId == ownerId ? (
+        {message.senderId === ownerId ? (
           <NavLink to={"/profile"}>
             <img src={ownerPhoto !== null ? ownerPhoto : userAva} alt="" />
           </NavLink>
@@ -65,7 +55,7 @@ const Message: React.FC<PropsType> = ({
       <div className={classes.RightBlock}>
         <div className={classes.Date}>{formatDate(messageDate)}</div>
         <div className={classes.Buttons}>
-          {userId == message.senderId && (
+          {userId === message.senderId && (
             <div>
               <Button
                 onClick={() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import classes from "./ChatPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -31,6 +31,7 @@ const Chat: React.FC = () => {
     return () => {
       dispatch(stopMessagesListening());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let addNewMessage = (values: NewMessageFormValuesType) => {

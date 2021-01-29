@@ -31,6 +31,7 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
 
   useEffect(() => {
     dispatch(getMessages(userId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getOwnerDialogPhoto = () => {
@@ -45,7 +46,7 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
   const getUserDialogPhoto = () => {
     let userDialogId: number | null = userId;
     if (!userDialogId) {
-      console.log("no sender id in messages");
+      console.log("no user id in messages");
     } else {
       dispatch(getUserPhoto(userDialogId));
     }
@@ -54,12 +55,8 @@ const Messages: React.FC<PropsType> = ({ userId }) => {
   useEffect(() => {
     getOwnerDialogPhoto();
     getUserDialogPhoto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ownerId, userId]);
-
-  console.log("owner id: ", ownerId);
-  console.log("owner photo: ", ownerPhoto);
-  console.log("user id: ", userId);
-  console.log("user photo: ", userPhoto);
 
   let addNewMessage = (values: NewMessageFormValuesType) => {
     let id = userId;

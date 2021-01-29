@@ -25,8 +25,6 @@ type PropsType = {
 const AddMessageForm: React.FC<
   InjectedFormProps<NewMessageFormValuesType, PropsType> & PropsType
 > = (props) => {
-  console.log(props.status);
-
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={classes.Form}>

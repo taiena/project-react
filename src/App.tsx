@@ -45,6 +45,7 @@ const App: React.FC<PropsType> = (props) => {
   useEffect(() => {
     dispatch(initializeApp());
     window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!initialized) {

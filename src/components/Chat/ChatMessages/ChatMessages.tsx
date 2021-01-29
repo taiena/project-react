@@ -26,6 +26,7 @@ const ChatMessages: React.FC<{}> = () => {
     if (isAutoScroll) {
       messagesAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
 
   return (

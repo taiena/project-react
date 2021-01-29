@@ -23,18 +23,19 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
   const ownerPhoto = useSelector(selectPhoto);
   const dispatch = useDispatch();
 
-  const getPhoto = () => {
-    let userId: number | null = ownerId;
-    if (!userId) {
-      console.log("no id in header");
-    } else {
-      dispatch(getOwnerPhoto(userId));
-    }
-  };
-
   useEffect(() => {
+    const getPhoto = () => {
+      let userId: number | null = ownerId;
+      if (!userId) {
+        console.log("no id in header");
+      } else {
+        dispatch(getOwnerPhoto(userId));
+      }
+    };
+
     getPhoto();
-  }, [ownerPhoto]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ownerPhoto, ownerId]);
 
   const logoutCallback = () => {
     dispatch(logout());

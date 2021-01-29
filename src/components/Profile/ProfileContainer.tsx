@@ -38,6 +38,7 @@ const ProfilePage: React.FC<ProfilePagePropsType> = (props) => {
 
   useEffect(() => {
     refreshProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.userId]);
 
   // isOwner true when no id in props (then it is our profile)

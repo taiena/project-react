@@ -14,6 +14,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
   useEffect(() => {
     dispatch(getDialogs());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
