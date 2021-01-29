@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/authReducer";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from "../../redux/redux-store";
+import { Button, ButtonTypes } from "../common/Button/Button";
+// import { Field } from "redux-form";
 
 const maxLength30 = maxLengthCreator(30);
 
@@ -24,29 +26,50 @@ const LoginForm: React.FC<
   InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps
 > = ({ handleSubmit, error, captchaUrl }) => {
   return (
-    <form onSubmit={handleSubmit} className={classes.Login}>
+    <form onSubmit={handleSubmit} className={classes.Form}>
       {/* placeholder, name, validate, component */}
-      {createField<LoginFormValuesTypeKeys>(
-        "Email",
-        "email",
-        [required, maxLength30],
-        Input
-      )}
-      {createField<LoginFormValuesTypeKeys>(
-        "Password",
-        "password",
-        [required, maxLength30],
-        Input,
-        { type: "password" }
-      )}
-      {createField<LoginFormValuesTypeKeys>(
-        undefined, // placeholder
-        "rememberMe", //name
-        [], // validate
-        Input, // component
-        { type: "checkbox" }, // {...props}
-        "remember me" // text
-      )}
+
+      <div className={classes.Email}>
+        <div className={classes.Title}>Enter your email: </div>
+        {createField<LoginFormValuesTypeKeys>(
+          "Email",
+          "email",
+          [required, maxLength30],
+          Input
+        )}
+      </div>
+      <div className={classes.Password}>
+        <div className={classes.Title}>Enter your password: </div>
+        {createField<LoginFormValuesTypeKeys>(
+          "Password",
+          "password",
+          [required, maxLength30],
+          Input,
+          { type: "password" }
+        )}
+      </div>
+
+      <div className={classes.Remember}>
+        {/* <div className={classes.RememberTitle}>Remember me:</div> */}
+        <div className={classes.RememberCheckbox}>
+          {/* <Field
+            name="rememberMe"
+            component="input"
+            type="checkbox"
+            id="loginremember"
+          /> */}
+          {createField<LoginFormValuesTypeKeys>(
+            undefined, // placeholder
+            "rememberMe", //name
+            [], // validate
+            Input, // component
+            { type: "checkbox", id: "loginremember" }, // {...props}
+            "remember me" // text
+          )}
+
+          {/* <label htmlFor="loginremember" /> */}
+        </div>
+      </div>
 
       {captchaUrl && <img src={captchaUrl} alt="" />}
       {captchaUrl &&
@@ -60,7 +83,7 @@ const LoginForm: React.FC<
 
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
-        <button>Login</button>
+        <Button type={ButtonTypes.InterfaceType1} text="login" />
       </div>
     </form>
   );
@@ -101,9 +124,13 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+    <div className={classes.Container}>
+      <section className={classes.Login}>
+        <h1>LOGIN</h1>
+        <div className={classes.FormWrapper}>
+          <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+        </div>
+      </section>
     </div>
   );
 };
