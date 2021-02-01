@@ -46,19 +46,11 @@ const ProfileDataForm: React.FC<
 
           <div className={classes.ProfileJob}>
             <div className={classes.ProfileJobLooking}>
-              <div className={classes.ProfileJobTitle}>Looking for a job:</div>
+              <div className={classes.ProfileJobTitle}>Looking for a job: </div>
               <div className={classes.ProfileJobCheckbox}>
-                <Field
-                  name="lookingForAJob"
-                  component="input"
-                  type="checkbox"
-                  id="checkjob"
-                />{" "}
-                {/* {createField("", "lookingForAJob", [], Input, {
+                {createField("", "lookingForAJob", [], Input, {
                   type: "checkbox",
-                  id: "check",
-                })} */}
-                <label htmlFor="checkjob" />
+                })}
               </div>
             </div>
 
