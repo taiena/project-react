@@ -32,7 +32,7 @@ input[type="file"] {
   display: none;
 }
 
-input[type="checkbox"] + label:before {
+label input[type="checkbox"] + span:after {
   content: "\2714";
   color: transparent;
   display: inline-block;
@@ -48,6 +48,6 @@ input[type="checkbox"] + label:before {
   transition: color ease 0.3s;
 }
 
-input[type="checkbox"]:checked + label:before {
-  color: $color-main-lighter;
+label input[type="checkbox"]:checked + span:after {
+  color: $color-active;
 }

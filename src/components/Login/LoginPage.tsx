@@ -50,24 +50,15 @@ const LoginForm: React.FC<
       </div>
 
       <div className={classes.Remember}>
-        {/* <div className={classes.RememberTitle}>Remember me:</div> */}
+        <div className={classes.RememberTitle}>Remember me:</div>
         <div className={classes.RememberCheckbox}>
-          {/* <Field
-            name="rememberMe"
-            component="input"
-            type="checkbox"
-            id="loginremember"
-          /> */}
           {createField<LoginFormValuesTypeKeys>(
             undefined, // placeholder
             "rememberMe", //name
             [], // validate
             Input, // component
-            { type: "checkbox", id: "loginremember" }, // {...props}
-            "remember me" // text
+            { type: "checkbox", id: "loginremember" } // {...props}
           )}
-
-          {/* <label htmlFor="loginremember" /> */}
         </div>
       </div>
 

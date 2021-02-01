@@ -14,6 +14,10 @@ type FormControlPropsType = {
   meta: WrappedFieldMetaProps;
 };
 
+interface IProps {
+  label: string;
+}
+
 const FormControl: React.FC<FormControlPropsType> = ({
   meta: { touched, error },
   children,
@@ -44,7 +48,10 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
   const { input, meta, ...restProps } = props;
   return (
     <FormControl {...props}>
-      <input className={classes.Input} {...input} {...restProps} />
+      <label>
+        <input className={classes.Input} {...input} {...restProps} />
+        <span></span>
+      </label>
     </FormControl>
   );
 };
@@ -53,7 +60,7 @@ export function createField<FormKeysType extends string>(
   placeholder: string | undefined,
   name: FormKeysType,
   validators: Array<FieldValidatorType>,
-  component: React.FC<WrappedFieldProps>,
+  component: React.FC<WrappedFieldProps & IProps>,
   props = {},
   text = ""
 ) {
