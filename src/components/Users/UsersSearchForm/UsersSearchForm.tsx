@@ -3,6 +3,8 @@ import React from "react";
 import { FilterType } from "../../../redux/usersReducer";
 import { useSelector } from "react-redux";
 import { selectUserFilter } from "../../../redux/usersSelectors";
+import classes from "./UsersSearchForm.module.scss";
+import { Button, ButtonTypes } from "../../common/Button/Button";
 
 const usersSearchFormValidate = (values: any) => {
   const errors = {};
@@ -60,9 +62,11 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
               <option value="true">Friends</option>
               <option value="false">No friends</option>
             </Field>
-            <button type="submit" disabled={isSubmitting}>
-              Find
-            </button>
+            <Button
+              type={ButtonTypes.InterfaceType1}
+              disabled={isSubmitting}
+              text="find"
+            />
           </Form>
         )}
       </Formik>

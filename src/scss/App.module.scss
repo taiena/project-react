@@ -51,3 +51,20 @@ label input[type="checkbox"] + span:after {
 label input[type="checkbox"]:checked + span:after {
   color: $color-active;
 }
+
+textarea,
+input {
+  padding: 5px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+}
+
+input {
+  min-width: 30px;
+  height: 25px;
+}
