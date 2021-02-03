@@ -1,11 +1,11 @@
-import { Field, Form, Formik, FieldProps } from "formik";
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import { FilterType } from "../../../redux/usersReducer";
 import { useSelector } from "react-redux";
 import { selectUserFilter } from "../../../redux/usersSelectors";
 import classes from "./UsersSearchForm.module.scss";
 import { Button, ButtonTypes } from "../../common/Button/Button";
-import Select from "react-select";
+import { selectField } from "../../common/FormsControls/FormsControls";
 
 type OptionType = { label: string; value: string };
 
@@ -14,33 +14,6 @@ export const options: OptionType[] = [
   { value: "true", label: "Friends" },
   { value: "false", label: "No friends" },
 ];
-
-export const SelectField = ({
-  field, // { name, value, onChange, onBlur }
-  form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-  ...props
-}: FieldProps & {
-  label: string;
-  options: Array<{ value: boolean | null; label: string }>;
-}) => {
-  const { options } = props;
-
-  return (
-    <Select
-      {...field}
-      {...props}
-      options={options}
-      name={field.name}
-      value={
-        (options
-          ? options.find((option) => option.value === field.value)
-          : "") as any
-      }
-      onChange={(option) => setFieldValue(field.name, option.value)}
-      onBlur={field.onBlur}
-    />
-  );
-};
 
 const usersSearchFormValidate = (values: any) => {
   const errors = {};
@@ -92,7 +65,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
               <Field
                 name="friend"
                 as="select"
-                component={SelectField}
+                component={selectField}
                 options={options}
               />
 

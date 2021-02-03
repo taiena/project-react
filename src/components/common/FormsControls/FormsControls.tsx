@@ -3,6 +3,8 @@ import classes from "./FormsControls.module.scss";
 import { FieldValidatorType } from "../../../utils/validators/validators";
 import { Field, WrappedFieldProps } from "redux-form";
 import { WrappedFieldMetaProps } from "redux-form/lib/Field";
+import { FieldProps } from "formik";
+import Select from "react-select";
 
 // with the FormControl function, you can wrap some input,
 // it will add the error class to the div in which the input is nested
@@ -75,6 +77,33 @@ export function createField<FormKeysType extends string>(
       />{" "}
       {text}
     </>
+  );
+}
+
+export function selectField({
+  field, // { name, value, onChange, onBlur }
+  form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
+}: FieldProps & {
+  label: string;
+  options: Array<{ value: boolean | null; label: string }>;
+}) {
+  const { options } = props;
+
+  return (
+    <Select
+      {...field}
+      {...props}
+      options={options}
+      name={field.name}
+      value={
+        (options
+          ? options.find((option) => option.value === field.value)
+          : "") as any
+      }
+      onChange={(option) => setFieldValue(field.name, option.value)}
+      onBlur={field.onBlur}
+    />
   );
 }
 
