@@ -60,6 +60,7 @@ export const Users: React.FC<PropsType> = () => {
         actualFilter = { ...actualFilter, friend: false };
         break;
     }
+
     dispatch(requestUsers(actualPage, pageSize, actualFilter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

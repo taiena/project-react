@@ -1,10 +1,46 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FieldProps } from "formik";
 import React from "react";
 import { FilterType } from "../../../redux/usersReducer";
 import { useSelector } from "react-redux";
 import { selectUserFilter } from "../../../redux/usersSelectors";
 import classes from "./UsersSearchForm.module.scss";
 import { Button, ButtonTypes } from "../../common/Button/Button";
+import Select from "react-select";
+
+type OptionType = { label: string; value: string };
+
+export const options: OptionType[] = [
+  { value: "null", label: "All users" },
+  { value: "true", label: "Friends" },
+  { value: "false", label: "No friends" },
+];
+
+export const SelectField = ({
+  field, // { name, value, onChange, onBlur }
+  form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
+}: FieldProps & {
+  label: string;
+  options: Array<{ value: boolean | null; label: string }>;
+}) => {
+  const { options } = props;
+
+  return (
+    <Select
+      {...field}
+      {...props}
+      options={options}
+      name={field.name}
+      value={
+        (options
+          ? options.find((option) => option.value === field.value)
+          : "") as any
+      }
+      onChange={(option) => setFieldValue(field.name, option.value)}
+      onBlur={field.onBlur}
+    />
+  );
+};
 
 const usersSearchFormValidate = (values: any) => {
   const errors = {};
@@ -30,12 +66,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   ) => {
     const filter: FilterType = {
       term: values.term,
-      friend:
-        values.friend === "null"
-          ? null
-          : values.friend === "true"
-          ? true
-          : false,
+      friend: JSON.parse(values.friend),
     };
 
     props.onFilterChanged(filter);
@@ -43,7 +74,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   };
 
   return (
-    <div>
+    <div className={classes.Container}>
       <Formik
         enableReinitialize
         initialValues={{
@@ -55,18 +86,22 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <Field type="text" name="term" />
+            <div className={classes.SearchForm}>
+              <Field type="text" name="term" />
 
-            <Field name="friend" as="select">
-              <option value="null">All users</option>
-              <option value="true">Friends</option>
-              <option value="false">No friends</option>
-            </Field>
-            <Button
-              type={ButtonTypes.InterfaceType1}
-              disabled={isSubmitting}
-              text="find"
-            />
+              <Field
+                name="friend"
+                as="select"
+                component={SelectField}
+                options={options}
+              />
+
+              <Button
+                type={ButtonTypes.InterfaceType1}
+                disabled={isSubmitting}
+                text="find"
+              />
+            </div>
           </Form>
         )}
       </Formik>
