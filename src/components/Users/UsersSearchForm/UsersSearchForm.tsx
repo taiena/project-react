@@ -47,7 +47,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   };
 
   return (
-    <div className={classes.Container}>
+    <section className={classes.Container}>
       <Formik
         enableReinitialize
         initialValues={{
@@ -60,15 +60,14 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
         {({ isSubmitting }) => (
           <Form>
             <div className={classes.SearchForm}>
-              <Field type="text" name="term" />
-
+              <Field className={classes.TextField} type="text" name="term" />
               <Field
+                className={classes.Select}
                 name="friend"
                 as="select"
                 component={selectField}
                 options={options}
               />
-
               <Button
                 type={ButtonTypes.InterfaceType1}
                 disabled={isSubmitting}
@@ -78,7 +77,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
           </Form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 });
 

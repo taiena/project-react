@@ -5,6 +5,19 @@
 
 .SearchForm {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 4fr 2fr 1fr;
+  grid-gap: 20px;
+  grid-template-columns: 4fr 3fr 1fr;
+}
+
+.Select {
+  color: #555;
+}
+
+.TextField {
+  height: 39px;
+}
+
+.TextField:before {
+  content: "1";
+  color: white;
 }

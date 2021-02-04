@@ -80,6 +80,19 @@ export function createField<FormKeysType extends string>(
   );
 }
 
+function customTheme(theme: any) {
+  return {
+    ...theme,
+    borderRadius: 0,
+    colors: {
+      ...theme.colors,
+      primary25: "#f8a408", // selected
+      primary: "#8105c9", // hover
+      neutral0: "#f3f1f7", // bg
+    },
+  };
+}
+
 export function selectField({
   field, // { name, value, onChange, onBlur }
   form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
@@ -103,6 +116,7 @@ export function selectField({
       }
       onChange={(option) => setFieldValue(field.name, option.value)}
       onBlur={field.onBlur}
+      theme={customTheme}
     />
   );
 }
