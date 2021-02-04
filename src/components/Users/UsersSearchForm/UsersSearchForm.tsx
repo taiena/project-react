@@ -3,6 +3,17 @@ import React from "react";
 import { FilterType } from "../../../redux/usersReducer";
 import { useSelector } from "react-redux";
 import { selectUserFilter } from "../../../redux/usersSelectors";
+import classes from "./UsersSearchForm.module.scss";
+import { Button, ButtonTypes } from "../../common/Button/Button";
+import { selectField } from "../../common/FormsControls/FormsControls";
+
+type OptionType = { label: string; value: string };
+
+export const options: OptionType[] = [
+  { value: "null", label: "All users" },
+  { value: "true", label: "Friends" },
+  { value: "false", label: "No friends" },
+];
 
 const usersSearchFormValidate = (values: any) => {
   const errors = {};
@@ -28,12 +39,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   ) => {
     const filter: FilterType = {
       term: values.term,
-      friend:
-        values.friend === "null"
-          ? null
-          : values.friend === "true"
-          ? true
-          : false,
+      friend: JSON.parse(values.friend),
     };
 
     props.onFilterChanged(filter);
@@ -41,7 +47,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   };
 
   return (
-    <div>
+    <section className={classes.Container}>
       <Formik
         enableReinitialize
         initialValues={{
@@ -53,20 +59,25 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <Field type="text" name="term" />
-
-            <Field name="friend" as="select">
-              <option value="null">All users</option>
-              <option value="true">Friends</option>
-              <option value="false">No friends</option>
-            </Field>
-            <button type="submit" disabled={isSubmitting}>
-              Find
-            </button>
+            <div className={classes.SearchForm}>
+              <Field className={classes.TextField} type="text" name="term" />
+              <Field
+                className={classes.Select}
+                name="friend"
+                as="select"
+                component={selectField}
+                options={options}
+              />
+              <Button
+                type={ButtonTypes.InterfaceType1}
+                disabled={isSubmitting}
+                text="find"
+              />
+            </div>
           </Form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 });
 

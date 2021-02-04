@@ -3,6 +3,8 @@ import classes from "./FormsControls.module.scss";
 import { FieldValidatorType } from "../../../utils/validators/validators";
 import { Field, WrappedFieldProps } from "redux-form";
 import { WrappedFieldMetaProps } from "redux-form/lib/Field";
+import { FieldProps } from "formik";
+import Select from "react-select";
 
 // with the FormControl function, you can wrap some input,
 // it will add the error class to the div in which the input is nested
@@ -38,7 +40,7 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
   const { input, meta, ...restProps } = props;
   return (
     <FormControl {...props}>
-      <textarea className={classes.Textarea} {...input} {...restProps} />
+      <textarea {...input} {...restProps} />
     </FormControl>
   );
 };
@@ -49,7 +51,7 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
   return (
     <FormControl {...props}>
       <label>
-        <input className={classes.Input} {...input} {...restProps} />
+        <input {...input} {...restProps} />
         <span></span>
       </label>
     </FormControl>
@@ -75,6 +77,47 @@ export function createField<FormKeysType extends string>(
       />{" "}
       {text}
     </>
+  );
+}
+
+function customTheme(theme: any) {
+  return {
+    ...theme,
+    borderRadius: 0,
+    colors: {
+      ...theme.colors,
+      primary25: "#f8a408", // selected
+      primary: "#8105c9", // hover
+      neutral0: "#f3f1f7", // bg
+    },
+  };
+}
+
+export function selectField({
+  field, // { name, value, onChange, onBlur }
+  form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
+}: FieldProps & {
+  label: string;
+  options: Array<{ value: boolean | null; label: string }>;
+}) {
+  const { options } = props;
+
+  return (
+    <Select
+      {...field}
+      {...props}
+      options={options}
+      name={field.name}
+      value={
+        (options
+          ? options.find((option) => option.value === field.value)
+          : "") as any
+      }
+      onChange={(option) => setFieldValue(field.name, option.value)}
+      onBlur={field.onBlur}
+      theme={customTheme}
+    />
   );
 }
 
