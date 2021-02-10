@@ -53,12 +53,11 @@ const App: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.Wrapper}>
       {globalError !== null && <ErrorModal globalError={globalError} />}
-
       <Header changeTheme={props.changeTheme} />
       <Nav />
-      <div className={classes.wrapperContent}>
+      <div className={classes.MainContainer}>
         <Switch>
           <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />
