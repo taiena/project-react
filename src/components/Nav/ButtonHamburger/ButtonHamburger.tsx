@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
-import { MenuContext } from "../NavState";
+import React from "react";
 import classes from "./ButtonHamburger.module.scss";
 
-const ButtonHamburger = () => {
-  const { isMenuOpen, toggleMenuMode } = useContext(MenuContext);
+export type PropsType = {
+  isMenuOpen: boolean;
+  toggleMenuMode: () => void;
+};
 
+const ButtonHamburger: React.FC<PropsType> = ({
+  isMenuOpen,
+  toggleMenuMode,
+}) => {
   const cls = [classes.Hamburger];
 
   const clickHandler = () => {
