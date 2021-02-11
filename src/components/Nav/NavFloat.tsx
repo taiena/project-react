@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import classes from "./Nav.module.scss";
 import ButtonHamburger from "./ButtonHamburger/ButtonHamburger";
 import renderLinks from "./NavData";
+import Backdrop from "./Backdrop/Backdrop";
 
 const NavFloat: React.FC = () => {
   const [isMenuOpen, toggleMenu] = useState(false);
 
   function toggleMenuMode() {
     toggleMenu(!isMenuOpen);
+  }
+
+  function closeMenuMode() {
+    toggleMenu(false);
   }
 
   const cls = [classes.NavFloat];
@@ -23,9 +28,10 @@ const NavFloat: React.FC = () => {
         toggleMenuMode={toggleMenuMode}
       />
 
-      <nav className={cls.join(" ")}>
+      <nav className={cls.join(" ")} onClick={closeMenuMode}>
         <ul>{renderLinks()}</ul>
       </nav>
+      {isMenuOpen ? <Backdrop closeMenuMode={closeMenuMode} /> : null}
     </div>
   );
 };
