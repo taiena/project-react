@@ -3,6 +3,7 @@ import classes from "./Nav.module.scss";
 import ButtonHamburger from "./ButtonHamburger/ButtonHamburger";
 import renderLinks from "./NavData";
 import Backdrop from "./Backdrop/Backdrop";
+import WindowDimensions from "../../utils/windowDimensions";
 
 const NavFloat: React.FC = () => {
   const [isMenuOpen, toggleMenu] = useState(false);
@@ -21,13 +22,19 @@ const NavFloat: React.FC = () => {
     cls.push(classes.Close);
   }
 
+  let windowWidth = WindowDimensions();
+
+  if (windowWidth.width > 767 && isMenuOpen) {
+    closeMenuMode();
+  }
+
   return (
     <div className={classes.NavFloatContainer}>
       <ButtonHamburger
         isMenuOpen={isMenuOpen}
         toggleMenuMode={toggleMenuMode}
       />
-
+      <div>{windowWidth.width}</div>
       <nav className={cls.join(" ")} onClick={closeMenuMode}>
         <ul>{renderLinks()}</ul>
       </nav>
