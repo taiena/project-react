@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import { logout, getOwnerPhoto } from "../../redux/authReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, ButtonTypes } from "../common/Button/Button";
 import userAva from "../../assets/images/ava.svg";
+import WindowDimensions from "../../utils/windowDimensions";
 
 export type PropsType = {
   changeTheme: () => void;
@@ -22,6 +23,22 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
   const ownerId = useSelector(selectId);
   const ownerPhoto = useSelector(selectPhoto);
   const dispatch = useDispatch();
+
+  const [isMenuOpen, toggleMenu] = useState(false);
+
+  function toggleMenuMode() {
+    toggleMenu(!isMenuOpen);
+  }
+
+  function closeMenuMode() {
+    toggleMenu(false);
+  }
+
+  let windowWidth = WindowDimensions();
+
+  if (windowWidth.width > 767 && isMenuOpen) {
+    closeMenuMode();
+  }
 
   useEffect(() => {
     const getPhoto = () => {
@@ -54,11 +71,23 @@ const Header: React.FC<PropsType> = ({ changeTheme }) => {
       <div className={classes.LoginBlock}>
         {isAuth ? (
           <div className={classes.Logined}>
-            {login}
+            <div className={classes.Dropdown + " " + (isMenuOpen ? classes.Open : "")} 
+            onClick={toggleMenuMode} >
+              <ul onClick={closeMenuMode}>
+                <li>logged as: {login}</li>
+                <li onClick={logoutCallback}>logout</li>
+              </ul>
+            </div>
+            {isMenuOpen ? <div  className={classes.Backdrop} 
+              onClick={closeMenuMode} /> : null}
+
+            <div className={classes.LoginName}>
+              {login}
+            </div>
             <div className={classes.Ava}>
               <img src={ownerPhoto || userAva} alt="" />
             </div>
-            <div>
+            <div  className={classes.LoginBtn}>
               <Button
                 onClick={logoutCallback}
                 type={ButtonTypes.Login}
