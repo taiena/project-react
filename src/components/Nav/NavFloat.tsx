@@ -34,7 +34,6 @@ const NavFloat: React.FC = () => {
         isMenuOpen={isMenuOpen}
         toggleMenuMode={toggleMenuMode}
       />
-      <div>{windowWidth.width}</div>
       <nav className={cls.join(" ")} onClick={closeMenuMode}>
         <ul>{renderLinks()}</ul>
       </nav>
