@@ -1,18 +1,43 @@
 @import "../../scss/vars";
 
-.nav {
+.Nav {
   grid-area: nav;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  &Float {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 100px;
+    padding: 85px 0px;
+    box-sizing: border-box;
+    transform: translateX(0px);
+    transition: transform 0.22s ease-in;
+    z-index: 90;
+
+    &.Close {
+      transform: translateX(-300px);
+    }
+
+    &Container {
+      @media (min-width: 767px) {
+        display: none;
+      }
+    }
+  }
 }
 
 .link {
   margin-bottom: 10px;
 
   & a {
-    color: #ffffff;
     padding: 10px 65px;
     position: relative;
     z-index: 1;
-    // font-weight: 700;
 
     &.active {
       color: $color-active !important;

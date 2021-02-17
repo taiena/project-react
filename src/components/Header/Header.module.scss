@@ -1,6 +1,7 @@
 @import "../../scss/vars";
 
 .Header {
+  z-index: 70;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,6 +40,68 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.Dropdown {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 15px solid $color-text-dark;
+  cursor: pointer;
+  transition: 0.5s ease;
+
+  @media (min-width: 767px) {
+    display: none;
+  }
+
+  & ul {
+    display: none;
+  }
+}
+
+.Open {
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 15px solid $color-text-dark;
+  border-top: none;
+
+  & ul {
+    display: block;
+    position: absolute;
+    right: -70px;
+    top: 60px;
+    padding: 10px;
+    min-width: 170px;
+    background-color: $color-header-menu;
+    text-align: right;
+
+    & li {
+      padding: 5px;
+    }
+  }
+}
+
+.Backdrop {
+  z-index: 2;
+  background: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.LoginBtn,
+.LoginName {
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 .Ava {

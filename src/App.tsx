@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import classes from "./scss/App.module.scss";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
+import NavFloat from "./components/Nav/NavFloat";
 import ProfilePage from "./components/Profile/ProfileContainer";
 import DialogsPage from "./components/DialogsPage/DialogsContainer";
 import MessagesPage from "./components/DialogsPage/Messages/MessagesContainer";
@@ -53,12 +54,12 @@ const App: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.Wrapper}>
       {globalError !== null && <ErrorModal globalError={globalError} />}
-
       <Header changeTheme={props.changeTheme} />
       <Nav />
-      <div className={classes.wrapperContent}>
+      <NavFloat />
+      <div className={classes.MainContainer}>
         <Switch>
           <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />

@@ -1,8 +1,8 @@
 @import "/vars";
 
-.wrapper {
+.Wrapper {
   max-width: 1280px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
 
   display: grid;
@@ -12,9 +12,20 @@
   grid-template-areas:
     "header header header"
     "nav main main";
+
+  @media (max-width: 767px) {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main";
+  }
 }
 
-.wrapperContent {
+.MainContainer {
   grid-area: main;
 }
 
