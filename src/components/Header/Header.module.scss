@@ -63,7 +63,7 @@
 }
 
 .Open {
-  z-index: 2;
+  z-index: 3;
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -73,11 +73,11 @@
 
   & ul {
     display: block;
-    position: fixed;
-    right: 0px;
-    top: 70px;
+    position: absolute;
+    right: -70px;
+    top: 60px;
     padding: 10px;
-    min-width: 70px;
+    min-width: 170px;
     background-color: $color-header-menu;
     text-align: right;
 
@@ -88,7 +88,7 @@
 }
 
 .Backdrop {
-  z-index: 90;
+  z-index: 2;
   background: rgba(0, 0, 0, 0);
   position: fixed;
   top: 0;
