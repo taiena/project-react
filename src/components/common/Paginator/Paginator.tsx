@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Paginator.module.scss";
 import cn from "classnames";
+import WindowDimensions from "../../../utils/windowDimensions";
 
 type PropsType = {
   totalItemsCount: number;
@@ -15,8 +16,14 @@ let Paginator: React.FC<PropsType> = ({
   pageSize,
   currentPage,
   onPageChanged,
-  portionSize = 20,
+  portionSize = 10,
 }) => {
+  let windowWidth = WindowDimensions();
+
+  if (windowWidth.width < 900 && portionSize == 10) {
+    portionSize = 5;
+  }
+
   let pagesCount = Math.ceil(totalItemsCount / pageSize);
   let pages: Array<number> = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -40,49 +47,49 @@ let Paginator: React.FC<PropsType> = ({
     <div className={classes.Paginator}>
       {/* if the portion number > 1 show the button prev */}
       {portionNumber > 1 && (
-        <button
+        <div
+          className={cn(classes.Arrow, classes.Prev)}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
-        >
-          PREV
-        </button>
+        />
       )}
 
-      {/* outputting an array of pages with the filter of the current portion */}
-      {pages
-        .filter(
-          (page) =>
-            page >= leftPortionPageNumber && page <= rightPortionPageNumber
-        )
-        .map((page) => {
-          return (
-            <span
-              key={page}
-              className={cn(
-                {
-                  [classes.selectedPage]: currentPage === page,
-                },
-                classes.pageNumber
-              )}
-              onClick={(e) => {
-                onPageChanged(page);
-              }}
-            >
-              {page}
-            </span>
-          );
-        })}
+      <div className={classes.Pages}>
+        {/* outputting an array of pages with the filter of the current portion */}
+        {pages
+          .filter(
+            (page) =>
+              page >= leftPortionPageNumber && page <= rightPortionPageNumber
+          )
+          .map((page) => {
+            return (
+              <div
+                key={page}
+                className={cn(
+                  {
+                    [classes.SelectedPage]: currentPage === page,
+                  },
+                  classes.PageNumber
+                )}
+                onClick={(e) => {
+                  onPageChanged(page);
+                }}
+              >
+                {page}
+              </div>
+            );
+          })}
+      </div>
 
       {/* if there are more portions than the current portion, show the button next */}
       {portionCount > portionNumber && (
-        <button
+        <div
+          className={cn(classes.Arrow, classes.Next)}
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
-        >
-          NEXT
-        </button>
+        />
       )}
     </div>
   );

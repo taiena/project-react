@@ -2,16 +2,62 @@
 
 .Paginator {
   display: flex;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
-.pageNumber {
-  padding: 5px;
-  border: 1px solid black;
+.Pages {
+  display: flex;
+  padding: 0px 10px;
+}
+
+.PageNumber {
+  border: 1px solid #aaa;
+  border-radius: 50%;
   cursor: pointer;
+  margin: 3px;
+  padding: 7px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $color-main-lighter;
+    color: $color-text-dark;
+  }
 }
 
-.pageNumber.selectedPage {
+.PageNumber.SelectedPage {
   font-weight: bold;
   background-color: $color-active;
+  color: $color-text-light;
+}
+
+.Arrow {
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  transition: all 0.5s ease;
+}
+
+.Prev {
+  border-right: 30px solid $color-main;
+
+  &:hover {
+    border-right: 30px solid $color-main-lighter;
+  }
+}
+
+.Next {
+  border-left: 30px solid $color-main;
+
+  &:hover {
+    border-left: 30px solid $color-main-lighter;
+  }
 }
